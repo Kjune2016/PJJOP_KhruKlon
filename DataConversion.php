@@ -343,12 +343,14 @@ for($i=0 ; $i<$countOfWak ;$i++){ // วนเท่ากับจำนวน�
 //print_r ($arrKlonPayang);
 
 // กลอนแบบเป็นสัทอักษร
-$str3 = "";
+
 for($i=0 ; $i<$countOfWak ;$i++){ // วนเท่ากับจำนวนวรรค
   $arrBePhonemes = [];
+  $arrBePhonemes2 = [];
   $arrPhonemes = [];
   $str = "";
   $str2 = "";
+  $str3 = "";
   $deJsonWak = json_decode($jsonWak[$i], true); // ทำทีละวรรค
   //print_r ($deJsonWak);
   //echo "<br>";
@@ -364,22 +366,25 @@ for($i=0 ; $i<$countOfWak ;$i++){ // วนเท่ากับจำนวน�
   for($k=0 ; $k<count($arrBePhonemes) ; $k++){
     $str = ($str)." ".($arrBePhonemes[$k]);
     $str2 = str_replace("-"," ",$str); // แทนที่ "-" ด้วย " "
-    $arrPhonemes = (explode(" ",$str2));
+    $arrBePhonemes2 = (explode(" ",$str2));
   }
-  //print_r ($arrPhonemes);
-  //echo "<br>........<br>";
-  for($c=0 ; $c<count($arrPhonemes) ; $c++){
-      $arrKlonPhonemes[$i][$c] = $arrPhonemes[$c];
-      // กลอนแบบเสียงวรรณยุกต์ 1
-      $str3 = $arrPhonemes[$c];
-      $arrTone[$c] = (explode("^",$str3));
-  }
+  //print_r ($arrBePhonemes2);
+  echo "<br>........<br>";
+  for($c=0 ; $c<=count($arrBePhonemes2) ; $c++){
+      //$arrKlonPhonemes[$i][$c] = $arrPhonemes[$c];
+      // กลอนแบบเสียงวรรณยุกต์
+        //$str3 = $arrBePhonemes2[$c];
+        $arrTone[$c] = (explode("^",$arrBePhonemes2[$c]));
+}
+//print_r ($arrTone);
   // กลอนแบบเสียงวรรณยุกต์ 2
   for($c=0 ; $c<count($arrTone) ; $c++){
-      $arrKlonTone[$i][$c] = $arrTone[$c][1];
+    $arrKlonPhonemes[$i][$c] = $arrTone[$c][0];
+    $arrKlonTone[$i][$c] = $arrTone[$c][1];
   }
   //print_r ($arrTone);
 }
+
 //echo "<br><br>PHONEMES<br>";
 //print_r ($arrKlonPhonemes);
 //echo "<br><br>Tone<br>";
