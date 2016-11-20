@@ -131,4 +131,20 @@ for($i=0 ; $i<count($arrWak) ; $i++){
   $deJsonNumPayang = json_decode($jsonNumPayang, true); // ส่วนของจูนไม่ต้องดีโค้ดก็ได้ แต่ดีไว้ดูความถูกต้องได้ ซึ่งเวลาส่งจริงอย่าลืมปิดละ
   print_r ($deJsonNumPayang);
   echo "<br>.................................................<br>";
+
+  // 1.3 ตรวจสัมผัสนอก
+  for($i=0 ; $i<$countOfWak ; $i++){
+    for($j=0 ; $j<count($arrKlonPhonemes[$i]) ; $j++){
+      if($i==0 && $i<4){
+        if($i==0){
+          $pyWak[$i][0] = count(arrKlonPhonemes)[$i];
+        }
+        else if($i==1 && count($arrKlonPhonemes)[$i]==8){
+          $pyWak2[$i][0] = explode("",count(arrKlonPhonemes)[$i][2]);
+
+        }
+      }
+
+    }
+  }
 ?>
