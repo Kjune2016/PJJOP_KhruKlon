@@ -55,7 +55,7 @@ for($i=0 ; $i<count($arrWak) ; $i++){
   }
   $resultNumOfWak->numOfWak = ($str1)." จำนวนวรรคทั้งหมดคือ ".($countOfWak)." วรรค";
   $jsonNumWak = json_encode($resultNumOfWak);
-  //echo $jsonNumWak;
+  echo $jsonNumWak; // ส่วนที่เราคืนให้พาน
   //echo "<br>";
   $deJsonNumWak = json_decode($jsonNumWak, true); // ส่วนของจูนไม่ต้องดีโค้ดก็ได้ แต่ดีไว้ดูความถูกต้องได้ ซึ่งเวลาส่งจริงอย่าลืมปิดละ
   print_r ($deJsonNumWak);
@@ -65,26 +65,20 @@ for($i=0 ; $i<count($arrWak) ; $i++){
   // นับพยางค์แต่ละวรรค
   $resultNumOfPayang = new CheckSyntaxAndMelody();
   $str2 = "";
-  for($i=0 ; $i<$countOfWak ; $i++){
-    for($j=0; $j<15 ; $j++){
-      if($arrKlonPayang[$i][$j]!=null){
-        $arrCountOfPayang[$i] = $arrCountOfPayang[$i] + 1;
-      }
-    }
-  }
   //print_r ($arrCountOfPayang);
   // ตรวจสอบว่าจำนวนพยางค์ในแต่่ละวรรคถูกไหม พร้อมเก็บสถานะ
-  for($i=0 ; $i<count($arrCountOfPayang) ; $i++){
-    if($arrCountOfPayang[$i]==8 || $arrCountOfPayang[$i]==9){
+  for($i=0 ; $i<$countOfWak ; $i++){
+    $totalPY = count($arrKlonPayang[$i]);
+    if(($totalPY-1)==8 || ($totalPY-1)==9){
       $arrStatusNumPayang[$i] = "trueGood";
     }
-    else if($arrCountOfPayang[$i]==7){
+    else if(($totalPY-1)==7){
       $arrStatusNumPayang[$i] = "true";
     }
-    else if($arrCountOfPayang[$i]<8){
+    else if(($totalPY-1)<8){
       $arrStatusNumPayang[$i] = "bad";
     }
-    else if($arrCountOfPayang[$i]>9){
+    else if(($totalPY-1)>9){
       $arrStatusNumPayang[$i] = "CheckWordPrawisrrchniis";
     }
   }
@@ -127,7 +121,7 @@ for($i=0 ; $i<count($arrWak) ; $i++){
   }
   $resultNumOfPayang->numOfPayang = ($str2);
   $jsonNumPayang = json_encode($resultNumOfPayang);
-  //echo ($jsonNumPayang."<br>");
+  echo ($jsonNumPayang."<br>"); // ส่วนที่เราคืนให้พาน
   $deJsonNumPayang = json_decode($jsonNumPayang, true); // ส่วนของจูนไม่ต้องดีโค้ดก็ได้ แต่ดีไว้ดูความถูกต้องได้ ซึ่งเวลาส่งจริงอย่าลืมปิดละ
   print_r ($deJsonNumPayang);
   echo "<br>.................................................<br>";
