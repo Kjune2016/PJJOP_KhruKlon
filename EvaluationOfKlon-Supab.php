@@ -53,13 +53,13 @@ for($i=0 ; $i<count($arrWak) ; $i++){
       $str1 = ($str1)." ขาดวรรคที่"." ".($i+1)." "."ของบทที่ 2"."-false/";
     }
   }
-  $resultNumOfWak->numOfWak = ($str1)." จำนวนวรรคทั้งหมดคือ ".($countOfWak)." วรรค";
+  /*$resultNumOfWak->numOfWak = ($str1)." จำนวนวรรคทั้งหมดคือ ".($countOfWak)." วรรค";
   $jsonNumWak = json_encode($resultNumOfWak);
   echo $jsonNumWak; // ส่วนที่เราคืนให้พาน
   //echo "<br>";
   $deJsonNumWak = json_decode($jsonNumWak, true); // ส่วนของจูนไม่ต้องดีโค้ดก็ได้ แต่ดีไว้ดูความถูกต้องได้ ซึ่งเวลาส่งจริงอย่าลืมปิดละ
   print_r ($deJsonNumWak);
-  echo "<br>.................................................<br>";
+  echo "<br>.................................................<br>";*/
 
   // 1.2 ตรวจจำนวนพยางค์
   // นับพยางค์แต่ละวรรค
@@ -69,6 +69,7 @@ for($i=0 ; $i<count($arrWak) ; $i++){
   // ตรวจสอบว่าจำนวนพยางค์ในแต่่ละวรรคถูกไหม พร้อมเก็บสถานะ
   for($i=0 ; $i<$countOfWak ; $i++){
     $totalPY = count($arrKlonPayang[$i]);
+    //echo $totalPY;
     if(($totalPY-1)==8 || ($totalPY-1)==9){
       $arrStatusNumPayang[$i] = "trueGood";
     }
@@ -119,26 +120,61 @@ for($i=0 ; $i<count($arrWak) ; $i++){
       $str2 = ($str2)."จำนวนพยางค์ในวรรคที่ ".($i+1)." ของบทที่ 2 "."ต้องไปตรวจอะกึ่งเสียง"."-true/";
     }
   }
-  $resultNumOfPayang->numOfPayang = ($str2);
+  /*$resultNumOfPayang->numOfPayang = ($str2);
   $jsonNumPayang = json_encode($resultNumOfPayang);
   echo ($jsonNumPayang."<br>"); // ส่วนที่เราคืนให้พาน
   $deJsonNumPayang = json_decode($jsonNumPayang, true); // ส่วนของจูนไม่ต้องดีโค้ดก็ได้ แต่ดีไว้ดูความถูกต้องได้ ซึ่งเวลาส่งจริงอย่าลืมปิดละ
   print_r ($deJsonNumPayang);
-  echo "<br>.................................................<br>";
+  echo "<br>.................................................<br>";*/
 
   // 1.3 ตรวจสัมผัสนอก
+  // เก็บพยางค์ที่เป็นตำแหน่งรับ-ส่งสัมผัสกันเอาไว้ใน array ชื่อ py ก่อน
+  $py = [];
   for($i=0 ; $i<$countOfWak ; $i++){
-    for($j=0 ; $j<count($arrKlonPhonemes[$i]) ; $j++){
-      if($i==0 && $i<4){
-        if($i==0){
-          $pyWak[$i][0] = count(arrKlonPhonemes)[$i];
+    $totalPY = count($arrKlonPhonemes[$i]);
+        // กรณี 8 พยางค์
+        // วรรคที่ 1
+        if($i==0 && ($totalPY-2)==8){
+          $py[$i][0] =$arrKlonPhonemes[$i][$totalPY-2];
         }
-        else if($i==1 && count($arrKlonPhonemes)[$i]==8){
-          $pyWak2[$i][0] = explode("",count(arrKlonPhonemes)[$i][2]);
-
+        // วรรคที่ 2
+        else if($i==1 && ($totalPY-2)==8){
+          $py[$i][0] =$arrKlonPhonemes[$i][3];
+          $py[$i][1] =$arrKlonPhonemes[$i][5];
+          $py[$i][2] =$arrKlonPhonemes[$i][$totalPY-2];
+        }
+        // วรรคที่ 3
+        else if($i==2 && ($totalPY-2)==8){
+          $py[$i][0] =$arrKlonPhonemes[$i][$totalPY-2];
+        }
+        // วรรคที่ 4
+        else if($i==3 && ($totalPY-2)==8){
+          $py[$i][0] =$arrKlonPhonemes[$i][3];
+          $py[$i][1] =$arrKlonPhonemes[$i][5];
+          $py[$i][2] =$arrKlonPhonemes[$i][$totalPY-2];
+        }
+        // กรณี 9 พยางค์
+        // วรรคที่ 1
+        else if($i==0 && ($totalPY-2)==9){
+          $py[$i][0] =$arrKlonPhonemes[$i][$totalPY-2];
+        }
+        // วรรคที่ 2
+        else if($i==1 && ($totalPY-2)==9){
+          $py[$i][0] =$arrKlonPhonemes[$i][3];
+          $py[$i][1] =$arrKlonPhonemes[$i][6];
+          $py[$i][2] =$arrKlonPhonemes[$i][$totalPY-2];
+        }
+        // วรรคที่ 3
+        else if($i==2 && ($totalPY-2)==9){
+          $py[$i][0] =$arrKlonPhonemes[$i][$totalPY-2];
+        }
+        // วรรคที่ 4
+        else if($i==3 && ($totalPY-2)==9){
+          $py[$i][0] =$arrKlonPhonemes[$i][3];
+          $py[$i][1] =$arrKlonPhonemes[$i][6];
+          $py[$i][2] =$arrKlonPhonemes[$i][$totalPY-2];
         }
       }
 
-    }
-  }
+  print_r ($py);
 ?>
