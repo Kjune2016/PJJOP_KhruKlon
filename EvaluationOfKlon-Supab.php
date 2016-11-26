@@ -20,8 +20,8 @@ class  CheckSyntaxAndMelody {
     public $vagueRhyme = "";
 }
   //print_r ($arrWak);
-$klon = "แล้วสอนว่าอย่าไว้ใจมนุษย์/w/wถึงเถาวัลย์พันเกี้ยวที่เลี้ยวลด/wก็ไม่คดเหมือนหนึ่งในน้ำใจคน/w/e";
-//$klon = "แล้วสอนว่าอย่าไว้ใจมนุษย์/wมันแสนสุดลึกล้ำเหลือกำหนด/wถึงเถาวัลย์พันเกี้ยวที่เลี้ยวลด/wก็ไม่คดเหมือนหนึ่งในน้ำใจคน/w/e";
+//$klon = "แล้วสอนว่าอย่าไว้ใจมนุษย์/w/wถึงเถาวัลย์พันเกี้ยวที่เลี้ยวลด/wก็ไม่คดเหมือนหนึ่งในน้ำใจคน/w/e";
+$klon = "แล้วสอนว่าอย่าไว้ใจมนุษย์/wมันแสนสุดลึกล้ำเหลือกำหนด/wถึงเถาวัลย์พันเกี้ยวที่เลี้ยวลด/wก็ไม่คดเหมือนหนึ่งในน้ำใจคน/w/e";
 //$klon = $_POST['klon'];
 //print_r (explode("/w", $klon));
 $arrWak = (explode("/w", $klon));
@@ -58,11 +58,11 @@ for($i=0 ; $i<count($arrWak) ; $i++){
   //$result = ($strNumWak)." จำนวนวรรคทั้งหมดคือ ".($countOfWak)." วรรค";
   $resultNumOfWak->numOfWak = ($strNumWak)."จำนวนวรรคทั้งหมดคือ ".($countOfWak)." วรรค";
   $jsonNumWak = json_encode($resultNumOfWak);
-  echo $jsonNumWak; // ส่วนที่เราคืนให้พาน
-  echo "<br>";
+  //echo $jsonNumWak; // ส่วนที่เราคืนให้พาน
+  //echo "<br>";
   $deJsonNumWak = json_decode($jsonNumWak, true); // ส่วนของจูนไม่ต้องดีโค้ดก็ได้ แต่ดีไว้ดูความถูกต้องได้ ซึ่งเวลาส่งจริงอย่าลืมปิดละ
-  print_r ($deJsonNumWak);
-  echo "<br>.................................................<br>";
+  //print_r ($deJsonNumWak);
+  //echo "<br>.................................................<br>";
 
 // 1.2 ตรวจจำนวนพยางค์
   // นับพยางค์แต่ละวรรค
@@ -126,10 +126,10 @@ for($i=0 ; $i<count($arrWak) ; $i++){
   }
   $resultNumOfPayang->numOfPayang = ($strNumPayang);
   $jsonNumPayang = json_encode($resultNumOfPayang);
-  echo ($jsonNumPayang."<br>"); // ส่วนที่เราคืนให้พาน
+  //echo ($jsonNumPayang."<br>"); // ส่วนที่เราคืนให้พาน
   $deJsonNumPayang = json_decode($jsonNumPayang, true); // ส่วนของจูนไม่ต้องดีโค้ดก็ได้ แต่ดีไว้ดูความถูกต้องได้ ซึ่งเวลาส่งจริงอย่าลืมปิดละ
-  print_r ($deJsonNumPayang);
-  echo "<br>.................................................<br>";
+  //print_r ($deJsonNumPayang);
+  //echo "<br>.................................................<br>";
 
 // 1.3 เสียงท้ายพยางค์
   $resultTone = new CheckSyntaxAndMelody();
@@ -165,17 +165,17 @@ for($i=0 ; $i<count($arrWak) ; $i++){
         if($tone==2 || $tone==3 || $tone==5){
           if($tone==2){
             //*** ถ้าสถานะเป็น true หมด พานจะรู้ไหมว่าอันไหนได้คะแนนไพเราะ อันไหนไม่ได้
-            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงเอก-true/";
+            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ถูกต้อง คือเสียงเอก-true/";
           }
           else if($tone==3){
-            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงโท-true/";
+            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ถูกต้อง คือเสียงโท-true/";
           }
           else if($tone==5){
-            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ-true/";
+            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ-true/";
           }
         }
         else {
-          $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงเอก เสียงโท และที่นิยมคือเสียงจัตวา-false/";
+          $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงเอก เสียงโท และที่นิยมคือเสียงจัตวา-false/";
         }
       }
       // วรรคที่ 3 และ 4
@@ -201,19 +201,19 @@ for($i=0 ; $i<count($arrWak) ; $i++){
         if($tone==1 || $tone==2 || $tone==3 || $tone==4 || $tone==5){
           if($tone==2){
             //*** ถ้าสถานะเป็น true หมด พานจะรู้ไหมว่าอันไหนได้คะแนนไพเราะ อันไหนไม่ได้
-            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงเอก-true/";
+            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงเอก-true/";
           }
           else if($tone==3){
-            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงโท-true/";
+            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงโท-true/";
           }
           else if($tone==4){
-            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงตรี-true/";
+            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงตรี-true/";
           }
           else if($tone==5){
-            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงจัตวา-true/";
+            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงจัตวา-true/";
           }
           else if($tone==1){
-            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงสามัญ แต่ไม่นิยมลงเสียงนี้ จึงขาดความไพเราะ-true/";
+            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงสามัญ แต่ไม่นิยมลงเสียงนี้ จึงขาดความไพเราะ-true/";
           }
         }
       }
@@ -222,17 +222,17 @@ for($i=0 ; $i<count($arrWak) ; $i++){
         if($tone==2 || $tone==3 || $tone==5){
           if($tone==2){
             //*** ถ้าสถานะเป็น true หมด พานจะรู้ไหมว่าอันไหนได้คะแนนไพเราะ อันไหนไม่ได้
-            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงเอก-true/";
+            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ถูกต้อง คือเสียงเอก-true/";
           }
           else if($tone==3){
-            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงโท-true/";
+            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ถูกต้อง คือเสียงโท-true/";
           }
           else if($tone==5){
-            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ-true/";
+            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ-true/";
           }
         }
         else {
-          $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงเอก เสียงโท และที่นิยมคือเสียงจัตวา-false/";
+          $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงเอก เสียงโท และที่นิยมคือเสียงจัตวา-false/";
         }
       }
       // วรรคที่ 3 และ 4
@@ -240,30 +240,30 @@ for($i=0 ; $i<count($arrWak) ; $i++){
         if($tone==1 || $tone==4){
           if($tone==1){
             //*** ถ้าสถานะเป็น true หมด พานจะรู้ไหมว่าอันไหนได้คะแนนไพเราะ อันไหนไม่ได้
-            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".round($i/2)." ของบทที่ 1 ถูกต้อง คือเสียงสามัญ และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ-true/";
+            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".round($i/2)." ของบทที่ 2 ถูกต้อง คือเสียงสามัญ และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ-true/";
           }
           else if($tone==4){
-            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".round($i/2)." ของบทที่ 1 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ-true/";
+            $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".round($i/2)." ของบทที่ 2 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ-true/";
           }
         }
         else {
-          $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".round($i/2)." ของบทที่ 1 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงจัตวา และที่นิยมคือเสียงสามัญ-false/";
+          $strTone = ($strTone)."ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".round($i/2)." ของบทที่ 2 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงจัตวา และที่นิยมคือเสียงสามัญ-false/";
         }
       }
     }
   }
   $resultTone->tone = ($strTone);
   $jsonTone = json_encode($resultTone);
-  echo ($jsonTone."<br>"); // ส่วนที่เราคืนให้พาน
+  //echo ($jsonTone."<br>"); // ส่วนที่เราคืนให้พาน
   $deJsonTone = json_decode($jsonTone, true); // ส่วนของจูนไม่ต้องดีโค้ดก็ได้ แต่ดีไว้ดูความถูกต้องได้ ซึ่งเวลาส่งจริงอย่าลืมปิดละ
-  print_r ($deJsonTone);
-  echo "<br>.................................................<br>";
+  //print_r ($deJsonTone);
+  //echo "<br>.................................................<br>";
 
 
 // 1.4 ตรวจสัมผัสนอก
   // เก็บพยางค์ที่เป็นตำแหน่งรับ-ส่งสัมผัสกันเอาไว้ใน array ชื่อ rhyme ก่อน
-  $py = [];
-  $py2 = [];
+  $pn = [];
+  $pn2 = [];
   $rhyme = [];
   for($i=0 ; $i<count($arrWak)-1 ; $i++){
     $totalPN = count($arrKlonPhonemes[$i]);
@@ -273,56 +273,56 @@ for($i=0 ; $i<count($arrWak) ; $i++){
           // กรณี 8 9 and 7 พยางค์
             // วรรคที่ 1 บทที่ 1
             if($i==0){
-              $py[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
+              $pn[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
             }
             // วรรคที่ 2
             else if($i==1){
               if(($totalPN-1)==8){
-                $py[$i][0] =$arrKlonPhonemes[$i][3];
-                $py[$i][1] =$arrKlonPhonemes[$i][5];
-                $py[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+                $pn[$i][0] =$arrKlonPhonemes[$i][3];
+                $pn[$i][1] =$arrKlonPhonemes[$i][5];
+                $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
               }
               else if(($totalPN-1)>=9){
-                $py[$i][0] =$arrKlonPhonemes[$i][3];
-                $py[$i][1] =$arrKlonPhonemes[$i][6];
-                $py[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+                $pn[$i][0] =$arrKlonPhonemes[$i][3];
+                $pn[$i][1] =$arrKlonPhonemes[$i][6];
+                $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
               }
               else if(($totalPN-1)==7){
-                $py[$i][0] =$arrKlonPhonemes[$i][2];
-                $py[$i][1] =$arrKlonPhonemes[$i][3];
-                $py[$i][2] =$arrKlonPhonemes[$i][4];
-                $py[$i][3] =$arrKlonPhonemes[$i][5];
-                $py[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
+                $pn[$i][0] =$arrKlonPhonemes[$i][2];
+                $pn[$i][1] =$arrKlonPhonemes[$i][3];
+                $pn[$i][2] =$arrKlonPhonemes[$i][4];
+                $pn[$i][3] =$arrKlonPhonemes[$i][5];
+                $pn[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
               }
               else if(($totalPN-1)<8){
-                $py[$i][0] = "จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก";
+                $pn[$i][0] = "จำนวนพยางค์ไม่เพียงพอ";
               }
             }
             // วรรคที่ 3
             else if($i==2){
-              $py[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
+              $pn[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
             }
             // วรรคที่ 4
             else if($i==3){
               if(($totalPN-1)==8){
-                $py[$i][0] =$arrKlonPhonemes[$i][3];
-                $py[$i][1] =$arrKlonPhonemes[$i][5];
-                $py[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+                $pn[$i][0] =$arrKlonPhonemes[$i][3];
+                $pn[$i][1] =$arrKlonPhonemes[$i][5];
+                $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
               }
               else if(($totalPN-1)>=9){
-                $py[$i][0] =$arrKlonPhonemes[$i][3];
-                $py[$i][1] =$arrKlonPhonemes[$i][6];
-                $py[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+                $pn[$i][0] =$arrKlonPhonemes[$i][3];
+                $pn[$i][1] =$arrKlonPhonemes[$i][6];
+                $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
               }
               else if(($totalPN-1)==7){
-                $py[$i][0] =$arrKlonPhonemes[$i][2];
-                $py[$i][1] =$arrKlonPhonemes[$i][3];
-                $py[$i][2] =$arrKlonPhonemes[$i][4];
-                $py[$i][3] =$arrKlonPhonemes[$i][5];
-                $py[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
+                $pn[$i][0] =$arrKlonPhonemes[$i][2];
+                $pn[$i][1] =$arrKlonPhonemes[$i][3];
+                $pn[$i][2] =$arrKlonPhonemes[$i][4];
+                $pn[$i][3] =$arrKlonPhonemes[$i][5];
+                $pn[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
               }
               else if(($totalPN-1)<8){
-                $py[$i][0] = "จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก";
+                $pn[$i][0] = "จำนวนพยางค์ไม่เพียงพอ";
               }
             }
           }
@@ -331,86 +331,86 @@ for($i=0 ; $i<count($arrWak) ; $i++){
         // กรณี 8 9 and 7 พยางค์
           // วรรคที่ 1 บทที่ 2
           if($i==4){
-            $py[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
+            $pn[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
           }
           // วรรคที่ 2
           else if($i==5){
             if(($totalPN-1)==8){
-              $py[$i][0] =$arrKlonPhonemes[$i][3];
-              $py[$i][1] =$arrKlonPhonemes[$i][5];
-              $py[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+              $pn[$i][0] =$arrKlonPhonemes[$i][3];
+              $pn[$i][1] =$arrKlonPhonemes[$i][5];
+              $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
             }
             else if(($totalPN-1)==9){
-              $py[$i][0] =$arrKlonPhonemes[$i][3];
-              $py[$i][1] =$arrKlonPhonemes[$i][6];
-              $py[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+              $pn[$i][0] =$arrKlonPhonemes[$i][3];
+              $pn[$i][1] =$arrKlonPhonemes[$i][6];
+              $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
             }
             else if(($totalPY-1)==7){
-              $py[$i][0] =$arrKlonPhonemes[$i][2];
-              $py[$i][1] =$arrKlonPhonemes[$i][3];
-              $py[$i][2] =$arrKlonPhonemes[$i][4];
-              $py[$i][3] =$arrKlonPhonemes[$i][5];
-              $py[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
+              $pn[$i][0] =$arrKlonPhonemes[$i][2];
+              $pn[$i][1] =$arrKlonPhonemes[$i][3];
+              $pn[$i][2] =$arrKlonPhonemes[$i][4];
+              $pn[$i][3] =$arrKlonPhonemes[$i][5];
+              $pn[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
             }
             else if(($totalPN-1)<8){
-              $py[$i][0] = "จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก";
+              $pn[$i][0] = "จำนวนพยางค์ไม่เพียงพอ";
             }
           }
           // วรรคที่ 3
           else if($i==6){
-            $py[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
+            $pn[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
           }
           // วรรคที่ 4
           else if($i==7){
             if(($totalPN-1)==8){
-              $py[$i][0] =$arrKlonPhonemes[$i][3];
-              $py[$i][1] =$arrKlonPhonemes[$i][5];
-              $py[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+              $pn[$i][0] =$arrKlonPhonemes[$i][3];
+              $pn[$i][1] =$arrKlonPhonemes[$i][5];
+              $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
             }
             else if(($totalPN-1)==9){
-              $py[$i][0] =$arrKlonPhonemes[$i][3];
-              $py[$i][1] =$arrKlonPhonemes[$i][6];
-              $py[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+              $pn[$i][0] =$arrKlonPhonemes[$i][3];
+              $pn[$i][1] =$arrKlonPhonemes[$i][6];
+              $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
             }
             else if(($totalPN-1)==7){
-              $py[$i][0] =$arrKlonPhonemes[$i][2];
-              $py[$i][1] =$arrKlonPhonemes[$i][3];
-              $py[$i][2] =$arrKlonPhonemes[$i][4];
-              $py[$i][3] =$arrKlonPhonemes[$i][5];
-              $py[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
+              $pn[$i][0] =$arrKlonPhonemes[$i][2];
+              $pn[$i][1] =$arrKlonPhonemes[$i][3];
+              $pn[$i][2] =$arrKlonPhonemes[$i][4];
+              $pn[$i][3] =$arrKlonPhonemes[$i][5];
+              $pn[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
             }
             else if(($totalPN-1)<8){
-              $py[$i][0] = "จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก";
+              $pn[$i][0] = "จำนวนพยางค์ไม่เพียงพอ";
             }
           }
         }
       }
-  //print_r ($py);
+  print_r ($pn);
   //$str3="";
-  for($i=0 ; $i<count($py) ; $i++){
+  for($i=0 ; $i<count($pn) ; $i++){
     $strExternalRhyme="";
-    for($j=0 ; $j<count($py[$i]) ; $j++){
-      if($py[$i][0] != "จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
-        $strExternalRhyme = $strExternalRhyme."~".$py[$i][$j];
+    for($j=0 ; $j<count($pn[$i]) ; $j++){
+      if($pn[$i][0] != "จำนวนพยางค์ไม่เพียงพอ"){
+        $strExternalRhyme = $strExternalRhyme."~".$pn[$i][$j];
         //echo $str3;
-        $py2[$i] = explode("~",$strExternalRhyme);
+        $pn2[$i] = explode("~",$strExternalRhyme);
       }
       else {
-        $py2[$i][0] = "จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก";
+        $pn2[$i][0] = "จำนวนพยางค์ไม่เพียงพอ";
       }
     }
   }
   //echo "<br>";
-  //print_r ($py2);
-  for($i=0 ; $i<count($py2) ; $i++){
+  //print_r ($pn2);
+  for($i=0 ; $i<count($pn2) ; $i++){
     $index = 0;
-    for($j=0 ; $j<count($py2[$i]) ; $j+=2){
-      if($py2[$i][0]!="จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
-        $rhyme[$i][$index] = $py2[$i][$j];
+    for($j=0 ; $j<count($pn2[$i]) ; $j+=2){
+      if($pn2[$i][0]!="จำนวนพยางค์ไม่เพียงพอ"){
+        $rhyme[$i][$index] = $pn2[$i][$j];
         $index = $index+1;
       }
       else {
-        $rhyme[$i][0] = "จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก";
+        $rhyme[$i][0] = "จำนวนพยางค์ไม่เพียงพอ";
       }
     }
   }
@@ -420,85 +420,259 @@ for($i=0 ; $i<count($arrWak) ; $i++){
   // สัมผัสระหว่างวรรคที่ 1 กับ วรรคที่ 2
   $resultExternalRhyme = new CheckSyntaxAndMelody();
   $strExternalRhyme2 = "";
-  for($i=0 ; $i<$countOfWak ; $i++){
-    // บทที่ 1
-    if($i==0 || $i<4){
-      // สัมผัสระหว่างวรรคที่ 1 กับ วรรคที่ 2
-      if($i==0){
-        if($rhyme[$i][1]==$rhyme[1][1] || $rhyme[$i][1]==$rhyme[1][2] && $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
-          $strExternalRhyme2 = ($strExternalRhyme2)."มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 1-true/";
-        }
-        else if($rhyme[$i][1]!=$rhyme[1][1] && $rhyme[$i][1]!=$rhyme[1][2] || $rhyme[$i][0]=="จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
-          $strExternalRhyme2 = ($strExternalRhyme2)."ไม่มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 1-false/";
-        }
-      }
-      // สัมผัสระหว่างวรรคที่ 2 กับ วรรคที่ 3
-      else if($i==1){
-        if($rhyme[$i][3]==$rhyme[2][1] && $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
-          $strExternalRhyme2 = ($strExternalRhyme2)."มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 1-true/";
-        }
-        else if($rhyme[$i][3]!=$rhyme[2][1] || $rhyme[$i][0]=="จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
-          $strExternalRhyme2 = ($strExternalRhyme2)."ไม่มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 1-false/";
-        }
-      }
+  //echo count($arrWak);
+  for($i=0 ; $i<count($arrWak)-1 ; $i++){
+    $check = 0;
+    for($j=1 ; $j<=count($rhyme[$i]) ; $j++){
+      // บทที่ 1
+      if($i==0 || $i<4){
 
-      // สัมผัสระหว่างวรรคที่ 3 กับ วรรคที่ 4
-      else if($i==2){
-        if($rhyme[$i][1]==$rhyme[3][1] || $rhyme[$i][1]==$rhyme[3][2] && $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
-          $strExternalRhyme2 = ($strExternalRhyme2)."มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 1-true/";
+        // สัมผัสระหว่างวรรคที่ 1 กับ วรรคที่ 2
+        if($i==0){
+          if($rhyme[$i][1]==$rhyme[1][$j] && $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอ"){
+            $check = 1;
+            $strExternalRhyme2 = ($strExternalRhyme2)."มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 1-true/";
+          }
+          else if($rhyme[$i][1]!=$rhyme[1][$j] && $check==0 || $rhyme[$i][0]=="จำนวนพยางค์ไม่เพียงพอ"){
+            $check = 1;
+            $strExternalRhyme2 = ($strExternalRhyme2)."ไม่มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 1-false/";
+          }
         }
-        else if($rhyme[$i][1]!=$rhyme[3][1] && $rhyme[$i][1]!=$rhyme[3][2] || $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
-          $strExternalRhyme2 = ($strExternalRhyme2)."ไม่มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 1-false/";
+        // สัมผัสระหว่างวรรคที่ 2 กับ วรรคที่ 3
+        else if($i==1){
+          if($rhyme[$i][3]==$rhyme[2][$j] && $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอ"){
+            $check = 1;
+            $strExternalRhyme2 = ($strExternalRhyme2)."มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 1-true/";
+          }
+          else if($rhyme[$i][3]!=$rhyme[2][$j] && $check==0 || $rhyme[$i][0]=="จำนวนพยางค์ไม่เพียงพอ"){
+            $check = 1;
+            $strExternalRhyme2 = ($strExternalRhyme2)."ไม่มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 1-false/";
+          }
+        }
+
+        // สัมผัสระหว่างวรรคที่ 3 กับ วรรคที่ 4
+        else if($i==2){
+          if($rhyme[$i][1]==$rhyme[3][$j] && $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอ"){
+            $check = 1;
+            $strExternalRhyme2 = ($strExternalRhyme2)."มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 1-true/";
+          }
+          else if($rhyme[$i][1]!=$rhyme[3][$j] && $check==0 || $rhyme[$i][0]=="จำนวนพยางค์ไม่เพียงพอ"){
+            $check = 1;
+            $strExternalRhyme2 = ($strExternalRhyme2)."ไม่มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 1-false/";
+          }
+        }
+      }
+      // บทที่ 2  ปล. ยังไม่เคยสมมติตัวอย่าง
+      else if($i==4 || $i<8){
+        // สัมผัสระหว่างวรรคที่ 1 กับ วรรคที่ 2
+        if($i==4){
+          if($rhyme[$i][1]==$rhyme[5][$j] && $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอ"){
+            $check = 1;
+            $strExternalRhyme2 = ($strExternalRhyme2)."มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 2-true/";
+          }
+          else if($rhyme[$i][1]!=$rhyme[5][$j] && $check==0 || $rhyme[$i][0]=="จำนวนพยางค์ไม่เพียงพอ"){
+            $check = 1;
+            $strExternalRhyme2 = ($strExternalRhyme2)."ไม่มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 2-false/";
+          }
+        }
+        // สัมผัสระหว่างวรรคที่ 2 กับ วรรคที่ 3
+        else if($i==5){
+          if($rhyme[$i][3]==$rhyme[6][$j] && $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอ"){
+            $check = 1;
+            $strExternalRhyme2 = ($strExternalRhyme2)."มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 2-true/";
+          }
+          else if($rhyme[$i][3]!=$rhyme[6][$j] && $check==0 || $rhyme[$i][0]=="จำนวนพยางค์ไม่เพียงพอ"){
+            $check = 1;
+            $strExternalRhyme = ($strExternalRhyme)."ไม่มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 2-false/";
+          }
+        }
+        // สัมผัสระหว่างวรรคที่ 3 กับ วรรคที่ 4
+        else if($i==6){
+          if($rhyme[$i][1]==$rhyme[7][$j] && $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอ"){
+            $check = 1;
+            $strExternalRhyme2 = ($strExternalRhyme2)."มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 2-true/";
+          }
+          else if($rhyme[$i][1]!=$rhyme[7][$j] && $check==0 || $rhyme[$i][0]=="จำนวนพยางค์ไม่เพียงพอ"){
+            $check = 1;
+            $strExternalRhyme2 = ($strExternalRhyme2)."ไม่มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 2-false/";
+          }
         }
       }
     }
-    else if($i==4 || $i<8){
-      // สัมผัสระหว่างวรรคที่ 1 กับ วรรคที่ 2
-      if($i==4){
-        if($rhyme[$i][1]==$rhyme[5][1] || $rhyme[$i][1]!=$rhyme[5][2] && $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
-          $strExternalRhyme2 = ($strExternalRhyme2)."มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 2-true/";
-        }
-        else if($rhyme[$i][1]!=$rhyme[5][1] && $rhyme[$i][1]!=$rhyme[5][2] || $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
-          $strExternalRhyme2 = ($strExternalRhyme2)."ไม่มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 2-false/";
-        }
-      }
-      // สัมผัสระหว่างวรรคที่ 2 กับ วรรคที่ 3
-      else if($i==5){
-        if($rhyme[$i][3]==$rhyme[6][1] && $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
-          $strExternalRhyme2 = ($strExternalRhyme2)."มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 2-true/";
-        }
-        else if($rhyme[$i][3]!=$rhyme[6][1] || $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
-          $strExternalRhyme = ($strExternalRhyme)."ไม่มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 2-false/";
-        }
-      }
-      // สัมผัสระหว่างวรรคที่ 3 กับ วรรคที่ 4 ********** ขาดสัมผัสระหว่างบทนะ
-      else if($i==6){
-        if($rhyme[$i][1]==$rhyme[7][1] || $rhyme[$i][1]==$rhyme[7][2] && $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
-          $strExternalRhyme2 = ($strExternalRhyme2)."มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 2-true/";
-        }
-        else if($i==6 && $rhyme[$i][1]!=$rhyme[7][1] && $rhyme[$i][1]!=$rhyme[7][2] || $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
-          $strExternalRhyme2 = ($strExternalRhyme2)."ไม่มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 2-false/";
-        }
-      }
-    }
-    // สัมผัสระหว่างบท
+    // สัมผัสระหว่างบท   ปล. ยังไม่เคยสมมติตัวอย่าง
     if($countOfWak>4 && $countOfWak<8){
-      if($rhyme[3][3]==$rhyme[5][3] && $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
+      if($rhyme[3][3]==$rhyme[5][3] && $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอ"){
+        $check = 1;
         $strExternalRhyme2 = ($strExternalRhyme2)."มีสัมผัสนอกระหว่างบท-true/";
       }
-      else if($rhyme[3][3]!=$rhyme[5][3] || $rhyme[$i][0]!="จำนวนพยางค์ไม่เพียงพอในการตรวจสัมผัสนอก"){
+      else if($rhyme[3][3]!=$rhyme[5][3] && $check!=0 || $rhyme[$i][0]=="จำนวนพยางค์ไม่เพียงพอ"){
+        $check = 1;
         $strExternalRhyme2 = ($strExternalRhyme2)."ไม่มีสัมผัสนอกระหว่างบท-false/";
       }
     }
   }
-  $resultExternalRhyme->externalRhyme = ($strExternalRhyme2);
+
+  /*$resultExternalRhyme->externalRhyme = ($strExternalRhyme2);
   $jsonExternalRhyme = json_encode($resultExternalRhyme);
   echo ($jsonExternalRhyme."<br>"); // ส่วนที่เราคืนให้พาน
   $deJsonExternalRhyme = json_decode($jsonExternalRhyme, true); // ส่วนของจูนไม่ต้องดีโค้ดก็ได้ แต่ดีไว้ดูความถูกต้องได้ ซึ่งเวลาส่งจริงอย่าลืมปิดละ
   print_r ($deJsonExternalRhyme);
-  echo "<br>.................................................<br>";
+  echo "<br>.................................................<br>";*/
 
 
 // 1.5 สัมผัสซ้ำ
+$py = [];
+for($i=0 ; $i<count($arrWak)-1 ; $i++){
+  $totalPY = count($arrKlonPayang[$i]);
+  //echo ($totalPN)." ";
+      // บทที่ 1
+      if($i==0 || $i<4){
+        // กรณี 8 9 and 7 พยางค์
+          // วรรคที่ 1 บทที่ 1
+          if($i==0){
+            $py[$i][0] =$arrKlonPayang[$i][$totalPY-1];
+          }
+          // วรรคที่ 2
+          else if($i==1){
+            if(($totalPY-1)==8){
+              $py[$i][0] =$arrKlonPayang[$i][3];
+              $py[$i][1] =$arrKlonPayang[$i][5];
+              $py[$i][2] =$arrKlonPayang[$i][$totalPY-1];
+            }
+            else if(($totalPY-1)>=9){
+              $py[$i][0] =$arrKlonPayang[$i][3];
+              $py[$i][1] =$arrKlonPayang[$i][6];
+              $py[$i][2] =$arrKlonPayang[$i][$totalPY-1];
+            }
+            else if(($totalPY-1)==7){
+              $py[$i][0] =$arrKlonPayang[$i][2];
+              $py[$i][1] =$arrKlonPayang[$i][3];
+              $py[$i][2] =$arrKlonPayang[$i][4];
+              $py[$i][3] =$arrKlonPayang[$i][5];
+              $py[$i][4] =$arrKlonPayang[$i][$totalPY-1];
+            }
+            else if(($totalPY-1)<8){
+              $py[$i][0] = "จำนวนพยางค์ไม่เพียงพอ";
+            }
+          }
+          // วรรคที่ 3
+          else if($i==2){
+            $py[$i][0] =$arrKlonPayang[$i][$totalPY-1];
+          }
+          // วรรคที่ 4
+          else if($i==3){
+            if(($totalPY-1)==8){
+              $py[$i][0] =$arrKlonPayang[$i][3];
+              $py[$i][1] =$arrKlonPayang[$i][5];
+              $py[$i][2] =$arrKlonPayang[$i][$totalPY-1];
+            }
+            else if(($totalPY-1)>=9){
+              $py[$i][0] =$arrKlonPayang[$i][3];
+              $py[$i][1] =$arrKlonPayang[$i][6];
+              $py[$i][2] =$arrKlonPayang[$i][$totalPY-1];
+            }
+            else if(($totalPY-1)==7){
+              $py[$i][0] =$arrKlonPayang[$i][2];
+              $py[$i][1] =$arrKlonPayang[$i][3];
+              $py[$i][2] =$arrKlonPayang[$i][4];
+              $py[$i][3] =$arrKlonPayang[$i][5];
+              $py[$i][4] =$arrKlonPayang[$i][$totalPY-1];
+            }
+            else if(($totalPY-1)<8){
+              $py[$i][0] = "จำนวนพยางค์ไม่เพียงพอ";
+            }
+          }
+        }
+    // บทที่ 2
+    if($i>=4 || $i<8){
+      // กรณี 8 9 and 7 พยางค์
+        // วรรคที่ 1 บทที่ 2
+        if($i==4){
+          $py[$i][0] =$arrKlonPayang[$i][$totalPY-1];
+        }
+        // วรรคที่ 2
+        else if($i==5){
+          if(($totalPY-1)==8){
+            $py[$i][0] =$arrKlonPayang[$i][3];
+            $py[$i][1] =$arrKlonPayang[$i][5];
+            $py[$i][2] =$arrKlonPayang[$i][$totalPY-1];
+          }
+          else if(($totalPY-1)==9){
+            $py[$i][0] =$arrKlonPayang[$i][3];
+            $py[$i][1] =$arrKlonPayang[$i][6];
+            $py[$i][2] =$arrKlonPayang[$i][$totalPY-1];
+          }
+          else if(($totalPY-1)==7){
+            $py[$i][0] =$arrKlonPayang[$i][2];
+            $py[$i][1] =$arrKlonPayang[$i][3];
+            $py[$i][2] =$arrKlonPayang[$i][4];
+            $py[$i][3] =$arrKlonPayang[$i][5];
+            $py[$i][4] =$arrKlonPayang[$i][$totalPY-1];
+          }
+          else if(($totalPY-1)<8){
+            $py[$i][0] = "จำนวนพยางค์ไม่เพียงพอ";
+          }
+        }
+        // วรรคที่ 3
+        else if($i==6){
+          $py[$i][0] =$arrKlonPayang[$i][$totalPY-1];
+        }
+        // วรรคที่ 4
+        else if($i==7){
+          if(($totalPY-1)==8){
+            $py[$i][0] =$arrKlonPayang[$i][3];
+            $py[$i][1] =$arrKlonPayang[$i][5];
+            $py[$i][2] =$arrKlonPayang[$i][$totalPY-1];
+          }
+          else if(($totalPY-1)==9){
+            $py[$i][0] =$arrKlonPayang[$i][3];
+            $py[$i][1] =$arrKlonPayang[$i][6];
+            $py[$i][2] =$arrKlonPayang[$i][$totalPY-1];
+          }
+          else if(($totalPY-1)==7){
+            $py[$i][0] =$arrKlonPayang[$i][2];
+            $py[$i][1] =$arrKlonPayang[$i][3];
+            $py[$i][2] =$arrKlonPayang[$i][4];
+            $py[$i][3] =$arrKlonPayang[$i][5];
+            $py[$i][4] =$arrKlonPayang[$i][$totalPY-1];
+          }
+          else if(($totalPY-1)<8){
+            $py[$i][0] = "จำนวนพยางค์ไม่เพียงพอ";
+          }
+        }
+      }
+    }
+  $resultDuplicateRhyme = new CheckSyntaxAndMelody();
+  $strDuplicateRhyme = "";
+  $totalPY = count($arrKlonPayang[$i])-1;
+  for($i=0 ; $i<count($arrWak)-1 ;$i++){
+    $check = 0;
+    for($j=0 ; $j<count($py[$i]) ; $j++){
+      if($py[$i][$j]!="จำนวนพยางค์ไม่เพียงพอ"){
+        $checkDup = $py[$i][$j];
+      }
+      for($r=$i+1 ; $r<count($arrWak)-1 ;$r++){
+        for($c=$j ; $c<count($py[$r]) ; $c++){
+          if($py[$r][0]=="จำนวนพยางค์ไม่เพียงพอ"){
+            $strDuplicateRhyme = ($strDuplicateRhyme)."จำนวนพยางค์ไม่เพียงพอ-false/";
+            $check = 1;
+          }
+          else if($checkDup==$py[$r][$c]){
+            $strDuplicateRhyme = ($strDuplicateRhyme)."มีสัมผัสซ้ำที่คำว่า ".($py[$i][$j])."-false/";
+            $check = 1;
+          }
+          else if($check==0){
+            $strDuplicateRhyme = ($strDuplicateRhyme)."ไม่เกิดสัมผัสซ้ำที่พยางค์ ".($py[$i][$j])."-true/";
+          }
+        }
+      }
+    }
+  }
+  $resultDuplicateRhyme->duplicateRhyme = ($strDuplicateRhyme);
+  $jsonDuplicateRhyme = json_encode($resultDuplicateRhyme);
+  echo ($jsonDuplicateRhyme."<br>"); // ส่วนที่เราคืนให้พาน
+  $deJsonDuplicateRhyme = json_decode($jsonDuplicateRhyme, true); // ส่วนของจูนไม่ต้องดีโค้ดก็ได้ แต่ดีไว้ดูความถูกต้องได้ ซึ่งเวลาส่งจริงอย่าลืมปิดละ
+  print_r ($deJsonDuplicateRhyme);
+  echo "<br>.................................................<br>";
 // 1.6 ชิงสัมผัส
 ?>
