@@ -1,7 +1,7 @@
 <?php
-require ("DataConversion.php");
+//require ("DataConversion.php");
 //require ("DataConversion2.php");
-//require ("DataConversion3.php");
+require ("DataConversion3.php");
 /*print_r ($arrKlonWord);
 echo "<br>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!<br>";
 print_r ($arrKlonPayang);
@@ -781,92 +781,40 @@ for($i=0 ; $i<count($arrWak)-1 ; $i++){
   //print_r ($py);
   $resultDuplicateRhyme = new CheckSyntaxAndMelody();
   $strDuplicateRhyme = "";
-  //$arr = array('1' =>"a" ,'2' => "b");
+  $arr = array('1'=>array('a' => '111', 'b'=>'222'),
+               '2'=>array('a' => '333', 'b'=>'111'),
+               '3'=>array('a' => '555', 'b'=>'666'));
   //$totalPY = count($arrKlonPayang[$i])-1;
-  for($i=0 ; $i<count($arrWak)-1 ;$i++){
-    $check = 0;
-    for($j=0; $j<count($pn[$i]) ; $j++){
-      $checkDup = $pn[$i][$j];
-      //echo ($checkDup)."<br>";
-      if(in_array($checkDup,$arr)){
-        echo "ass ";
-      }
-      else {
-        //echo "string ";
-      }
-    }
-  }
-  //echo "<br>";
-  //$totalPY = count($arrKlonPayang[$i])-1;
-  /*for($i=0 ; $i<count($arrWak)-1 ;$i++){
-    $check = 0;
-    for($j=0; $j<count($py[$i]) ; $j++){
-      if($py[$i][0]!="จำนวนพยางค์ไม่เพียงพอ"){
-        $checkDup = $py[$i][$j];
-      }
-      //echo "<br>".$checkDup."<br>";
-      if($i%2==0){
-        //echo "1";
-        for($r=$i+1 ; $r<count($arrWak)-1 ; $r++){
-          for($c=$j ; $c<count($py[$r]) ; $c++){
-            //print_r ("<br>".$py[$r][$c]."<br>");
-            if($py[$r][0]=="จำนวนพยางค์ไม่เพียงพอ"){
-              $strDuplicateRhyme = ($strDuplicateRhyme)."จำนวนพยางค์ไม่เพียงพอ-false/";
-              $check = 1;
-            }
-            else if($checkDup==$py[$r][$c]){
-              //echo "2";
-              $strDuplicateRhyme = ($strDuplicateRhyme)."มีสัมผัสซ้ำที่คำว่า ".($py[$i][$j])."-false/";
-              $check = 1;
-            }
-          }
+  $check = 0;
+  foreach($pn as $value){
+    for($i=0 ; $i<count($arrWak)-1 ;$i++){
+      for($j=0; $j<count($pn[$i]) ; $j++){
+        $checkDup = $pn[$i][$j];
+        if(in_array($checkDup, $value)){
+          //echo "Got ".($checkDup);
+
         }
       }
-      /*else {
-        for($r=$i ; $r<count($arrWak)-1 ;$r++){
-          if($r!=$i){
-            echo "3";
-            for($c=$j ; $c<count($py[$r]) ; $c++){
-              print_r ("<br>".$py[$r][$c]."<br>");
-              if($py[$r][0]=="จำนวนพยางค์ไม่เพียงพอ"){
-                $strDuplicateRhyme = ($strDuplicateRhyme)."จำนวนพยางค์ไม่เพียงพอ-false/";
-                $check = 1;
-              }
-              else if($checkDup==$py[$r][$c]){
-                echo "4";
-                $strDuplicateRhyme = ($strDuplicateRhyme)."มีสัมผัสซ้ำที่คำว่า ".($py[$i][$j])."-false/";
-                $check = 1;
-              }
-            }
-          }
-          else {
-            echo "5";
-            for($c=$j+1 ; $c<count($py[$r]) ; $c++){
-              //print_r ("<br>".$py[$r][$c]."<br>");
-              if($py[$r][0]=="จำนวนพยางค์ไม่เพียงพอ"){
-                $strDuplicateRhyme = ($strDuplicateRhyme)."จำนวนพยางค์ไม่เพียงพอ-false/";
-                $check = 1;
-              }
-              else if($checkDup==$py[$r][$c]){
-                //echo "6";
-                $strDuplicateRhyme = ($strDuplicateRhyme)."มีสัมผัสซ้ำที่คำว่า ".($py[$i][$j])."-false/";
-                $check = 1;
-              }
-              /*else if($check==0){
-                $strDuplicateRhyme = ($strDuplicateRhyme)."ไม่เกิดสัมผัสซ้ำที่พยางค์ ".($py[$i][$j])."-true/";
-              }
-           //}
-          //}
-
-        //}
-      //}
     }
-    if($check==0){
-      //echo "7";
-      $strDuplicateRhyme = ($strDuplicateRhyme)."ไม่เกิดสัมผัสซ้ำที่พยางค์ ".($py[$i][$j])."-true/";
+}
+  /*for($i=0 ; $i<3 ;$i++){
+    $check = 0;
+    for($j=0; $j<count($arr[$i]) ; $j++){
+      //$checkDup = $pn[$i][$j];
+      //echo ($checkDup)."<br>";
+      if(array_key_exists('111',$arr)){
+        echo "ass";;
+        echo "<br>";
+      }
+      else {
+        echo "string ";
+        echo "<br>";
+      }
     }
   }
-  $resultDuplicateRhyme->duplicateRhyme = ($strDuplicateRhyme);
+  echo "<br>";
+  print_r ($pn);
+  /*$resultDuplicateRhyme->duplicateRhyme = ($strDuplicateRhyme);
   $jsonDuplicateRhyme = json_encode($resultDuplicateRhyme);
   echo ($jsonDuplicateRhyme."<br>"); // ส่วนที่เราคืนให้พาน
   $deJsonDuplicateRhyme = json_decode($jsonDuplicateRhyme, true); // ส่วนของจูนไม่ต้องดีโค้ดก็ได้ แต่ดีไว้ดูความถูกต้องได้ ซึ่งเวลาส่งจริงอย่าลืมปิดละ
@@ -1497,14 +1445,19 @@ $jsonChingRhyme = json_encode($resultChingRhyme);
 $deJsonChingRhyme = json_decode($jsonChingRhyme, true); // ส่วนของจูนไม่ต้องดีโค้ดก็ได้ แต่ดีไว้ดูความถูกต้องได้ ซึ่งเวลาส่งจริงอย่าลืมปิดละ
 //print_r ($deJsonChingRhyme);
 //echo "<br>.................................................<br>";
-print_r ($pn);
+//print_r ($pn);
+
+
 //1.8 สัมผัสเลือน
 //print_r ($pn);
 //echo "<br>";
-//print_r ($rhyme);
+print_r ($rhyme);
 $arrStatusVague = [];
+//echo count($arrWak)-1;
+//echo count($arrWak)-1;
 for($i=1 ; $i<count($arrWak)-1 ; $i+=2){
-  $totalPN = count($arrKlonPhonemes)-1;
+  $totalPN = count($arrKlonPhonemes[$i])-1;
+  //echo $totalPN;
   if($totalPN==8 || $totalPN==9){
     if($rhyme[$i][1]!=$rhyme[$i][2]){
       $arrStatusVague[$i][0] = "true";
@@ -1537,6 +1490,7 @@ for($i=1 ; $i<count($arrWak)-1 ; $i+=2){
     }
   }
 }
+echo "<br>";
 print_r ($arrStatusVague);
 for($i=1 ; $i<count($arrWak)-1 ; $i+=2){
   for($j=0 ; $j<count($arrStatusVague[$i]) ; $j++){
@@ -1582,5 +1536,5 @@ for($i=1 ; $i<count($arrWak)-1 ; $i+=2){
     }
   }
 }
-//print_r ($arrVagueRhyme);
+print_r ($arrVagueRhyme);
 ?>
