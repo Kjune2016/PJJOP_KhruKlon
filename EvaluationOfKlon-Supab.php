@@ -71,7 +71,7 @@ $resultNumOfWak = new CheckSyntaxAndMelody();
   //print_r ($arrCountOfPayang);
   // ตรวจสอบว่าจำนวนพยางค์ในแต่่ละวรรคถูกไหม พร้อมเก็บสถานะ
   for($i=0 ; $i<count($arrWak)-1 ; $i++){
-    $totalPY = count($arrKlonPayang[$i]);
+    $totalPY = count($arrKlonPhonemes[$i]);
     //echo ($totalPY)." ";
     if(($totalPY-1)==8 || ($totalPY-1)==9){
       $arrStatusNumPayang[$i] = "trueGood";
@@ -83,7 +83,9 @@ $resultNumOfWak = new CheckSyntaxAndMelody();
       $arrStatusNumPayang[$i] = "bad";
     }
     else if(($totalPY-1)>9){
-      $arrStatusNumPayang[$i] = "CheckWordPrawisrrchniis";
+      // เรียกฟังก์ชันตรวจคำอะกึ่งเสียง โดยส่งเลขวรรคที่มีพยางค์เกิน 9 ไป
+      $arrStatusNumPayang[$i] = "bad";
+
     }
   }
   //print_r ($arrStatusNumPayang);
@@ -502,15 +504,15 @@ $resultNumOfWak = new CheckSyntaxAndMelody();
   $arrStatusDup = [];
   $arrDupRhyme = [];
   $num = 0;
-  print_r ($pn);
+  //print_r ($pn);
   for($i=0 ; $i<count($pn) ; $i++){
     for($j=0 ; $j<count($pn[$i]) ; $j++){
       $arrDupPn[$num] = $pn[$i][$j];
       $num++;
     }
   }
-  echo "<br>";
-  print_r ($arrDupPn);
+  //echo "<br>";
+  //print_r ($arrDupPn);
   //echo count($arrDupPn);
   //$check = 0;
   for($i=0 ; $i<count($arrDupPn) ; $i++){
@@ -542,31 +544,41 @@ $resultNumOfWak = new CheckSyntaxAndMelody();
     }
 }
   //echo "<br>";
-  print_r ($arrStatusDup);
-  echo "<br>";
-  print_r ($arrStatusDupRhyme);
+  //print_r ($arrStatusDup);
+  //echo "<br>";
+  //print_r ($arrStatusDupRhyme);
   for($j=0 ; $j<count($arrStatusDupRhyme) ; $j++){
     for($k=0 ; $k<count($arrStatusDupRhyme[$j]) ; $k++){
       if($j<4){
         if($arrStatusDupRhyme[$j][$k] == "false"){
-          $arrDupRhyme[$j][str] = "มีสัมผัสซ้ำที่คำว่า ".($py[$j][$k])." ในบทที่ 1";
+          $arrDupRhyme[$j][str] = "มีสัมผัสซ้ำที่คำว่า ".($py[$j][$k])." ในบทที่ ".(round(count($arrWak)%4));
+          $arrDupRhyme[$j][status] = "false";
         }
         else {
-          $arrDupRhyme[$j][str] = "ไม่มีสัมผัสซ้ำในบทที่ 2";
+          $arrDupRhyme[$j][str] = "ไม่มีสัมผัสซ้ำในบทที่ ".(round(count($arrWak)%4));
+          $arrDupRhyme[$j][status] = "true";
         }
       }
       else if($j==4 || $j<8){
         if($arrStatusDupRhyme[$j][$k] == "false"){
-          $arrDupRhyme[$j][str] = "มีสัมผัสซ้ำที่คำว่า ".($py[$j][$k])." ในบทที่ 2";
+          $arrDupRhyme[$j][str] = "มีสัมผัสซ้ำที่คำว่า ".($py[$j][$k])." ในบทที่ ".(round(count($arrWak)%4));
+          $arrDupRhyme[$j][status] = "false";
         }
         else {
-          $arrDupRhyme[$j][str] = "ไม่มีสัมผัสซ้ำในบทที่ 2";
+          $arrDupRhyme[$j][str] = "ไม่มีสัมผัสซ้ำในบทที่ ".(round(count($arrWak)%4));
+          $arrDupRhyme[$j][status] = "true";
         }
       }
     }
   }
-  echo "<br>";
-  print_r ($arrDupRhyme);
+  //print_r ($arrDupRhyme);
+  $resultDuplicateRhyme->duplicateRhyme = ($arrDupRhyme);
+  $jsonDuplicateRhyme = json_encode($resultDuplicateRhyme);
+  echo ($jsonDuplicateRhyme."<br>"); // ส่วนที่เราคืนให้พาน
+  $deJsonDuplicateRhyme = json_decode($jsonDuplicateRhyme, true); // ส่วนของจูนไม่ต้องดีโค้ดก็ได้ แต่ดีไว้ดูความถูกต้องได้ ซึ่งเวลาส่งจริงอย่าลืมปิดละ
+  print_r ($deJsonDuplicateRhyme);
+  echo "<br>.................................................<br>";
+  //print_r ($indexOfRhyme)."<br>";
   // 1.6 ชิงสัมผัส
    //// ********* ยังไม่สามารถบอกได้ว่าชิงสัมผัสที่พยางค์ไหน
    /// เตรียม input สำหรับตรวจชิงสัมผัส
