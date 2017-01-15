@@ -37,26 +37,26 @@ function checkWak($arrWak){
     for($i=0 ; $i<count($arrIndexOfWak) ; $i++){
       if($i>=0 && $i<4 && $arrIndexOfWak[$i]=="false"){
         //print "ขาดวรรคที่"." ".($i+1)." "."ของบบที่ 1"."<br>";
-        $arrNumWak[$i][str] = " ขาดวรรคที่ ".($i+1)." ของบทที่ 1";
-        $arrNumWak[$i][status] = "false";
+        $arrNumWak[$i]['str'] = " ขาดวรรคที่ ".($i+1)." ของบทที่ 1";
+        $arrNumWak[$i]['status'] = "false";
       }
       else if ($i>=4 && $i<8 && $arrIndexOfWak[$i]=="false") {
         //print "ขาดวรรคที่"." ".($i+1)." "."ของบบที่ 2"."<br>";
-        $arrNumWak[$i][str] = " ขาดวรรคที่ ".($i+1)." ของบทที่ 2";
-        $arrNumWak[$i][status] = "false";
+        $arrNumWak[$i]['str'] = " ขาดวรรคที่ ".(round($i%4)+1)." ของบทที่ 2";
+        $arrNumWak[$i]['status'] = "false";
       }
       else if($i>=0 && $i<4 && $arrIndexOfWak[$i]=="true"){
         //print "ขาดวรรคที่"." ".($i+1)." "."ของบบที่ 1"."<br>";
-        $arrNumWak[$i][str] = " มีวรรคที่ ".($i+1)." ของบทที่ 1";
-        $arrNumWak[$i][status] = "true";
+        $arrNumWak[$i]['str'] = " มีวรรคที่ ".($i+1)." ของบทที่ 1";
+        $arrNumWak[$i]['status'] = "true";
       }
       else if ($i>=4 && $i<8 && $arrIndexOfWak[$i]=="true") {
         //print "ขาดวรรคที่"." ".($i+1)." "."ของบบที่ 2"."<br>";
-        $arrNumWak[$i][str] = " มีวรรคที่ ".($i+1)." ของบทที่ 2";
-        $arrNumWak[$i][status] = "true";
+        $arrNumWak[$i]['str'] = " มีวรรคที่ ".(round($i%4)+1)." ของบทที่ 2";
+        $arrNumWak[$i]['status'] = "true";
       }
     }
-    $arrNumWak[sum] = "จำนวนวรรคทั้งหมดคือ ".($countOfWak)." วรรค";
+    $arrNumWak['sum'] = "จำนวนวรรคทั้งหมดคือ ".($countOfWak)." วรรค";
     return ($arrNumWak);
     //print_r ($arrIndexOfWak);
     //print_r ($arrNumWak);
@@ -71,12 +71,12 @@ function checkWak($arrWak){
     //return ($deJsonNumWak);
     //echo "<br>.................................................<br>";
 }
-$a = checkWak($arrWak);
+//$a = checkWak($arrWak);
 //echo $a;
 //print_r ($a);
 
 // 1.2 ตรวจจำนวนพยางค์
-function checkPayang($arrWak){
+function checkPayang($arrWak,$arrKlonPhonemes){
   // นับพยางค์แต่ละวรรค
   $resultNumOfPayang = new CheckSyntaxAndMelody();
   $strNumPayang = "";
@@ -105,45 +105,45 @@ function checkPayang($arrWak){
   for($i=0 ; $i<count($arrWak)-1 ; $i++){
     if($i>=0 && $i<4 && $arrStatusNumPayang[$i] == "trueGood"){
         //print "ขาดวรรคที่"." ".($i+1)." "."ของบบที่ 1"."<br>";
-      $arrNumPayang[$i][str] = "จำนวนพยางค์ในวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง";
-      $arrNumPayang[$i][status] = "trueGood";
+      $arrNumPayang[$i]['str'] = "จำนวนพยางค์ในวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง";
+      $arrNumPayang[$i]['status'] = "trueGood";
     }
     else if ($i>=4 && $i<8 && $arrStatusNumPayang[$i] == "trueGood") {
         //print "ขาดวรรคที่"." ".($i+1)." "."ของบบที่ 2"."<br>";
-        $arrNumPayang[$i][str] = "จำนวนพยางค์ในวรรคที่ ".($i+1)." ของบทที่ 2 ถูกต้อง";
-        $arrNumPayang[$i][status] = "trueGood";
+        $arrNumPayang[$i]['str'] = "จำนวนพยางค์ในวรรคที่ ".(round($i%4)+1)." ของบทที่ 2 ถูกต้อง";
+        $arrNumPayang[$i]['status'] = "trueGood";
     }
     else if($i>=0 && $i<4 && $arrStatusNumPayang[$i] == "true"){
         //print "ขาดวรรคที่"." ".($i+1)." "."ของบบที่ 1"."<br>";
-        $arrNumPayang[$i][str] = "จำนวนพยางค์ในวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง";
-        $arrNumPayang[$i][status] = "true";
+        $arrNumPayang[$i]['str'] = "จำนวนพยางค์ในวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง";
+        $arrNumPayang[$i]['status'] = "true";
     }
     else if ($i>=4 && $i<8 && $arrStatusNumPayang[$i] == "true") {
         //print "ขาดวรรคที่"." ".($i+1)." "."ของบบที่ 2"."<br>";
-        $arrNumPayang[$i][str] = "จำนวนพยางค์ในวรรคที่ ".($i+1)." ของบทที่ 2 ถูกต้อง";
-        $arrNumPayang[$i][status] = "true";
+        $arrNumPayang[$i]['str'] = "จำนวนพยางค์ในวรรคที่ ".(round($i%4)+1)." ของบทที่ 2 ถูกต้อง";
+        $arrNumPayang[$i]['status'] = "true";
     }
     else if($i>=0 && $i<4 && $arrStatusNumPayang[$i] == "bad"){
         //print "ขาดวรรคที่"." ".($i+1)." "."ของบบที่ 1"."<br>";
-        $arrNumPayang[$i][str] = "จำนวนพยางค์ในวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง";
-        $arrNumPayang[$i][status] = "false";
+        $arrNumPayang[$i]['str'] = "จำนวนพยางค์ในวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง";
+        $arrNumPayang[$i]['status'] = "false";
     }
     else if ($i>=4 && $i<8 && $arrStatusNumPayang[$i] == "bad") {
         //print "ขาดวรรคที่"." ".($i+1)." "."ของบบที่ 2"."<br>";
-        $arrNumPayang[$i][str] = "จำนวนพยางค์ในวรรคที่ ".($i+1)." ของบทที่ 2 ถูกต้อง";
-        $arrNumPayang[$i][status] = "false";
+        $arrNumPayang[$i]['str'] = "จำนวนพยางค์ในวรรคที่ ".(round($i%4)+1)." ของบทที่ 2 ถูกต้อง";
+        $arrNumPayang[$i]['status'] = "false";
     }
     //*********************** ยังไม่ได้ตรวจคำอะกึ่งเสียง ************************************
-    else if($i>=0 && $i<4 && $arrStatusNumPayang[$i] == "CheckWordPrawisrrchniis"){
+    /*else if($i>=0 && $i<4 && $arrStatusNumPayang[$i] == "CheckWordPrawisrrchniis"){
         //print "ขาดวรรคที่"." ".($i+1)." "."ของบบที่ 1"."<br>";
-        $strNumPayang[$i][str] = "จำนวนพยางค์ในวรรคที่ ".($i+1)." ของบทที่ 1 ต้องไปตรวจอะกึ่งเสียง";
-        $arrNumPayang[$i][status] = "true";
+        $strNumPayang[$i]['str'] = "จำนวนพยางค์ในวรรคที่ ".($i+1)." ของบทที่ 1 ต้องไปตรวจอะกึ่งเสียง";
+        $arrNumPayang[$i]['status'] = "true";
     }
     else if ($i>=4 && $i<8 && $arrStatusNumPayang[$i] == "CheckWordPrawisrrchniis") {
         //print "ขาดวรรคที่"." ".($i+1)." "."ของบบที่ 2"."<br>";
-        $strNumPayang[$i][str] = "จำนวนพยางค์ในวรรคที่ ".($i+1)." ของบทที่ 2 ต้องไปตรวจอะกึ่งเสียง";
-        $arrNumPayang[$i][status] = "true";
-    }
+        $strNumPayang[$i]['str'] = "จำนวนพยางค์ในวรรคที่ ".($i+1)." ของบทที่ 2 ต้องไปตรวจอะกึ่งเสียง";
+        $arrNumPayang[$i]['status'] = "true";
+    }*/
   }
   return ($arrNumPayang);
   //$resultNumOfPayang->numOfPayang = ($arrNumPayang);
@@ -153,7 +153,7 @@ function checkPayang($arrWak){
   //print_r ($deJsonNumPayang);
   //echo "<br>.................................................<br>";
 }
-$b = checkPayang($arrWak);
+//$b = checkPayang($arrWak);
 //print_r ($b);
 
 
@@ -171,24 +171,24 @@ function checkTone($arrWak,$arrKlonTone){
       if($i==0){
         if($tone==1 || $tone==2 || $tone==3 || $tone==4 || $tone==5){
           if($tone==2){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงเอก";
-            $arrOfTone[$i][status] = "true";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงเอก";
+            $arrOfTone[$i]['status'] = "true";
           }
           else if($tone==3){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงโท";
-            $arrOfTone[$i][status] = "true";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงโท";
+            $arrOfTone[$i]['status'] = "true";
           }
           else if($tone==4){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงตรี";
-            $arrOfTone[$i][status] = "true";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงตรี";
+            $arrOfTone[$i]['status'] = "true";
           }
           else if($tone==5){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงจัตวา";
-            $arrOfTone[$i][status] = "true";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงจัตวา";
+            $arrOfTone[$i]['status'] = "true";
           }
           else if($tone==1){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงสามัญ แต่ไม่นิยมลงเสียงนี้ จึงขาดความไพเราะ";
-            $arrOfTone[$i][status] = "true";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงสามัญ แต่ไม่นิยมลงเสียงนี้";
+            $arrOfTone[$i]['status'] = "true";
           }
         }
       }
@@ -196,38 +196,38 @@ function checkTone($arrWak,$arrKlonTone){
       if($i==1){
         if($tone==2 || $tone==3 || $tone==5){
           if($tone==2){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ถูกต้อง คือเสียงเอก";
-            $arrOfTone[$i][status] = "true";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ถูกต้อง คือเสียงเอก";
+            $arrOfTone[$i]['status'] = "true";
           }
           else if($tone==3){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ถูกต้อง คือเสียงโท";
-            $arrOfTone[$i][status] = "true";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ถูกต้อง คือเสียงโท";
+            $arrOfTone[$i]['status'] = "true";
           }
           else if($tone==5){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
-            $arrOfTone[$i][status] = "trueGood";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+            $arrOfTone[$i]['status'] = "trueGood";
           }
         }
         else {
-          $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงเอก เสียงโท และที่นิยมคือเสียงจัตวา";
-          $arrOfTone[$i][status] = "false";
+          $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงเอก เสียงโท และที่นิยมคือเสียงจัตวา";
+          $arrOfTone[$i]['status'] = "false";
         }
       }
       // วรรคที่ 3 และ 4
       if($i==2 || $i==3){
         if($tone==1 || $tone==4){
           if($tone==1){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง คือเสียงสามัญ และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
-            $arrOfTone[$i][status] = "trueGood";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง คือเสียงสามัญ และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+            $arrOfTone[$i]['status'] = "trueGood";
           }
           else if($tone==4){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
-            $arrOfTone[$i][status] = "trueGood";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+            $arrOfTone[$i]['status'] = "trueGood";
           }
         }
         else {
-          $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i+1)." ของบทที่ 1 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงจัตวา และที่นิยมคือเสียงสามัญ";
-          $arrOfTone[$i][status] = "false";
+          $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i+1)." ของบทที่ 1 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงจัตวา และที่นิยมคือเสียงสามัญ";
+          $arrOfTone[$i]['status'] = "false";
         }
       }
     }
@@ -237,24 +237,24 @@ function checkTone($arrWak,$arrKlonTone){
       if($i==4){
         if($tone==1 || $tone==2 || $tone==3 || $tone==4 || $tone==5){
           if($tone==2){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงเอก";
-            $arrOfTone[$i][status] = "true";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงเอก";
+            $arrOfTone[$i]['status'] = "true";
           }
           else if($tone==3){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงโท";
-            $arrOfTone[$i][status] = "true";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงโท";
+            $arrOfTone[$i]['status'] = "true";
           }
           else if($tone==4){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงตรี";
-            $arrOfTone[$i][status] = "true";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงตรี";
+            $arrOfTone[$i]['status'] = "true";
           }
           else if($tone==5){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงจัตวา";
-            $arrOfTone[$i][status] = "true";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงจัตวา";
+            $arrOfTone[$i]['status'] = "true";
           }
           else if($tone==1){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงสามัญ แต่ไม่นิยมลงเสียงนี้ จึงขาดความไพเราะ";
-            $arrOfTone[$i][status] = "true";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงสามัญ แต่ไม่นิยมลงเสียงนี้ จึงขาดความไพเราะ";
+            $arrOfTone[$i]['status'] = "true";
           }
         }
       }
@@ -262,38 +262,38 @@ function checkTone($arrWak,$arrKlonTone){
       if($i==5){
         if($tone==2 || $tone==3 || $tone==5){
           if($tone==2){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ถูกต้อง คือเสียงเอก";
-            $arrOfTone[$i][status] = "true";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ถูกต้อง คือเสียงเอก";
+            $arrOfTone[$i]['status'] = "true";
           }
           else if($tone==3){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ถูกต้อง คือเสียงโท";
-            $arrOfTone[$i][status] = "true";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ถูกต้อง คือเสียงโท";
+            $arrOfTone[$i]['status'] = "true";
           }
           else if($tone==5){
-            $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
-            $arrOfTone[$i][status] = "trueGood";
+            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+            $arrOfTone[$i]['status'] = "trueGood";
           }
         }
         else {
-          $arrOfTone[$i][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงเอก เสียงโท และที่นิยมคือเสียงจัตวา";
-          $arrOfTone[$i][status] = "false";
+          $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงเอก เสียงโท และที่นิยมคือเสียงจัตวา";
+          $arrOfTone[$i]['status'] = "false";
         }
       }
       // วรรคที่ 3 และ 4
       if($i==6 || $i==7){
         if($tone==1 || $tone==4){
           if($tone==1){
-            $arrOfTone[round($i/2)][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".round($i/2)." ของบทที่ 2 ถูกต้อง คือเสียงสามัญ และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
-            $arrOfTone[round($i/2)][status] = "trueGood";
+            $arrOfTone[round($i/2)]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".round($i/2)." ของบทที่ 2 ถูกต้อง คือเสียงสามัญ และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+            $arrOfTone[round($i/2)]['status'] = "trueGood";
           }
           else if($tone==4){
-            $arrOfTone[round($i/2)][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".round($i/2)." ของบทที่ 2 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
-            $arrOfTone[round($i/2)][status] = "trueGood";
+            $arrOfTone[round($i/2)]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".round($i/2)." ของบทที่ 2 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+            $arrOfTone[round($i/2)]['status'] = "trueGood";
           }
         }
         else {
-            $arrOfTone[round($i/2)][str] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".round($i/2)." ของบทที่ 2 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงจัตวา และที่นิยมคือเสียงสามัญ";
-            $arrOfTone[round($i/2)][status] = "false";
+            $arrOfTone[round($i/2)]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".round($i/2)." ของบทที่ 2 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงจัตวา และที่นิยมคือเสียงสามัญ";
+            $arrOfTone[round($i/2)]['status'] = "false";
         }
       }
     }
@@ -308,7 +308,7 @@ function checkTone($arrWak,$arrKlonTone){
   //print_r ($deJsonTone);
   //echo "<br>.................................................<br>";
 }
-$c = checkTone($arrWak,$arrKlonTone);
+//$c = checkTone($arrWak,$arrKlonTone);
 //print_r ($c);
 
 
@@ -316,6 +316,7 @@ $c = checkTone($arrWak,$arrKlonTone);
 function checkExRhyme($arrWak,$arrKlonPhonemes,$rhyme){
   //echo "<br>////";
   //print_r ($rhyme);
+  //echo "<br><br>";
   // ตรวจสัมผัสตามกฏ
   // สัมผัสระหว่างวรรคที่ 1 กับ วรรคที่ 2
   $resultExternalRhyme = new CheckSyntaxAndMelody();
@@ -356,26 +357,26 @@ function checkExRhyme($arrWak,$arrKlonPhonemes,$rhyme){
             else if($totalPN==8 || $totalPN==9 && $rhyme[$i][1]==$rhyme[1][1]){
               $indexOfRhyme[0][0] = "payangAt3";
             }
-            $arrExternalRhyme[$i][str] = "มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 1";
-            $arrExternalRhyme[$i][status] = "true";
+            $arrExternalRhyme[$i]['str'] = "มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 1";
+            $arrExternalRhyme[$i]['status'] = "true";
           }
           else if($rhyme[$i][1]!=$rhyme[1][$j] && $check==0 || $rhyme[$i][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
             $check = 1;
-            $arrExternalRhyme[$i][str] = "ไม่มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 1";
-            $arrExternalRhyme[$i][status] = "false";
+            $arrExternalRhyme[$i]['str'] = "ไม่มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 1";
+            $arrExternalRhyme[$i]['status'] = "false";
           }
         }
         // สัมผัสระหว่างวรรคที่ 2 กับ วรรคที่ 3
         else if($i==1){
           if($rhyme[$i][3]==$rhyme[2][$j] && $rhyme[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
             $check = 1;
-            $arrExternalRhyme[$i][str] = "มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 1";
-            $arrExternalRhyme[$i][status] = "true";
+            $arrExternalRhyme[$i]['str'] = "มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 1";
+            $arrExternalRhyme[$i]['status'] = "true";
           }
           else if($rhyme[$i][3]!=$rhyme[2][$j] && $check==0 || $rhyme[$i][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
             $check = 1;
-            $arrExternalRhyme[$i][str] = "ไม่มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 1";
-            $arrExternalRhyme[$i][status] = "false";
+            $arrExternalRhyme[$i]['str'] = "ไม่มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 1";
+            $arrExternalRhyme[$i]['status'] = "false";
           }
         }
 
@@ -404,13 +405,13 @@ function checkExRhyme($arrWak,$arrKlonPhonemes,$rhyme){
             else if($totalPN==8 || $totalPN==9 && $rhyme[$i][1]==$rhyme[3][1]){
               $indexOfRhyme[0][1] = "payangAt3";
             }
-            $arrExternalRhyme[$i][str] = "มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 1";
-            $arrExternalRhyme[$i][status] = "true";
+            $arrExternalRhyme[$i]['str'] = "มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 1";
+            $arrExternalRhyme[$i]['status'] = "true";
           }
           else if($rhyme[$i][1]!=$rhyme[3][$j] && $check==0 || $rhyme[$i][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
             $check = 1;
-            $arrExternalRhyme[$i][str] = "ไม่มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 1";
-            $arrExternalRhyme[$i][status] = "false";
+            $arrExternalRhyme[$i]['str'] = "ไม่มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 1";
+            $arrExternalRhyme[$i]['status'] = "false";
           }
         }
       }
@@ -441,13 +442,13 @@ function checkExRhyme($arrWak,$arrKlonPhonemes,$rhyme){
             else if($totalPN==8 || $totalPN==9 && $rhyme[$i][1]==$rhyme[1][1]){
               $indexOfRhyme[0][0] = "payangAt3";
             }
-            $arrExternalRhyme[$i][str] = "มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 2";
-            $arrExternalRhyme[$i][status] = "true";
+            $arrExternalRhyme[$i]['str'] = "มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 2";
+            $arrExternalRhyme[$i]['status'] = "true";
           }
           else if($rhyme[$i][1]!=$rhyme[5][$j] && $check==0 || $rhyme[$i][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
             $check = 1;
-            $arrExternalRhyme[$i][str] = "ไม่มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 2";
-            $arrExternalRhyme[$i][status] = "false";
+            $arrExternalRhyme[$i]['str'] = "ไม่มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 2";
+            $arrExternalRhyme[$i]['status'] = "false";
           }
         }
         // สัมผัสระหว่างวรรคที่ 2 กับ วรรคที่ 3
@@ -475,42 +476,42 @@ function checkExRhyme($arrWak,$arrKlonPhonemes,$rhyme){
             else if($totalPN==8 || $totalPN==9 && $rhyme[$i][1]==$rhyme[1][1]){
               $indexOfRhyme[0][0] = "payangAt3";
             }
-            $arrExternalRhyme[$i][str] = "มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 2";
-            $arrExternalRhyme[$i][status] = "true";
+            $arrExternalRhyme[$i]['str'] = "มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 2";
+            $arrExternalRhyme[$i]['status'] = "true";
           }
           else if($rhyme[$i][3]!=$rhyme[6][$j] && $check==0 || $rhyme[$i][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
             $check = 1;
-            $arrExternalRhyme[$i][str] = "ไม่มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 2";
-            $arrExternalRhyme[$i][status] = "false";
+            $arrExternalRhyme[$i]['str'] = "ไม่มีสัมผัสนอกระหว่างวรรคที่ 2 กับ วรรคที่ 3 ในบทที่ 2";
+            $arrExternalRhyme[$i]['status'] = "false";
           }
         }
         // สัมผัสระหว่างวรรคที่ 3 กับ วรรคที่ 4
         else if($i==6){
           if($rhyme[$i][1]==$rhyme[7][$j] && $rhyme[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
             $check = 1;
-            $arrExternalRhyme[$i][str] = "มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 2";
-            $arrExternalRhyme[$i][status] = "true";
+            $arrExternalRhyme[$i]['str'] = "มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 2";
+            $arrExternalRhyme[$i]['status'] = "true";
           }
           else if($rhyme[$i][1]!=$rhyme[7][$j] && $check==0 || $rhyme[$i][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
             $check = 1;
-            $arrExternalRhyme[$i][str] = "ไม่มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 2";
-            $arrExternalRhyme[$i][status] = "false";
+            $arrExternalRhyme[$i]['str'] = "ไม่มีสัมผัสนอกระหว่างวรรคที่ 3 กับ วรรคที่ 4 ในบทที่ 2";
+            $arrExternalRhyme[$i]['status'] = "false";
           }
         }
       }
     }
     // สัมผัสระหว่างบท   ปล. ยังไม่เคยสมมติตัวอย่าง
-    if($countOfWak>4 && $countOfWak<8){
-      if($rhyme[3][3]==$rhyme[5][3] && $rhyme[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
-        $check = 1;
-        $arrExternalRhyme[connect][str] = "มีสัมผัสนอกระหว่างบท";
-        $arrExternalRhyme[connect][status] = "true";
-      }
-      else if($rhyme[3][3]!=$rhyme[5][3] && $check!=0 || $rhyme[$i][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
-        $check = 1;
-        $arrExternalRhyme[connect][str] = "ไม่มีสัมผัสนอกระหว่างบท";
-        $arrExternalRhyme[connect][status] = "false";
-      }
+  }
+  if(count($arrWak)>4 || count($arrWak)<8){
+    if($rhyme[3][3]==$rhyme[5][3] && $rhyme[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+      $check = 1;
+      $arrExternalRhyme['connect']['str'] = "มีสัมผัสนอกระหว่างบท";
+      $arrExternalRhyme['connect']['status'] = "true";
+    }
+    else if($rhyme[3][3]!=$rhyme[5][3] && $check!=0 || $rhyme[$i][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $check = 1;
+      $arrExternalRhyme['connect']['str'] = "ไม่มีสัมผัสนอกระหว่างบท";
+      $arrExternalRhyme['connect']['status'] = "false";
     }
   }
   //print_r ($indexOfRhyme);
@@ -529,96 +530,591 @@ function checkExRhyme($arrWak,$arrKlonPhonemes,$rhyme){
 
 
 // 1.5 สัมผัสซ้ำ
-function checkDupRhyme($pn){
-  $resultDuplicateRhyme = new CheckSyntaxAndMelody();
-  $arrDupPn = [];
-  $arrStatusDup = [];
-  $arrDupRhyme = [];
-  $num = 0;
-  //print_r ($pn);
-  for($i=0 ; $i<count($pn) ; $i++){
-    for($j=0 ; $j<count($pn[$i]) ; $j++){
-      $arrDupPn[$num] = $pn[$i][$j];
-      $num++;
+function checkDupRhyme($arrWak,$arrKlonPhonemes,$arrKlonTone){
+  $pn = [];
+  $tone = [];
+  for($i=0 ; $i<count($arrWak)-1 ; $i++){
+    $totalPN = count($arrKlonPhonemes[$i]);
+    $totalTone = count($arrKlonTone[$i]);
+    //echo ($totalPN)." ";
+        // บทที่ 1
+        if($i==0 || $i<4){
+          // กรณี 8 9 and 7 พยางค์
+            // วรรคที่ 1 บทที่ 1
+            if($i==0){
+              $pn[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
+              $tone[$i][0] =$arrKlonTone[$i][$totalTone-1];
+            }
+            // วรรคที่ 2
+            else if($i==1){
+              if(($totalPN-1)==8){
+                $pn[$i][0] =$arrKlonPhonemes[$i][3];
+                $tone[$i][0] =$arrKlonTone[$i][3];
+                $pn[$i][1] =$arrKlonPhonemes[$i][5];
+                $tone[$i][1] =$arrKlonTone[$i][5];
+                $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+                $tone[$i][2] =$arrKlonTone[$i][$totalTone-1];
+              }
+              else if(($totalPN-1)>=9){
+                $pn[$i][0] =$arrKlonPhonemes[$i][3];
+                $tone[$i][0] =$arrKlonTone[$i][3];
+                $pn[$i][1] =$arrKlonPhonemes[$i][6];
+                $tone[$i][1] =$arrKlonTone[$i][6];
+                $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+                $tone[$i][2] =$arrKlonTone[$i][$totalTone-1];
+              }
+              else if(($totalPN-1)==7){
+                $pn[$i][0] =$arrKlonPhonemes[$i][2];
+                $tone[$i][0] =$arrKlonTone[$i][2];
+                $pn[$i][1] =$arrKlonPhonemes[$i][3];
+                $tone[$i][1] =$arrKlonTone[$i][3];
+                $pn[$i][2] =$arrKlonPhonemes[$i][4];
+                $tone[$i][2] =$arrKlonTone[$i][4];
+                $pn[$i][3] =$arrKlonPhonemes[$i][5];
+                $tone[$i][3] =$arrKlonTone[$i][5];
+                $pn[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
+                $tone[$i][4] =$arrKlonTone[$i][$totalTone-1];
+              }
+              else if(($totalPN-1)<8){
+                $pn[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+              }
+            }
+            // วรรคที่ 3
+            else if($i==2){
+              $pn[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
+              $tone[$i][0] =$arrKlonTone[$i][$totalTone-1];
+            }
+            // วรรคที่ 4
+            else if($i==3){
+              if(($totalPN-1)==8){
+                $pn[$i][0] =$arrKlonPhonemes[$i][3];
+                $tone[$i][0] =$arrKlonTone[$i][3];
+                $pn[$i][1] =$arrKlonPhonemes[$i][5];
+                $tone[$i][1] =$arrKlonTone[$i][5];
+                $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+                $tone[$i][2] =$arrKlonTone[$i][$totalTone-1];
+              }
+              else if(($totalPN-1)>=9){
+                $pn[$i][0] =$arrKlonPhonemes[$i][3];
+                $tone[$i][0] =$arrKlonTone[$i][3];
+                $pn[$i][1] =$arrKlonPhonemes[$i][6];
+                $tone[$i][1] =$arrKlonTone[$i][6];
+                $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+                $tone[$i][2] =$arrKlonTone[$i][$totalTone-1];
+              }
+              else if(($totalPN-1)==7){
+                $pn[$i][0] =$arrKlonPhonemes[$i][2];
+                $tone[$i][0] =$arrKlonTone[$i][2];
+                $pn[$i][1] =$arrKlonPhonemes[$i][3];
+                $tone[$i][1] =$arrKlonTone[$i][3];
+                $pn[$i][2] =$arrKlonPhonemes[$i][4];
+                $tone[$i][2] =$arrKlonTone[$i][4];
+                $pn[$i][3] =$arrKlonPhonemes[$i][5];
+                $tone[$i][3] =$arrKlonTone[$i][5];
+                $pn[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
+                $tone[$i][4] =$arrKlonTone[$i][$totalTone-1];
+              }
+              else if(($totalPN-1)<8){
+                $pn[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+              }
+            }
+          }
+      // บทที่ 2
+      if($i>=4 || $i<8){
+        // กรณี 8 9 and 7 พยางค์
+          // วรรคที่ 1 บทที่ 2
+          if($i==4){
+            $pn[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
+          }
+          // วรรคที่ 2
+          else if($i==5){
+            if(($totalPN-1)==8){
+              $pn[$i][0] =$arrKlonPhonemes[$i][3];
+              $tone[$i][0] =$arrKlonTone[$i][3];
+              $pn[$i][1] =$arrKlonPhonemes[$i][5];
+              $tone[$i][1] =$arrKlonTone[$i][5];
+              $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+              $tone[$i][2] =$arrKlonTone[$i][$totalTone-1];
+            }
+            else if(($totalPN-1)>=9){
+              $pn[$i][0] =$arrKlonPhonemes[$i][3];
+              $tone[$i][0] =$arrKlonTone[$i][3];
+              $pn[$i][1] =$arrKlonPhonemes[$i][6];
+              $tone[$i][1] =$arrKlonTone[$i][6];
+              $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+              $tone[$i][2] =$arrKlonTone[$i][$totalTone-1];
+            }
+            else if(($totalPY-1)==7){
+              $pn[$i][0] =$arrKlonPhonemes[$i][2];
+              $tone[$i][0] =$arrKlonTone[$i][2];
+              $pn[$i][1] =$arrKlonPhonemes[$i][3];
+              $tone[$i][1] =$arrKlonTone[$i][3];
+              $pn[$i][2] =$arrKlonPhonemes[$i][4];
+              $tone[$i][2] =$arrKlonTone[$i][4];
+              $pn[$i][3] =$arrKlonPhonemes[$i][5];
+              $tone[$i][3] =$arrKlonTone[$i][5];
+              $pn[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
+              $tone[$i][4] =$arrKlonTone[$i][$totalTone-1];
+            }
+            else if(($totalPN-1)<8){
+              $pn[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+            }
+          }
+          // วรรคที่ 3
+          else if($i==6){
+            $pn[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
+          }
+          // วรรคที่ 4
+          else if($i==7){
+            if(($totalPN-1)==8){
+              $pn[$i][0] =$arrKlonPhonemes[$i][3];
+              $tone[$i][0] =$arrKlonTone[$i][3];
+              $pn[$i][1] =$arrKlonPhonemes[$i][5];
+              $tone[$i][1] =$arrKlonTone[$i][5];
+              $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+              $tone[$i][2] =$arrKlonTone[$i][$totalTone-1];
+            }
+            else if(($totalPN-1)>=9){
+              $pn[$i][0] =$arrKlonPhonemes[$i][3];
+              $tone[$i][0] =$arrKlonTone[$i][3];
+              $pn[$i][1] =$arrKlonPhonemes[$i][6];
+              $tone[$i][1] =$arrKlonTone[$i][6];
+              $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+              $tone[$i][2] =$arrKlonTone[$i][$totalTone-1];
+            }
+            else if(($totalPN-1)==7){
+              $pn[$i][0] =$arrKlonPhonemes[$i][2];
+              $tone[$i][0] =$arrKlonTone[$i][2];
+              $pn[$i][1] =$arrKlonPhonemes[$i][3];
+              $tone[$i][1] =$arrKlonTone[$i][3];
+              $pn[$i][2] =$arrKlonPhonemes[$i][4];
+              $tone[$i][2] =$arrKlonTone[$i][4];
+              $pn[$i][3] =$arrKlonPhonemes[$i][5];
+              $tone[$i][3] =$arrKlonTone[$i][5];
+              $pn[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
+              $tone[$i][4] =$arrKlonTone[$i][$totalTone-1];
+            }
+            else if(($totalPN-1)<8){
+              $pn[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+            }
+          }
+        }
+      }
+    //print_r ($py);
+    //print_r ($pn);
+    //print_r($tone);
+    //echo "<br><br><br>";
+    $resultDuplicateRhyme = new CheckSyntaxAndMelody();
+    $arrDupPn = [];
+    $arrStatusDup = [];
+    $arrDupRhyme = [];
+    $num = 0;
+    for($i=0 ; $i<count($pn) ; $i++){
+      for($j=0 ; $j<count($pn[$i]) ; $j++){
+        $arrDupPn[$num] = $pn[$i][$j];
+        $arrDupTone[$num] = $tone[$i][$j];
+        $num++;
+      }
     }
-  }
-  //echo "<br>";
-  //print_r ($arrDupPn);
-  //echo count($arrDupPn);
-  //$check = 0;
-  for($i=0 ; $i<count($arrDupPn) ; $i++){
-    $dupPn = $arrDupPn[$i];
-    //echo "<br>".$dupPn."<br>";
-    for($j=0 ; $j<count($pn) ; $j++){
-      for($k=0 ; $k<count($pn[$j]) ; $k++){
-        //echo "<br>".$pn[$j][$k]."1"."<br>";
-        if($dupPn==$pn[$j][$k]){
-          //echo "<br>".$pn[$j][$k]."2"."<br>";
-          $arrStatusDup[$j][$k] = $arrStatusDup[$j][$k] + 1;
+    //echo "<br>";
+    //print_r ($arrDupPn);
+    //print_r ($arrDupTone);
+    //echo count($arrDupPn);
+    //$check = 0;
+    for($i=0 ; $i<count($arrDupPn) ; $i++){
+      $dupPn = $arrDupPn[$i];
+      $dupTone = $arrDupTone[$i];
+      //echo "<br>".$dupPn."<br>";
+      //echo "<br>".$dupTone."<br>";
+      for($j=0 ; $j<count($pn) ; $j++){
+        for($k=0 ; $k<count($pn[$j]) ; $k++){
+          //echo "<br>".$pn[$j][$k]."1"."<br>";
+          if($dupPn==$pn[$j][$k] && $dupTone==$tone[$j][$k]){
+            //echo "<br>".$pn[$j][$k]."2"."<br>";
+            $arrStatusDup[$j][$k] = $arrStatusDup[$j][$k] + 1;
 
+          }
+          else {
+            //echo "<br>".$pn[$j][$k]."3"."<br>";
+            $arrStatusDup[$j][$k] = $arrStatusDup[$j][$k] + 0;
+          }
         }
-        else {
-          //echo "<br>".$pn[$j][$k]."3"."<br>";
-          $arrStatusDup[$j][$k] = $arrStatusDup[$j][$k] + 0;
+      }
+      for($j=0 ; $j<count($pn) ; $j++){
+        for($k=0 ; $k<count($pn[$j]) ; $k++){
+          if($arrStatusDup[$j][$k] <=1){
+            $arrStatusDupRhyme[$j][$k] = "true";
+          }
+          else {
+            $arrStatusDupRhyme[$j][$k] = "false";
+          }
         }
       }
     }
-    for($j=0 ; $j<count($pn) ; $j++){
-      for($k=0 ; $k<count($pn[$j]) ; $k++){
-        if($arrStatusDup[$j][$k] <=1){
-          $arrStatusDupRhyme[$j][$k] = "true";
+    //echo "<br>";
+    //print_r ($arrStatusDup);
+    //echo "<br>";
+    //print_r ($arrStatusDupRhyme);
+    for($j=0 ; $j<count($arrStatusDupRhyme) ; $j++){
+      for($k=0 ; $k<count($arrStatusDupRhyme[$j]) ; $k++){
+        if($j==0 || $j<4){
+          if($arrStatusDupRhyme[$j][$k] == "false"){
+            //ยังบอกไม่ได้ว่าถ้าซ้ำซ้ำที่คำไหน บอกได้แต่เป็นโฟนีพ
+            $arrDupRhyme[$j]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($pn[$j][$k])." ในบทที่ ".(round(count($j)%4));
+            $arrDupRhyme[$j]['status'] = "false";
+          }
+          else {
+            $arrDupRhyme[$j]['str'] = "ไม่มีสัมผัสซ้ำในบทที่ ".(round(count($j)%4));
+            $arrDupRhyme[$j]['status'] = "true";
+          }
         }
-        else {
-          $arrStatusDupRhyme[$j][$k] = "false";
+        else if($j==4 || $j<8){
+          if($arrStatusDupRhyme[$j][$k] == "false"){
+            $arrDupRhyme[$j]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($pn[$j][$k])." ในบทที่ ".(round(count($j)%4));
+            $arrDupRhyme[$j]['status'] = "false";
+          }
+          else {
+            $arrDupRhyme[$j]['str'] = "ไม่มีสัมผัสซ้ำในบทที่ ".(round(count($j)%4));
+            $arrDupRhyme[$j]['status'] = "true";
+          }
         }
       }
     }
+    return ($arrDupRhyme);
+    //print_r ($arrDupRhyme);
+    //$resultDuplicateRhyme->duplicateRhyme = ($arrDupRhyme);
+    //$jsonDuplicateRhyme = json_encode($resultDuplicateRhyme);
+    //echo ($jsonDuplicateRhyme."<br>"); // ส่วนที่เราคืนให้พาน
+    //$deJsonDuplicateRhyme = json_decode($jsonDuplicateRhyme, true); // ส่วนของจูนไม่ต้องดีโค้ดก็ได้ แต่ดีไว้ดูความถูกต้องได้ ซึ่งเวลาส่งจริงอย่าลืมปิดละ
+    //print_r ($deJsonDuplicateRhyme);
+    //echo "<br>.................................................<br>";
+    //print_r ($indexOfRhyme)."<br>";
   }
-  //echo "<br>";
-  //print_r ($arrStatusDup);
-  //echo "<br>";
-  //print_r ($arrStatusDupRhyme);
-  for($j=0 ; $j<count($arrStatusDupRhyme) ; $j++){
-    for($k=0 ; $k<count($arrStatusDupRhyme[$j]) ; $k++){
-      if($j==0 || $j<4){
-        if($arrStatusDupRhyme[$j][$k] == "false"){
-          $arrDupRhyme[$j][str] = "มีสัมผัสซ้ำที่คำว่า ".($py[$j][$k])." ในบทที่ ".(round(count($j)%4));
-          $arrDupRhyme[$j][status] = "false";
-        }
-        else {
-          $arrDupRhyme[$j][str] = "ไม่มีสัมผัสซ้ำในบทที่ ".(round(count($j)%4));
-          $arrDupRhyme[$j][status] = "true";
-        }
-      }
-      else if($j==4 || $j<8){
-        if($arrStatusDupRhyme[$j][$k] == "false"){
-          $arrDupRhyme[$j][str] = "มีสัมผัสซ้ำที่คำว่า ".($py[$j][$k])." ในบทที่ ".(round(count($j)%4));
-          $arrDupRhyme[$j][status] = "false";
-        }
-        else {
-          $arrDupRhyme[$j][str] = "ไม่มีสัมผัสซในบทที่ ".(round(count($j)%4));
-          $arrDupRhyme[$j][status] = "true";
-        }
-      }
-    }
-  }
-  return ($arrDupRhyme);
-  //print_r ($arrDupRhyme);
-  //$resultDuplicateRhyme->duplicateRhyme = ($arrDupRhyme);
-  //$jsonDuplicateRhyme = json_encode($resultDuplicateRhyme);
-  //echo ($jsonDuplicateRhyme."<br>"); // ส่วนที่เราคืนให้พาน
-  //$deJsonDuplicateRhyme = json_decode($jsonDuplicateRhyme, true); // ส่วนของจูนไม่ต้องดีโค้ดก็ได้ แต่ดีไว้ดูความถูกต้องได้ ซึ่งเวลาส่งจริงอย่าลืมปิดละ
-  //print_r ($deJsonDuplicateRhyme);
-  //echo "<br>.................................................<br>";
-  //print_r ($indexOfRhyme)."<br>";
-}
-$e = checkDupRhyme($pn);
+//$e = checkDupRhyme($pn);
 //print_r ($e);
 
 
 // 1.6 ชิงสัมผัส
-function checkChingRhyme($arrWak,$arrKlonPhonemes,$indexOfRhyme,$indexChing){
+function checkChingRhyme($arrWak,$arrKlonPhonemes,$rhyme){
   //// ********* ยังไม่สามารถบอกได้ว่าชิงสัมผัสที่พยางค์ไหน
+  /// เตรียม input สำหรับตรวจชิงสัมผัส
+  for($i=0 ; $i<count($arrWak)-1 ; $i++){
+    $totalPN = count($arrKlonPhonemes[$i])-1;
+    //echo $totalPN;
+    $check = 0;
+    for($j=1 ; $j<=count($rhyme[$i]) ; $j++){
+      // บทที่ 1
+      if($i==0 || $i<4){
+
+        // สัมผัสระหว่างวรรคที่ 1 กับ วรรคที่ 2
+        if($i==0){
+          if($rhyme[$i][1]==$rhyme[1][$j] && $rhyme[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+            $check = 1;
+            if($totalPN==8 && $rhyme[$i][1]==$rhyme[1][2]){
+              $indexOfRhyme[0][0] = "payangAt5";
+            }
+            else if($totalPN==9 && $rhyme[$i][1]==$rhyme[1][2]){
+              $indexOfRhyme[0][0] = "payangAt6";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[1][1]){
+              $indexOfRhyme[0][0] = "payangAt2";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[1][2]){
+              $indexOfRhyme[0][0] = "payangAt3from7";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[1][3]){
+              $indexOfRhyme[0][0] = "payangAt4";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[1][4]){
+              $indexOfRhyme[0][0] = "payangAt5from7";
+            }
+            else if($totalPN==8 || $totalPN==9 && $rhyme[$i][1]==$rhyme[1][1]){
+              $indexOfRhyme[0][0] = "payangAt3";
+            }
+            $arrExternalRhyme[$i]['str'] = "มีสัมผัสนอกระหว่างวรรคที่ 1 กับ วรรคที่ 2 ในบทที่ 1";
+            $arrExternalRhyme[$i]['status'] = "true";
+          }
+        }
+
+        // สัมผัสระหว่างวรรคที่ 3 กับ วรรคที่ 4
+        else if($i==2){
+          if($rhyme[$i][1]==$rhyme[3][$j] && $rhyme[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+            $check = 1;
+            if($totalPN==8 && $rhyme[$i][1]==$rhyme[3][2]){
+              $indexOfRhyme[0][1] = "payangAt5";
+            }
+            else if($totalPN==9 && $rhyme[$i][1]==$rhyme[3][2]){
+              $indexOfRhyme[0][1] = "payangAt6";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[3][2]){
+              $indexOfRhyme[0][1] = "payangAt2";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[3][2]){
+              $indexOfRhyme[0][1] = "payangAt3";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[3][3]){
+              $indexOfRhyme[0][1] = "payangAt4";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[3][4]){
+              $indexOfRhyme[0][1] = "payangAt5";
+            }
+            else if($totalPN==8 || $totalPN==9 && $rhyme[$i][1]==$rhyme[3][1]){
+              $indexOfRhyme[0][1] = "payangAt3";
+            }
+          }
+        }
+      }
+      // บทที่ 2  ปล. ยังไม่เคยสมมติตัวอย่าง
+      else if($i==4 || $i<8){
+        // สัมผัสระหว่างวรรคที่ 1 กับ วรรคที่ 2
+        if($i==4){
+          if($rhyme[$i][1]==$rhyme[5][$j] && $rhyme[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+            $check = 1;
+            if($totalPN==8 && $rhyme[$i][1]==$rhyme[5][2]){
+              $indexOfRhyme[0][2] = "payangAt5";
+            }
+            else if($totalPN==9 && $rhyme[$i][1]==$rhyme[5][2]){
+              $indexOfRhyme[0][2] = "payangAt6";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[5][1]){
+              $indexOfRhyme[0][2] = "payangAt2";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[5][2]){
+              $indexOfRhyme[0][2] = "payangAt3";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[5][3]){
+              $indexOfRhyme[0][2] = "payangAt4";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[5][4]){
+              $indexOfRhyme[0][2] = "payangAt5";
+            }
+            else if($totalPN==8 || $totalPN==9 && $rhyme[$i][1]==$rhyme[1][1]){
+              $indexOfRhyme[0][0] = "payangAt3";
+            }
+          }
+        }
+        // สัมผัสระหว่างวรรคที่ 2 กับ วรรคที่ 3
+        else if($i==5){
+          if($rhyme[$i][3]==$rhyme[6][$j] && $rhyme[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+            $check = 1;
+            if($totalPN==8 && $rhyme[$i][1]==$rhyme[6][2]){
+              $indexOfRhyme[0][3] = "payangAt5";
+            }
+            else if($totalPN==9 && $rhyme[$i][1]==$rhyme[6][2]){
+              $indexOfRhyme[0][3] = "payangAt6";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[6][1]){
+              $indexOfRhyme[0][3] = "payangAt2";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[6][2]){
+              $indexOfRhyme[0][3] = "payangAt3";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[6][3]){
+              $indexOfRhyme[0][3] = "payangAt4";
+            }
+            else if($totalPN==7 && $rhyme[$i][1]==$rhyme[6][4]){
+              $indexOfRhyme[0][3] = "payangAt5";
+            }
+            else if($totalPN==8 || $totalPN==9 && $rhyme[$i][1]==$rhyme[1][1]){
+              $indexOfRhyme[0][0] = "payangAt3";
+            }
+          }
+        }
+      }
+    }
+  }
+  $indexChing = [];
+  //echo count($arrWak)-1;
+    for($i=0 ; $i<count($arrWak)-1 ; $i++){
+      $totalPN = count($arrKlonPhonemes[$i])-1;
+      //echo "///////////".$totalPN;
+      if($i==1){
+        if($indexOfRhyme[0][0]=="payangAt5"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
+        }
+        else if($indexOfRhyme[0][0]=="payangAt6"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
+          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][5];
+        }
+        else if($indexOfRhyme[0][0]=="payangAt2"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+        }
+        else if($indexOfRhyme[0][0]=="payangAt3from7"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+        }
+        else if($indexOfRhyme[0][0]=="payangAt4"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
+        }
+        else if($indexOfRhyme[0][0]=="payangAt5from7"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
+          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][4];
+        }
+        else if($indexOfRhyme[0][0]=="payangAt3"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+        }
+        else {
+          $indexChing[$i-1][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+        }
+      }
+      else if($i==3){
+        if($indexOfRhyme[0][1]=="payangAt5"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
+        }
+        else if($indexOfRhyme[0][1]=="payangAt6"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
+          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][5];
+        }
+        else if($indexOfRhyme[0][1]=="payangAt2"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+        }
+        else if($indexOfRhyme[0][1]=="payangAt3from7"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+        }
+        else if($indexOfRhyme[0][1]=="payangAt4"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
+        }
+        else if($indexOfRhyme[0][1]=="payangAt5from7"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
+          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][4];
+        }
+        else if($indexOfRhyme[0][1]=="payangAt3"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+        }
+        else {
+          $indexChing[$i-1][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+        }
+      }
+      else if($i==5){
+        if($indexOfRhyme[0][2]=="payangAt5"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
+        }
+        else if($indexOfRhyme[0][2]=="payangAt6"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
+          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][5];
+        }
+        else if($indexOfRhyme[0][2]=="payangAt2"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+        }
+        else if($indexOfRhyme[0][2]=="payangAt3from7"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+        }
+        else if($indexOfRhyme[0][2]=="payangAt4"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
+        }
+        else if($indexOfRhyme[0][2]=="payangAt5from7"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
+          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][4];
+        }
+        else if($indexOfRhyme[0][2]=="payangAt3"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+        }
+        else {
+          $indexChing[$i-1][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+        }
+      }
+      else if($i==7){
+        if($indexOfRhyme[0][3]=="payangAt5"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
+        }
+        else if($indexOfRhyme[0][3]=="payangAt6"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
+          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][5];
+        }
+        else if($indexOfRhyme[0][3]=="payangAt2"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+        }
+        else if($indexOfRhyme[0][3]=="payangAt3from7"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+        }
+        else if($indexOfRhyme[0][3]=="payangAt4"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
+        }
+        else if($indexOfRhyme[0][3]=="payangAt5from7"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
+          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][4];
+        }
+        else if($indexOfRhyme[0][3]=="payangAt3"){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+        }
+        else {
+          $indexChing[$i-1][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+        }
+      }
+
+      else if($i==2 || $i==6){
+        //echo $totalPN;
+        if($totalPN==8){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
+          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][4];
+          $indexChing[$i-1][4] = $arrKlonPhonemes[$i][5];
+          $indexChing[$i-1][5] = $arrKlonPhonemes[$i][6];
+          $indexChing[$i-1][6] = $arrKlonPhonemes[$i][7];
+        }
+        else if($totalPN==9){  //ถ้ามากกว่า 9 พยางค์แล้วเป็นคำอะกึ่งเสียงจะรวบแล้วเป็น 9 พยางค์
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
+          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][4];
+          $indexChing[$i-1][4] = $arrKlonPhonemes[$i][5];
+          $indexChing[$i-1][5] = $arrKlonPhonemes[$i][6];
+          $indexChing[$i-1][6] = $arrKlonPhonemes[$i][7];
+          $indexChing[$i-1][7] = $arrKlonPhonemes[$i][8];
+        }
+        else if($totalPN==7){
+          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
+          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
+          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][4];
+          $indexChing[$i-1][4] = $arrKlonPhonemes[$i][5];
+          $indexChing[$i-1][5] = $arrKlonPhonemes[$i][6];
+        }
+        else {
+          $indexChing[$i-1][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+        }
+      }
+    }
   //print_r ($arrKlonPhonemes)."<br>";
   //echo "<br>";
   //print_r ($indexOfRhyme)."<br>";
@@ -1022,25 +1518,28 @@ function checkChingRhyme($arrWak,$arrKlonPhonemes,$indexOfRhyme,$indexChing){
       $arrStatusChing = "false";
     }
   }
-  for($i=1 ; $i<count($arrWak)-1 ; $i++){
-    if($i>0 || $i<4){
+  //print_r($arrStatusChing);
+  for($i=2 ; $i<count($arrWak)-1 ; $i++){
+    if($i==2 || $i<=4){
       if($arrStatusChing[$i]=="true"){
-        $arrChingRhyme[$i][str] = "ไม่มีตำแหน่งชิงสัมผัสในวรรคที่ ".($i+1)." ของบทที่ 1";
-        $arrChingRhyme[$i][status] = "true";
+        $arrChingRhyme[$i]['str'] = "ไม่มีตำแหน่งชิงสัมผัสในวรรคที่ ".($i)." ของบทที่ 1";
+        $arrChingRhyme[$i]['status'] = "true";
       }
       else if($arrStatusChing[$i]=="false"){
-        $arrChingRhyme[$i][str] = "มีตำแหน่งชิงสัมผัสในวรรคที่ ".($i+1)." ของบทที่ 1";
-        $arrChingRhyme[$i][status] = "false";
+        $arrChingRhyme[$i]['str'] = "มีตำแหน่งชิงสัมผัสในวรรคที่ ".($i)." ของบทที่ 1";
+        $arrChingRhyme[$i]['status'] = "false";
       }
     }
     else if($i>=5 || $i<8){
       if($arrStatusChing[$i]=="true"){
-        $arrChingRhyme[$i][str] = "ไม่มีตำแหน่งชิงสัมผัสในวรรคที่ ".(round($i%5)+2)." ของบทที่ 2";
-        $arrChingRhyme[$i][status] = "true";
+        $arrChingRhyme[$i]['str'] = "ไม่มีตำแหน่งชิงสัมผัสในวรรคที่ ".(round($i%5)+2)." ของบทที่ 2";
+        //echo "<br>".($i)." ".(round($i%5)+2)."<br>";
+        $arrChingRhyme[$i]['status'] = "true";
       }
       else if($arrStatusChing[$i]=="false"){
-        $arrChingRhyme[$i][str] = "มีตำแหน่งชิงสัมผัสในวรรคที่ ".(round($i%5)+2)." ของบทที่ 2";
-        $arrChingRhyme[$i][status] = "false";
+        $arrChingRhyme[$i]['str'] = "มีตำแหน่งชิงสัมผัสในวรรคที่ ".(round($i%5)+2)." ของบทที่ 2";
+        //echo "<br>".($i)." ".(round($i%5)+2)."<br>";
+        $arrChingRhyme[$i]['status'] = "false";
       }
     }
   }
@@ -1055,16 +1554,91 @@ function checkChingRhyme($arrWak,$arrKlonPhonemes,$indexOfRhyme,$indexChing){
   //echo "<br>.................................................<br>";
   //print_r ($pn);//print_r ($pn);
 }
-$f = checkChingRhyme($arrWak,$arrKlonPhonemes,$indexOfRhyme,$indexChing);
+//$f = checkChingRhyme($arrWak,$arrKlonPhonemes,$indexOfRhyme,$indexChing);
 //print_r ($f);
 
 
 //1.7 สัมผัสใน
-function checkInRhyme($InternalRhyme){
+function checkInRhyme($arrWak,$arrKlonPhonemes){
   //print_r ($arrKlonPhonemes);
-
+  /// เตรียม input สำหรับตรวจสัมผสใน
+  $pnInRhyme = []; // เก็บพยางค์ที่จะใช้ตรวจ
+  for($i=0 ; $i<count($arrWak)-1 ; $i++){
+    $totalPN = count($arrKlonPhonemes[$i])-1;
+    if($totalPN==8 && $i==0 || $i==4){
+        $pnInRhyme[$i][0] = $arrKlonPhonemes[$i][3];
+        $pnInRhyme[$i][1] = $arrKlonPhonemes[$i][4];
+        $pnInRhyme[$i][2] = $arrKlonPhonemes[$i][5];
+        $pnInRhyme[$i][3] = $arrKlonPhonemes[$i][6];
+        $pnInRhyme[$i][4] = $arrKlonPhonemes[$i][7];
+    }
+    else if($totalPN==8 && $i==1 || $i==2 || $i==3 || $i==5 || $i==6 || $i==7){
+        $pnInRhyme[$i][0] = $arrKlonPhonemes[$i][5];
+        $pnInRhyme[$i][1] = $arrKlonPhonemes[$i][6];
+        $pnInRhyme[$i][2] = $arrKlonPhonemes[$i][7];
+    }
+    else if($totalPN>=9 && $i==0 || $i==4){
+        $pnInRhyme[$i][0] = $arrKlonPhonemes[$i][3];
+        $pnInRhyme[$i][1] = $arrKlonPhonemes[$i][4];
+        $pnInRhyme[$i][2] = $arrKlonPhonemes[$i][6];
+        $pnInRhyme[$i][3] = $arrKlonPhonemes[$i][7];
+        $pnInRhyme[$i][4] = $arrKlonPhonemes[$i][8];
+    }
+    else if($totalPN>=9 && $i==1 || $i==2 || $i==3 || $i==5 || $i==6 || $i==7){
+        $pnInRhyme[$i][0] = $arrKlonPhonemes[$i][6];
+        $pnInRhyme[$i][1] = $arrKlonPhonemes[$i][7];
+        $pnInRhyme[$i][2] = $arrKlonPhonemes[$i][8];
+    }
+    else if($totalPN==7 && $i==0 || $i==4){
+        $pnInRhyme[$i][0] = $arrKlonPhonemes[$i][2];
+        $pnInRhyme[$i][1] = $arrKlonPhonemes[$i][3];
+        $pnInRhyme[$i][2] = $arrKlonPhonemes[$i][4];
+        $pnInRhyme[$i][3] = $arrKlonPhonemes[$i][5];
+        $pnInRhyme[$i][4] = $arrKlonPhonemes[$i][6];
+    }
+    else if($totalPN==7 && $i==1 || $i==2 || $i==3 || $i==5 || $i==6 || $i==7){
+        $pnInRhyme[$i][0] = $arrKlonPhonemes[$i][4];
+        $pnInRhyme[$i][1] = $arrKlonPhonemes[$i][5];
+        $pnInRhyme[$i][2] = $arrKlonPhonemes[$i][6];
+    }
+    else {
+        $pnInRhyme[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+    }
+  }
+  //echo "<br>///////////////////////////////////<br>";
+  //print_r ($pnInRhyme);
+  //$pnInRhyme2 = []; // เก็บสระ กับตัวสะกด แยกกับพยัญชนะของแต่ละพยางค์
+  for($i=0 ; $i<count($pnInRhyme) ; $i++){
+    $strInternalRhyme="";
+    for($j=0 ; $j<count($pnInRhyme[$i]) ; $j++){
+      if($pnInRhyme[$i][0] != "จำนวนพยางค์ไม่ถูกต้อง"){
+        $strInternalRhyme = $strInternalRhyme."~".$pnInRhyme[$i][$j];
+        //echo $str3;
+        $pnInRhyme2[$i] = explode("~",$strInternalRhyme);
+      }
+      else {
+        $pnInRhyme2[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+      }
+    }
+  }
+  //echo "<br>";
+  //print_r ($pnInRhyme2);
+  $InternalRhyme = []; // เก็บเฉพาะสระ และตัวสะกด
+  for($i=0 ; $i<count($pnInRhyme2) ; $i++){
+    $index = 0;
+    for($j=0 ; $j<count($pnInRhyme2[$i]) ; $j+=2){
+      if($pnInRhyme2[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+        $InternalRhyme[$i][$index] = $pnInRhyme2[$i][$j];
+        $index = $index+1;
+      }
+      else {
+        $InternalRhyme[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+      }
+    }
+  }
   //echo "<br>";
   //print_r ($InternalRhyme);
+  //echo "<br><br>";
   $resultInternalRhyme = new CheckSyntaxAndMelody();
   $countIndex = 0;
   $arrIndexInRhyme = [];
@@ -1075,13 +1649,13 @@ function checkInRhyme($InternalRhyme){
           if($InternalRhyme[$i][1]==$InternalRhyme[$i][2]){
             $arrIndexInRhyme[$i][0] = "true";
           }
-          else if($InternalRhyme[$i][1]!=$InternalRhyme[$i][2]){
-            $arrIndexInRhyme[$i][0] = "false";
-          }
-          if($InternalRhyme[$i][1]==$InternalRhyme[$i][2] || $InternalRhyme[$i][1]==$InternalRhyme[$i][3]){
+          else if($InternalRhyme[$i][3]==$InternalRhyme[$i][4]){
             $arrIndexInRhyme[$i][1] = "true";
           }
-          else if($InternalRhyme[$i][1]!=$InternalRhyme[$i][2] && $InternalRhyme[$i][1]!=$InternalRhyme[$i][3]){
+          else if($InternalRhyme[$i][3]==$InternalRhyme[$i][5]){
+            $arrIndexInRhyme[$i][1] = "true";
+          }
+          else {
             $arrIndexInRhyme[$i][1] = "false";
           }
         }
@@ -1109,7 +1683,7 @@ function checkInRhyme($InternalRhyme){
 
   $arrInternalRhyme = [];
   for($i=0 ; $i<count($arrIndexInRhyme) ; $i++){
-    if($i>=0 || $i<4){
+    if($i==0 || $i<4){
       if($i==0){
         if($arrIndexInRhyme[$i][0]=="true" && $arrIndexInRhyme[$i][1]=="true"){
           $countIndex = $countIndex+2;
@@ -1137,23 +1711,23 @@ function checkInRhyme($InternalRhyme){
       if($i==4){
         if($arrIndexInRhyme[$i][0]=="true" && $arrIndexInRhyme[$i][1]=="true"){
           $countIndex = $countIndex+2;
-          $arrInternalRhyme[$i][str] = "มีสัมผัสใน 2 ตำแหน่งในวรรคที่ ".($i+1)." ของบทที่ 2";
+          $arrInternalRhyme[$i][str] = "มีสัมผัสใน 2 ตำแหน่งในวรรคที่ ".(round($i%4)+1)." ของบทที่ 2";
         }
         else if($arrIndexInRhyme[$i][0]=="true" || $arrIndexInRhyme[$i][1]=="true"){
           $countIndex = $countIndex+1;
-          $arrInternalRhyme[$i][str] = "มีสัมผัสใน 1 ตำแหน่งในวรรคที่ ".($i+1)." ของบทที่ 2";
+          $arrInternalRhyme[$i][str] = "มีสัมผัสใน 1 ตำแหน่งในวรรคที่ ".(round($i%4)+1)." ของบทที่ 2";
         }
         else if($arrIndexInRhyme[$i][0]=="false" && $arrIndexInRhyme[$i][1]=="false"){
-          $arrInternalRhyme[$i][str] = "ไม่มีสัมผัสในของวรรคที่ ".($i+1)." ในบทที่ 2";
+          $arrInternalRhyme[$i][str] = "ไม่มีสัมผัสในของวรรคที่ ".(round($i%4)+1)." ในบทที่ 2";
         }
       }
       else {
         if($arrIndexInRhyme[$i][0]=="true"){
           $countIndex = $countIndex+1;
-          $arrInternalRhyme[$i][str] = "มีสัมผัสในของวรรคที่ ".($i+1)." ในบทที่ 2";
+          $arrInternalRhyme[$i][str] = "มีสัมผัสในของวรรคที่ ".(round($i%4)+1)." ในบทที่ 2";
         }
         else if($arrIndexInRhyme[$i][0]=="false"){
-          $arrInternalRhyme[$i][str] = "ไม่มีสัมผัสในของวรรคที่ ".($i+1)." ในบทที่ 2";
+          $arrInternalRhyme[$i][str] = "ไม่มีสัมผัสในของวรรคที่ ".(round($i%4)+1)." ในบทที่ 2";
         }
       }
     }
@@ -1169,7 +1743,7 @@ function checkInRhyme($InternalRhyme){
   //print_r ($deJsonInternalRhyme);
   //echo "<br>.................................................<br>";
 }
-$g = checkInRhyme($InternalRhyme);
+//$g = checkInRhyme($InternalRhyme);
 //print_r ($g);
 
 
@@ -1220,7 +1794,7 @@ function checkVagueRhyme($arrWak,$arrKlonPhonemes,$rhyme){
   //print_r ($arrStatusVague);
   for($i=1 ; $i<count($arrWak)-1 ; $i+=2){
     for($j=0 ; $j<count($arrStatusVague[$i]) ; $j++){
-      if($i>0 || $i<4 && count($arrStatusVague[$i])==1){
+      if($i==0 || $i<4 && count($arrStatusVague[$i])==1){
         if($arrStatusVague[$i][$j]=="true"){
           $arrVagueRhyme[$i][str] = "ไม่มีตำแหน่งสัมผัสเลือนในวรรคที่ ".($i+1)." ของบทที่ 1";
           $arrVagueRhyme[$i][status] = "true";
@@ -1230,7 +1804,7 @@ function checkVagueRhyme($arrWak,$arrKlonPhonemes,$rhyme){
           $arrVagueRhyme[$i][status] = "false";
         }
       }
-      else if($i>0 || $i<4 && count($arrStatusVague[$i])>1){
+      else if($i==0 || $i<4 && count($arrStatusVague[$i])>1){
         if($arrStatusVague[$i][$j]=="true"){
           $arrVagueRhyme[$i][str] = "ไม่มีตำแหน่งสัมผัสเลือนในวรรคที่ ".($i+1)." ของบทที่ 1";
           $arrVagueRhyme[$i][status] = "true";
@@ -1240,7 +1814,7 @@ function checkVagueRhyme($arrWak,$arrKlonPhonemes,$rhyme){
           $arrVagueRhyme[$i][status] = "false";
         }
       }
-      else if($i>4 || $i<8 && count($arrStatusVague[$i])==1){
+      else if($i>=4 || $i<8 && count($arrStatusVague[$i])==1){
         if($arrStatusVague[$i][$j]=="true"){
           $arrVagueRhyme[$i][str] = "ไม่มีตำแหน่งสัมผัสเลือนในวรรคที่ ".(round($i%5)+2)." ของบทที่ 2";
           $arrVagueRhyme[$i][status] = "true";
@@ -1250,7 +1824,7 @@ function checkVagueRhyme($arrWak,$arrKlonPhonemes,$rhyme){
           $arrVagueRhyme[$i][status] = "false";
         }
       }
-      else if($i>4 || $i<8 && count($arrStatusVague[$i])>1){
+      else if($i>=4 || $i<8 && count($arrStatusVague[$i])>1){
         if($arrStatusVague[$i][$j]=="true"){
           $arrVagueRhyme[$i][str] = "ไม่มีตำแหน่งสัมผัสเลือนในวรรคที่ ".(round($i%5)+2)." ของบทที่ 2";
           $arrVagueRhyme[$i][status] = "true";
@@ -1271,7 +1845,7 @@ function checkVagueRhyme($arrWak,$arrKlonPhonemes,$rhyme){
   //print_r ($deJsonVagueRhyme);
   //echo "<br>.................................................<br>";
 }
-$h = checkVagueRhyme($arrWak,$arrKlonPhonemes,$rhyme);
+//$h = checkVagueRhyme($arrWak,$arrKlonPhonemes,$rhyme);
 //print_r ($h);
 
 
