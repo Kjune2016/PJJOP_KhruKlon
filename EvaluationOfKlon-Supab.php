@@ -161,140 +161,155 @@ function checkPayang($arrWak,$arrKlonPhonemes){
 function checkTone($arrWak,$arrKlonTone){
   $resultTone = new CheckSyntaxAndMelody();
   //$strTone = "";
+  //echo count($arrWak)."<br>";
   for($i=0 ; $i<count($arrWak)-1 ; $i++){
+    //echo $i." ";
     $numPY = count($arrKlonTone[$i])-1;
+    //echo $numPY."+"."<br>";
     $tone = $arrKlonTone[$i][$numPY];
-    //echo $numPY."<br>";
+    //echo $tone."<br>";
     // บทที่ 1
-    if($i==0 || $i<4){
-      // วรรคที่ 1
-      if($i==0){
-        if($tone==1 || $tone==2 || $tone==3 || $tone==4 || $tone==5){
-          if($tone==2){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงเอก";
-            $arrOfTone[$i]['status'] = "true";
-          }
-          else if($tone==3){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงโท";
-            $arrOfTone[$i]['status'] = "true";
-          }
-          else if($tone==4){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงตรี";
-            $arrOfTone[$i]['status'] = "true";
-          }
-          else if($tone==5){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงจัตวา";
-            $arrOfTone[$i]['status'] = "true";
-          }
-          else if($tone==1){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงสามัญ แต่ไม่นิยมลงเสียงนี้";
-            $arrOfTone[$i]['status'] = "true";
-          }
-        }
+    // วรรคที่ 1
+    if($i==0){
+      if($tone==2){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงเอก";
+        $arrOfTone[$i]['status'] = "true";
       }
-      // วรรคที่ 2
-      if($i==1){
-        if($tone==2 || $tone==3 || $tone==5){
-          if($tone==2){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ถูกต้อง คือเสียงเอก";
-            $arrOfTone[$i]['status'] = "true";
-          }
-          else if($tone==3){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ถูกต้อง คือเสียงโท";
-            $arrOfTone[$i]['status'] = "true";
-          }
-          else if($tone==5){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
-            $arrOfTone[$i]['status'] = "trueGood";
-          }
-        }
-        else {
-          $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงเอก เสียงโท และที่นิยมคือเสียงจัตวา";
-          $arrOfTone[$i]['status'] = "false";
-        }
+      else if($tone==3){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงโท";
+        $arrOfTone[$i]['status'] = "true";
       }
-      // วรรคที่ 3 และ 4
-      if($i==2 || $i==3){
-        if($tone==1 || $tone==4){
-          if($tone==1){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง คือเสียงสามัญ และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
-            $arrOfTone[$i]['status'] = "trueGood";
-          }
-          else if($tone==4){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
-            $arrOfTone[$i]['status'] = "trueGood";
-          }
-        }
-        else {
-          $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i+1)." ของบทที่ 1 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงจัตวา และที่นิยมคือเสียงสามัญ";
-          $arrOfTone[$i]['status'] = "false";
-        }
+      else if($tone==4){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงตรี";
+        $arrOfTone[$i]['status'] = "true";
+      }
+      else if($tone==5){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงจัตวา";
+        $arrOfTone[$i]['status'] = "true";
+      }
+      else if($tone==1){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 1 ถูกต้อง คือเสียงสามัญ แต่ไม่นิยมลงเสียงนี้";
+        $arrOfTone[$i]['status'] = "true";
+      }
+    }
+    // วรรคที่ 2
+    else if($i==1){
+      if($tone==2){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ถูกต้อง คือเสียงเอก";
+        $arrOfTone[$i]['status'] = "true";
+      }
+      else if($tone==3){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ถูกต้อง คือเสียงโท";
+        $arrOfTone[$i]['status'] = "true";
+      }
+      else if($tone==5){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+        $arrOfTone[$i]['status'] = "trueGood";
+      }
+      else {
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 1 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงเอก เสียงโท และที่นิยมคือเสียงจัตวา";
+        $arrOfTone[$i]['status'] = "false";
+      }
+    }
+    // วรรคที่ 3 และ 4
+    else if($i==2){
+      if($tone==1){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง คือเสียงสามัญ และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+        $arrOfTone[$i]['status'] = "trueGood";
+      }
+      else if($tone==4){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+        $arrOfTone[$i]['status'] = "trueGood";
+      }
+      else {
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i+1)." ของบทที่ 1 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงจัตวา และที่นิยมคือเสียงสามัญ";
+        $arrOfTone[$i]['status'] = "false";
+      }
+    }
+    else if($i==3){
+      if($tone==1){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง คือเสียงสามัญ และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+        $arrOfTone[$i]['status'] = "trueGood";
+      }
+      else if($tone==4){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i+1)." ของบทที่ 1 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+        $arrOfTone[$i]['status'] = "trueGood";
+      }
+      else {
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i+1)." ของบทที่ 1 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงจัตวา และที่นิยมคือเสียงสามัญ";
+        $arrOfTone[$i]['status'] = "false";
       }
     }
     // บทที่ 2
-    if($i==4 || $i<8){
-      // วรรคที่ 1
-      if($i==4){
-        if($tone==1 || $tone==2 || $tone==3 || $tone==4 || $tone==5){
-          if($tone==2){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงเอก";
-            $arrOfTone[$i]['status'] = "true";
-          }
-          else if($tone==3){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงโท";
-            $arrOfTone[$i]['status'] = "true";
-          }
-          else if($tone==4){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงตรี";
-            $arrOfTone[$i]['status'] = "true";
-          }
-          else if($tone==5){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงจัตวา";
-            $arrOfTone[$i]['status'] = "true";
-          }
-          else if($tone==1){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 1 ของบทที่ 2 ถูกต้อง คือเสียงสามัญ แต่ไม่นิยมลงเสียงนี้ จึงขาดความไพเราะ";
-            $arrOfTone[$i]['status'] = "true";
-          }
-        }
+    // วรรคที่ 1
+    else if($i==4){
+      if($tone==2){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".(round($i%4)+1)." ของบทที่ 2 ถูกต้อง คือเสียงเอก";
+        $arrOfTone[$i]['status'] = "true";
       }
-      // วรรคที่ 2
-      if($i==5){
-        if($tone==2 || $tone==3 || $tone==5){
-          if($tone==2){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ถูกต้อง คือเสียงเอก";
-            $arrOfTone[$i]['status'] = "true";
-          }
-          else if($tone==3){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ถูกต้อง คือเสียงโท";
-            $arrOfTone[$i]['status'] = "true";
-          }
-          else if($tone==5){
-            $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
-            $arrOfTone[$i]['status'] = "trueGood";
-          }
-        }
-        else {
-          $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ 2 ของบทที่ 2 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงเอก เสียงโท และที่นิยมคือเสียงจัตวา";
-          $arrOfTone[$i]['status'] = "false";
-        }
+      else if($tone==3){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".(round($i%4)+1)." ของบทที่ 2 ถูกต้อง คือเสียงโท";
+        $arrOfTone[$i]['status'] = "true";
       }
-      // วรรคที่ 3 และ 4
-      if($i==6 || $i==7){
-        if($tone==1 || $tone==4){
-          if($tone==1){
-            $arrOfTone[round($i/2)]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".round($i/2)." ของบทที่ 2 ถูกต้อง คือเสียงสามัญ และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
-            $arrOfTone[round($i/2)]['status'] = "trueGood";
-          }
-          else if($tone==4){
-            $arrOfTone[round($i/2)]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".round($i/2)." ของบทที่ 2 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
-            $arrOfTone[round($i/2)]['status'] = "trueGood";
-          }
-        }
-        else {
-            $arrOfTone[round($i/2)]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".round($i/2)." ของบทที่ 2 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงจัตวา และที่นิยมคือเสียงสามัญ";
-            $arrOfTone[round($i/2)]['status'] = "false";
-        }
+      else if($tone==4){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".(round($i%4)+1)." ของบทที่ 2 ถูกต้อง คือเสียงตรี";
+        $arrOfTone[$i]['status'] = "true";
+      }
+      else if($tone==5){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".(round($i%4)+1)." ของบทที่ 2 ถูกต้อง คือเสียงจัตวา";
+        $arrOfTone[$i]['status'] = "true";
+      }
+      else if($tone==1){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".(round($i%4)+1)." ของบทที่ 2 ถูกต้อง คือเสียงสามัญ แต่ไม่นิยมลงเสียงนี้ จึงขาดความไพเราะ";
+        $arrOfTone[$i]['status'] = "true";
+      }
+    }
+    // วรรคที่ 2
+    else if($i==5){
+      if($tone==2){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i-3)." ของบทที่ 2 ถูกต้อง คือเสียงเอก";
+        $arrOfTone[$i]['status'] = "true";
+      }
+      else if($tone==3){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i-3)." ของบทที่ 2 ถูกต้อง คือเสียงโท";
+        $arrOfTone[$i]['status'] = "true";
+      }
+      else if($tone==5){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i-3)." ของบทที่ 2 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+        $arrOfTone[$i]['status'] = "trueGood";
+      }
+      else {
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i-3)." ของบทที่ 2 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงเอก เสียงโท และที่นิยมคือเสียงจัตวา";
+        $arrOfTone[$i]['status'] = "false";
+      }
+    }
+    // วรรคที่ 3 และ 4
+    else if($i==6){
+      if($tone==1){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i-3)." ของบทที่ 2 ถูกต้อง คือเสียงสามัญ และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+        $arrOfTone[$i]['status'] = "trueGood";
+      }
+      else if($tone==4){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i-3)." ของบทที่ 2 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+        $arrOfTone[$i]['status'] = "trueGood";
+      }
+      else {
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i-3)." ของบทที่ 2 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงจัตวา และที่นิยมคือเสียงสามัญ";
+        $arrOfTone[$i]['status'] = "false";
+      }
+    }
+    else if($i==7){
+      if($tone==1){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i-3)." ของบทที่ 2 ถูกต้อง คือเสียงสามัญ และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+        $arrOfTone[$i]['status'] = "trueGood";
+      }
+      else if($tone==4){
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i-3)." ของบทที่ 2 ถูกต้อง คือเสียงจัตวา และเป็นเสียงที่นิยมช่วยเพิ่มความไพเราะ";
+        $arrOfTone[$i]['status'] = "trueGood";
+      }
+      else {
+        $arrOfTone[$i]['str'] = "ใช้เสียงวรรณยุกต์ท้ายวรรคที่ ".($i-3)." ของบทที่ 2 ไม่ถูกต้อง จึงขาดความไพเราะ โดยเสียงที่ถูกต้องคือเสียงจัตวา และที่นิยมคือเสียงสามัญ";
+        $arrOfTone[$i]['status'] = "false";
       }
     }
   }
@@ -1565,6 +1580,7 @@ function checkInRhyme($arrWak,$arrKlonPhonemes){
   $pnInRhyme = []; // เก็บพยางค์ที่จะใช้ตรวจ
   for($i=0 ; $i<count($arrWak)-1 ; $i++){
     $totalPN = count($arrKlonPhonemes[$i])-1;
+    //echo (count($arrKlonPhonemes[3])-1)."<br>";
     if($totalPN==8 && $i==0 || $i==4){
         $pnInRhyme[$i][0] = $arrKlonPhonemes[$i][3];
         $pnInRhyme[$i][1] = $arrKlonPhonemes[$i][4];
@@ -1572,19 +1588,19 @@ function checkInRhyme($arrWak,$arrKlonPhonemes){
         $pnInRhyme[$i][3] = $arrKlonPhonemes[$i][6];
         $pnInRhyme[$i][4] = $arrKlonPhonemes[$i][7];
     }
-    else if($totalPN==8 && $i==1 || $i==2 || $i==3 || $i==5 || $i==6 || $i==7){
+    else if($totalPN==8 && ($i==1 || $i==2 || $i==3 || $i==5 || $i==6 || $i==7)){
         $pnInRhyme[$i][0] = $arrKlonPhonemes[$i][5];
         $pnInRhyme[$i][1] = $arrKlonPhonemes[$i][6];
         $pnInRhyme[$i][2] = $arrKlonPhonemes[$i][7];
     }
-    else if($totalPN>=9 && $i==0 || $i==4){
+    else if($totalPN >=9 && $i==0 || $i==4){
         $pnInRhyme[$i][0] = $arrKlonPhonemes[$i][3];
         $pnInRhyme[$i][1] = $arrKlonPhonemes[$i][4];
         $pnInRhyme[$i][2] = $arrKlonPhonemes[$i][6];
         $pnInRhyme[$i][3] = $arrKlonPhonemes[$i][7];
         $pnInRhyme[$i][4] = $arrKlonPhonemes[$i][8];
     }
-    else if($totalPN>=9 && $i==1 || $i==2 || $i==3 || $i==5 || $i==6 || $i==7){
+    else if($totalPN >=9 && ($i==1 || $i==2 || $i==3 || $i==5 || $i==6 || $i==7)){
         $pnInRhyme[$i][0] = $arrKlonPhonemes[$i][6];
         $pnInRhyme[$i][1] = $arrKlonPhonemes[$i][7];
         $pnInRhyme[$i][2] = $arrKlonPhonemes[$i][8];
@@ -1596,7 +1612,7 @@ function checkInRhyme($arrWak,$arrKlonPhonemes){
         $pnInRhyme[$i][3] = $arrKlonPhonemes[$i][5];
         $pnInRhyme[$i][4] = $arrKlonPhonemes[$i][6];
     }
-    else if($totalPN==7 && $i==1 || $i==2 || $i==3 || $i==5 || $i==6 || $i==7){
+    else if($totalPN==7 && ($i==1 || $i==2 || $i==3 || $i==5 || $i==6 || $i==7)){
         $pnInRhyme[$i][0] = $arrKlonPhonemes[$i][4];
         $pnInRhyme[$i][1] = $arrKlonPhonemes[$i][5];
         $pnInRhyme[$i][2] = $arrKlonPhonemes[$i][6];
@@ -1607,6 +1623,7 @@ function checkInRhyme($arrWak,$arrKlonPhonemes){
   }
   //echo "<br>///////////////////////////////////<br>";
   //print_r ($pnInRhyme);
+  //echo "<br>";
   //$pnInRhyme2 = []; // เก็บสระ กับตัวสะกด แยกกับพยัญชนะของแต่ละพยางค์
   for($i=0 ; $i<count($pnInRhyme) ; $i++){
     $strInternalRhyme="";
@@ -1623,6 +1640,7 @@ function checkInRhyme($arrWak,$arrKlonPhonemes){
   }
   //echo "<br>";
   //print_r ($pnInRhyme2);
+  //echo "<br>";
   $InternalRhyme = []; // เก็บเฉพาะสระ และตัวสะกด
   for($i=0 ; $i<count($pnInRhyme2) ; $i++){
     $index = 0;
@@ -1643,44 +1661,45 @@ function checkInRhyme($arrWak,$arrKlonPhonemes){
   $countIndex = 0;
   $arrIndexInRhyme = [];
   for($i=0; $i<count($InternalRhyme) ; $i++){
-    for($j=1 ; $j<=count($InternalRhyme[$i]) ; $j++){
-      if($i==0 || $i==4){
-        if($InternalRhyme[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
-          if($InternalRhyme[$i][1]==$InternalRhyme[$i][2]){
-            $arrIndexInRhyme[$i][0] = "true";
-          }
-          else if($InternalRhyme[$i][3]==$InternalRhyme[$i][4]){
-            $arrIndexInRhyme[$i][1] = "true";
-          }
-          else if($InternalRhyme[$i][3]==$InternalRhyme[$i][5]){
-            $arrIndexInRhyme[$i][1] = "true";
-          }
-          else {
-            $arrIndexInRhyme[$i][1] = "false";
-          }
+    if($i==0 || $i==4){
+      if($InternalRhyme[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+        if($InternalRhyme[$i][1]==$InternalRhyme[$i][2]){
+          $arrIndexInRhyme[$i][0] = "true";
+        }
+        else if($InternalRhyme[$i][1]!=$InternalRhyme[$i][2]){
+          $arrIndexInRhyme[$i][0] = "false";
+        }
+        if($InternalRhyme[$i][3]==$InternalRhyme[$i][4] || $InternalRhyme[$i][3]==$InternalRhyme[$i][5]){
+          $arrIndexInRhyme[$i][1] = "true";
+        }
+        else if($InternalRhyme[$i][3]!=$InternalRhyme[$i][4] && $InternalRhyme[$i][3]!=$InternalRhyme[$i][5]){
+          $arrIndexInRhyme[$i][1] = "false";
+        }
+      }
+      else {
+        $arrIndexInRhyme[$i][0] = "false";
+      }
+    }
+    else if($i==1 || $i==2 || $i==3 || $i==5 || $i==6 || $i==7){
+      if($InternalRhyme[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+        if($InternalRhyme[$i][1]==$InternalRhyme[$i][2]){
+          $arrIndexInRhyme[$i][0] = "true";
+        }
+        else if($InternalRhyme[$i][1]==$InternalRhyme[$i][3]){
+          $arrIndexInRhyme[$i][0] = "true";
         }
         else {
           $arrIndexInRhyme[$i][0] = "false";
         }
       }
-      else if($i==1 || $i==2 || $i==3 || $i==5 || $i==6 || $i==7){
-        if($InternalRhyme[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
-          if($InternalRhyme[$i][1]==$InternalRhyme[$i][2] || $InternalRhyme[$i][1]==$InternalRhyme[$i][3]){
-            $arrIndexInRhyme[$i][0] = "true";
-          }
-          else if($InternalRhyme[$i][1]!=$InternalRhyme[$i][2] && $InternalRhyme[$i][1]!=$InternalRhyme[$i][3]){
-            $arrIndexInRhyme[$i][0] = "false";
-          }
-        }
-        else {
-            $arrIndexInRhyme[$i][0] = "false";
-        }
+      else {
+          $arrIndexInRhyme[$i][0] = "false";
       }
     }
   }
   //echo "<br>";
   //print_r ($arrIndexInRhyme);
-
+  //echo "<br>";
   $arrInternalRhyme = [];
   for($i=0 ; $i<count($arrIndexInRhyme) ; $i++){
     if($i==0 || $i<4){
