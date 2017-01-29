@@ -4,7 +4,13 @@ function cnDB(){
   $servername = "localhost";
   $username = "root";
   $password = "";
-  $dbname = "dictdb_th_en";
+  $dbname = "dbWord";
+
+
+  /*$servername = "localhost";
+  $username = "plearnja_prosody";
+  $password = "prosodyJune99";
+  $dbname = "plearnja_prodosy";*/
 
   // Create connection
   $conn = new mysqli($servername, $username, $password, $dbname);

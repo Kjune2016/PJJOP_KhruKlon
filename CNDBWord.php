@@ -1,10 +1,16 @@
 <?php
 //$call = "/api_dict/หิว"
 function cnDBWord(){
-  $servername = "localhost";
+  /*$servername = "localhost";
   $username = "root";
   $password = "";
-  $dbname = "dbword";
+  $dbname = "dictdb_th_en";*/
+
+
+  $servername = "localhost";
+  $username = "plearnja_prosody";
+  $password = "prosodyJune99";
+  $dbname = "plearnja_prosody";
 
   // Create connection
   $connDBWord = new mysqli($servername, $username, $password, $dbname);
