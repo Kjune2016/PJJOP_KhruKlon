@@ -43,6 +43,7 @@ function slangWord($arrKlonWord,$conn){
     $arrSlangWord[0][str] = "ไม่พบคำสแลง";
     $arrSlangWord[0][status] = "true";
   }
+  $arrSlangWord[count] = count($arrSlang);
   return ($arrSlangWord);
 }
 
@@ -80,6 +81,7 @@ function badWord($arrKlonWord, $conn){
       $arrBadWord[0][str] = "ไม่พบคำหยาบคาย";
       $arrBadWord[0][status] = "true";
     }
+    $arrBadWord[count] = count($arrBad);
     return ($arrBadWord);
   }
 

@@ -7,7 +7,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 function process($arrKlonWord,$arrKlonPayang,$arrKlonPhonemes,$arrKlonTone,$arrWak){
 	//$_SESSION['a'] = "aa";
 
-	echo "Word"."<br>";
+	/*echo "Word"."<br>";
 	print_r($arrKlonWord);
 	echo "<br><br>"."Payang"."<br>";
 	print_r($arrKlonPayang);
@@ -15,7 +15,7 @@ function process($arrKlonWord,$arrKlonPayang,$arrKlonPhonemes,$arrKlonTone,$arrW
 	print_r($arrKlonPhonemes);
 	echo "<br><br>"."Tone"."<br>";
 	print_r($arrKlonTone);
-	//echo "<br><br>";
+	echo "<br><br>";*/
 	$_SESSION['numWak'] = checkWak($arrWak);
 	//echo json_encode($_SESSION['numWak'])."<br>";
 	//$pan[0] = $arrNumWak;
@@ -58,7 +58,7 @@ function process($arrKlonWord,$arrKlonPayang,$arrKlonPhonemes,$arrKlonTone,$arrW
 	echo $strExternalRhyme;*/
 	//print_r ($_SESSION['ExternalRhyme']);
 	//echo "<br><br>";
-	$_SESSION['DupRhyme'] = checkDupRhyme($arrWak,$arrKlonPhonemes,$arrKlonTone,$arrKlonPayang);
+	$_SESSION['DupRhyme'] = checkDupRhyme($arrWak,$arrKlonPayang);
 	//$pan[4] = $arrDupRhyme;
 	/*$strDupRhyme = "ผลการตรวจสัมผัสซ้ำ<br>";
 	for($i=0 ; $i<count($arrDupRhyme) ; $i++){
@@ -95,6 +95,7 @@ function process($arrKlonWord,$arrKlonPayang,$arrKlonPhonemes,$arrKlonTone,$arrW
 	}
 	echo $strVagueRhyme;*/
 	//print_r ($arrVagueRhyme);
+	//print_r ($_SESSION['VagueRhyme']);
 	//echo "<br><br>";
 	//$connDBWord = cnDBWord();
 	$conn = cnDB();
@@ -164,6 +165,7 @@ function addValueToArray($arrWak,$jsonWak,$arr,$value){
 			$arrWord = [];
 			//echo "<br>".$jsonWak[$i]."<br>";
 			$deJsonWak = json_decode($jsonWak[$i],true);
+			$deJsonWak = $deJsonWak['message'];
 			//print_r ($deJsonWak);
 			if(is_array($deJsonWak)){
 				foreach($deJsonWak as $key=>$val) {
@@ -180,9 +182,12 @@ function addValueToArray($arrWak,$jsonWak,$arr,$value){
 		for($i=0 ; $i<count($arrWak)-1 ;$i++){ // วนเท่ากับจำนวนวรรค
 		  $arrBePayang = [];
 		  $arrPayang = [];
+			$string = "";
+			$string2 = "";
 		  $str = "";
 		  $str2 = "";
 		  $deJsonWak = (array)json_decode($jsonWak[$i], true); // ทำทีละวรรค
+			$deJsonWak = $deJsonWak['message'];
 			if(is_array($deJsonWak)){
 				foreach ($deJsonWak as $key=>$val) {
 			    	array_push($arrBePayang,$val[$value]);
@@ -199,8 +204,75 @@ function addValueToArray($arrWak,$jsonWak,$arr,$value){
 		  for($c=0 ; $c<count($arrPayang) ; $c++){
 		    $arrKlonPayang[$i][$c] = $arrPayang[$c];
 		  }
+			if((count($arrKlonPayang[$i])-1)>9){
+				$arrBePayang = [];
+				$arrKlonPayang[$i] = [];
+				$arrPayang = [];
+				$string = "";
+				$string2 = "";
+				$str = "";
+				$str2 = "";
+				foreach ($deJsonWak as $key=>$val) {
+				  //echo $value['word']." ";
+				  $string = $val['payang'];
+				  //echo $string." "."<br>";
+				  $string2 = $val['word'];
+				  //echo $string2." "."<br>";
+				  if(stristr($string2,"ะ")){
+						//echo $string2." "."<br>";
+				    array_push($arrBePayang,$val['payang']);
+				  }
+				  else {
+				    if(stristr($string,"ะ-ห")){
+				      //echo "<br>".$string."1"." ";
+							//echo $val['payang']."<br>";
+				      $val['payang'] = substr($val['payang'],7);
+				      array_push($arrBePayang,$val['payang']);
+				      //echo $val['payang'];
+				    }
+				    else if(stristr($string,"ผะ-อ")){
+				      //echo "<br>".$str2."1"." ";
+				      $val['payang'] = substr($val['payang'],7);
+				      array_push($arrBePayang,$val['payang']);
+				      //echo $value['payang'];
+				    }
+						/*else if(stristr($string,"พะ-ย")){
+				      //echo "<br>".$str2."1"." ";
+				      $val['payang'] = substr($val['payang'],7);
+				      array_push($arrBePayang,$val['payang']);
+				      //echo $value['payang'];
+				    }*/
+						else if(stristr($string,"ธะ-น")){
+				      //echo "<br>".$str2."1"." ";
+				      $val['payang'] = substr($val['payang'],7);
+				      array_push($arrBePayang,$val['payang']);
+				      //echo $value['payang'];
+				    }
+				    else if(stristr($string,"สะ-บ")){
+				      //echo "<br>".$str2."1"." ";
+				      $val['payang'] = substr($val['payang'],7);
+				      array_push($arrBePayang,$val['payang']);
+				      //echo $value['payang'];
+				    }
+				    else{
+				      array_push($arrBePayang,$val['payang']);
+				    }
+				  }
+				}
+				//print_r($arrBePayang);
+				//echo "<br>1<br>";
+
+			for($k=0 ; $k<count($arrBePayang) ; $k++){
+		    $str = ($str)." ".($arrBePayang[$k]);
+		    $str2 = str_replace("-"," ",$str); // แทนที่ "-" ด้วย " "
+		    $arrPayang = (explode(" ",$str2));
+		  }
+		  for($c=0 ; $c<count($arrPayang) ; $c++){
+		    $arrKlonPayang[$i][$c] = $arrPayang[$c];
+		  }
 		}
-		return ($arrKlonPayang);
+	}
+	return ($arrKlonPayang);
 	}
 	else if($value == 'phonemes'){
 		for($i=0 ; $i<count($arrWak)-1 ;$i++){
@@ -213,6 +285,7 @@ function addValueToArray($arrWak,$jsonWak,$arr,$value){
 			$str2 = "";
 			$arrPhonemesAndTone = [];
 			$deJsonWak = json_decode($jsonWak[$i], true); // ทำทีละวรรค
+			$deJsonWak = $deJsonWak['message'];
 			//print_r ($deJsonWak);
 			//echo "<br>";
 			//echo "<br>==================================<br>";
@@ -371,24 +444,31 @@ function getData(){
 	$arrWord = [];
 	$arrBePayang = [];
 	$arrBePhonemes = [];
-	//$klon = $_GET['klon'];
+	$klon = $_GET['klon'];
 	//echo $klon;
-	$klon = "/w/w/w/w";
+	//$klon = "/w/w/w/w";
 	//$klon = "แล้วสอนว่าอย่าไว้ใจมนุษย์/wมันแสนสุดลึกล้ำเหลือกำหนด/wถึงเถาวัลย์พันเกี้ยวที่เลี้ยวลด/wก็ไม่คดเหมือนหนึ่งในน้ำใจคน/wแล้วสอนว่าอย่าไว้ใจมนุษย์/wมันแสนสุดลึกล้ำเหลือกำหนด/wถึงเถาวัลย์พันเกี้ยวที่เลี้ยวลด/wก็ไม่คดเหมือนหนึ่งในน้ำใจคน/w/e";
 	//$klon = "แล้วสอนว่าอย่าไว้ใจมนุษย์/wมันแสนสุดลึกล้ำเหลือกำหนด/wถึงเถาวัลย์พันเกี้ยวที่เลี้ยวลด/wก็ไม่คดเหมือนหนึ่งในน้ำใจคน/w/e";
 	$arrWak = splitWak($klon);
 	//print_r($arrWak);
 	//echo (count($arrWak)-1);
-	for ($i=0; $i<count($arrWak)-1 ; $i++) {
-		/*$url = "http://anklon.plearnjai.com/cgi-bin/form.py?input=";
+	for ($i=0; $i<count($arrWak)-1 ; ) {
+		$url = "http://172.27.225.156:8080/getData/v1/";
 		//$a = "แล้วสอนว่าอย่าไว้ใจมนุษย์";
-		$word = $_POST["input"];
-		$call_url = $url.$word;
-		$jsonWak[$i] = file_get_contents($call_url);
-		print_r ($jsonWak);*/
+		$wak = $arrWak[$i];
+		if($wak != ""){
+			$txt = urlencode($wak);
+			//$wak = $_POST["input"];
+			$call_url = $url.$txt;
+			$jsonWak[$i] = file_get_contents($call_url);
+			$i++;
+		}
+		else if($wak == "" && $i<(count($arrWak)-1)){
+			$i++;
+		}
 		//print_r($myfile);
 		//$jsonWak[$i] = json_decode($myfile);
-		$index = (string)$i;
+		//$index = (string)$i;
 		//$jsonWak[$i] = readTxt("wak".$index.".txt"); // ถูกทุกอย่างยกเว้น มันพบคำว่า นิ่ง เป็นคำสแลง เป็นเพราะ DB ออกผลใกล้เคียงมาให้
 		//$jsonWak[$i] = readTxt("poem2wak".$index.".txt"); // ถูกหมด
 		//$jsonWak[$i] = readTxt("poem3wak".$index.".txt"); // มีเจสันวรรคที่ i = 5 แต่ไม่มีข้อมูลตอนดีโค้ด ทำให้ผลการตรวจเพี้ยนหมด
@@ -409,7 +489,7 @@ function getData(){
 		//$jsonWak[$i] = readTxt("poem17wak".$index.".txt"); // ถูกหมด
 		//$jsonWak[$i] = readTxt("poem18wak".$index.".txt"); // ถูกหมด
 		//$jsonWak[$i] = readTxt("poem19wak".$index.".txt"); // สัมผัสในโปรแกรมตรวจผิด 1 จุด
-		//$jsonWak[$i] = readTxt("poem20wak".$index.".txt"); // ผิดสัมผัสซ้ำ 1 ที่ โปรแกรมตรวจไม่เจอ
+		//$jsonWak[$i] = readTxt("poem20wak".$index.".txt");
 		//$jsonWak[$i] = readTxt("poem21wak".$index.".txt"); // ถูกทุกอย่างยกเว้น มันพบคำว่า ถอย เป็นคำหยาบคาย เป็นเพราะ DB ออกผลใกล้เคียงมาให้ เผลอ กับละเมอ แปลงเป็นโฟนีมผิดอยู่
 		//$jsonWak[$i] = readTxt("poem22wak".$index.".txt"); // ผิดสัมผัสซ้ำ 1 ที่ มี 1 สัมผัสเลือน ถูก
 		//$jsonWak[$i] = readTxt("poem27wak".$index.".txt"); // กลอนที่ 20 ที่ใช้ทดลองนะ มีตัดพยางค์ผิด แต่อาจารย์ให้มองผ่านไปก่อน
@@ -422,6 +502,7 @@ function getData(){
 		//echo $jsonWak;
 		#echo $data;
 	}
+	//print_r ($jsonWak);
 	//$enCode = json_encode($arrWak);
 	//echo $enCode;
 	//print_r ($arrWak);

@@ -2,21 +2,6 @@
 require ("return2.php");
 //function scoreHard($arrWak,$arrOfTone,$arrNumPayang,$arrDupRhyme,$arrExternalRhyme){
 $pan = array();
-/*$countWak = count($_SESSION['numWak'])-1;
-$strWak = "";
-if($countWak == 4 || $countWak == 8){
-  $pan['prosody']['numWak']['str'] = "จำนวนวรรคครบถ้วน";
-  $pan['prosody']['numWak']['status'] = "true";
-}
-else {
-  for($i=0 ; $i<$countWak ; $i++){
-    if($_SESSION['numWak'][$i] == "false"){
-      $strWak = $strWak."/".$_SESSION['numWak'][$i]['str'];
-    }
-  }
-  $pan['prosody']['numWak']['str'] = $strWak;
-  $pan['prosody']['numWak']['status'] = "false";
-}*/
 $strWak = "";
 $check = 0;
 $countWak = count($_SESSION['numWak'])-1;
@@ -53,7 +38,7 @@ else {
 }
 $strTone = "";
 $countTone = count($_SESSION['tone']);
-for($i=0 ; $i<$counTone ; $i++){
+for($i=0 ; $i<$countTone ; $i++){
   if($_SESSION['tone'][$i]['status'] == "false"){
     $strTone = ($strTone)."/".($_SESSION['tone'][$i]['str']);
     $check++;
@@ -169,7 +154,7 @@ for($i=0 ; $i<$countBadWord ; $i++){
 }
 if($check != 0){
   $pan['melody']['badWord']['str'] = $strBadWord;
-  $pan['melody']['badWord']['status'] = "false";
+  $pan['melody']['badWord']['status'] = $_SESSION['badWord']['count'];
 }
 else {
   $pan['melody']['badWord']['str'] = "ไม่พบคำหยาบคาย";
@@ -186,14 +171,16 @@ for($i=0 ; $i<$countSlangWord ; $i++){
 }
 if($check != 0){
   $pan['melody']['slangWord']['str'] = $strSlangWord;
-  $pan['melody']['slangWord']['status'] = "false";
+  $pan['melody']['slangWord']['status'] = $_SESSION['slangWord']['count'];
 }
 else {
   $pan['melody']['slangWord']['str'] = "ไม่พบคำสแลง";
   $pan['melody']['slangWord']['status'] = "true";
 }
-print_r ($pan);
+//print_r ($pan);
+//echo "<br><br>";
 $panjson = json_encode($pan);
-//print_r($panjson);
+print_r($panjson);
+
 
 ?>
