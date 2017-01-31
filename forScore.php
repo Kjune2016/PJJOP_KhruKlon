@@ -167,30 +167,40 @@ else {
 $strBadWord = "";
 $check = 0;
 $countBadWord = count($_SESSION['BadWord']);
+//echo $countBadWord."<br>";
 for($i=0 ; $i<$countBadWord ; $i++){
   if($_SESSION['BadWord'][$i]['status'] == "false"){
-    $pan['melody']['badWord']['str'] = $_SESSION['badWord']['str'];
-    $pan['melody']['badWord']['status'] = $_SESSION['badWord']['count'];
+    $strBadWord = ($strBadWord)."/".($_SESSION['BadWord'][$i]['str']);
+    $check++;
   }
-  else {
-    $pan['melody']['badWord']['str'] = "ไม่พบคำหยาบคาย";
-    $pan['melody']['badWord']['status'] = 0;
-  }
+}
+if($check != 0){
+  $pan['melody']['badWord']['str'] = $strBadWord;
+  $pan['melody']['badWord']['status'] = $_SESSION['BadWord']['count'];
+}
+else {
+  $pan['melody']['badWord']['str'] = "ไม่พบคำหยาบคาย";
+  $pan['melody']['badWord']['status'] = 0;
 }
 $strSlangWord = "";
 $check = 0;
 $countSlangWord = count($_SESSION['SlangWord']);
 for($i=0 ; $i<$countSlangWord ; $i++){
   if($_SESSION['SlangWord'][$i]['status'] == "false"){
-    $pan['melody']['slangWord']['str'] = $_SESSION['slangWord']['str'];
-    $pan['melody']['slangWord']['status'] = $_SESSION['slangWord']['count'];
-  }
-  else {
-    $pan['melody']['slangWord']['str'] = "ไม่พบคำสแลง";
-    $pan['melody']['slangWord']['status'] = 0;
+    $strSlangWord = ($strSlangWord)."/".($_SESSION['SlangWord'][$i]['str']);
+    $check++;
   }
 }
-//print_r ($pan);
+if($check != 0 ){
+  $pan['melody']['slangWord']['str'] = $strSlangWord;
+  $pan['melody']['slangWord']['status'] = $_SESSION['SlangWord']['count'];
+}
+else {
+  $pan['melody']['slangWord']['str'] = "ไม่พบคำสแลง";
+  $pan['melody']['slangWord']['status'] = 0;
+}
+
+print_r ($pan);
 //echo "<br><br>";
 $panjson = json_encode($pan);
 //print_r($panjson);

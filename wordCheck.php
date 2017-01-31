@@ -11,6 +11,7 @@ require_once ("CNDB.php");
 function slangWord($arrKlonWord,$conn){
   $arrSlang = array();
   $numSlang = 0;
+  $count = 0;
   for($i=0 ; $i<count($arrKlonWord) ; $i++){
     for($j=0 ; $j<count($arrKlonWord[$i]) ; $j++){
       $word = $arrKlonWord[$i][$j];
@@ -18,20 +19,22 @@ function slangWord($arrKlonWord,$conn){
       $querySlang = "SELECT word FROM slang_word WHERE word = '$word'";
       $resultSlang = mysqli_query($conn, $querySlang);
       if (mysqli_num_rows($resultSlang) > 0) {
-        /*if(in_array($word,$arrSlang)){
+        if(in_array($word,$arrSlang)){
           $numSlang = $numSlang;
-        }*/
-        $arrSlang[$numSlang] = $word;
-        $numSlang++;
-      }
-        /*else {
+        }
+        //$arrSlang[$numSlang] = $word;
+        //$numSlang++;
+      //}
+        else {
           $arrSlang[$numSlang] = $word;
           $numSlang++;
-        }*/
-      //}
+        }
+        $count++;
+      }
     }
   }
   //print_r ($arrSlang);
+  //echo $count."<br>";
   // แสดงค่าคำสแลง
   if(count($arrSlang)>0){
     for($i=0 ; $i<count($arrSlang) ; $i++){
@@ -43,7 +46,7 @@ function slangWord($arrKlonWord,$conn){
     $arrSlangWord[0][str] = "ไม่พบคำสแลง";
     $arrSlangWord[0][status] = "true";
   }
-  $arrSlangWord[count] = count($arrSlang);
+  $arrSlangWord[count] = $count;
   return ($arrSlangWord);
 }
 
@@ -51,25 +54,30 @@ function slangWord($arrKlonWord,$conn){
 function badWord($arrKlonWord, $conn){
   $arrBad = array();
   $numBad = 0;
+  $count = 0;
   for($i=0 ; $i<count($arrKlonWord) ; $i++){
     for($j=0 ; $j<count($arrKlonWord[$i]) ; $j++){
       $word = $arrKlonWord[$i][$j];
       $queryBad = "SELECT word FROM bad_word WHERE word = '$word'";
       $resultBad = mysqli_query($conn, $queryBad);
       if (mysqli_num_rows($resultBad) > 0) {
-        /*if(in_array($word,$arrBad)){
+        if(in_array($word,$arrBad)){
           $numBad = $numBad;
-        }*/
-        $arrBad[$numBad] = $word;
-        $numBad++;
-      }
-        /*else {
+        }
+        //$arrBad[$numBad] = $word;
+        //$numBad++;
+      //}
+        else {
           $arrBad[$numBad] = $word;
           $numBad++;
-        }*/
-      //}
+        }
+        $count++;
+      }
     }
   }
+
+  //print_r ($arrBad);
+  //echo "<br>";
     // แสดงค่าคำหยาบคาย
     if(count($arrBad)>0){
       for($i=0 ; $i<count($arrBad) ; $i++){
@@ -81,10 +89,11 @@ function badWord($arrKlonWord, $conn){
       $arrBadWord[0][str] = "ไม่พบคำหยาบคาย";
       $arrBadWord[0][status] = "true";
     }
-    $arrBadWord[count] = count($arrBad);
+    $arrBadWord[count] = $count;
     return ($arrBadWord);
   }
-
+  //print_r ($arrBadWord);
+  //echo "<br>";
   //print_r ($arrKlonWord);
   //echo "<br>";
   // ตรวจการใช้คำ คำคู่ที่ถูกสลับ คำไม่มีความหมาย   ยังต้องแก้อีกอะ เศร้า
