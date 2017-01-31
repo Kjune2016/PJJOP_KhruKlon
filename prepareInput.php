@@ -1,5 +1,5 @@
 <?php
-require ("DataConversion.php");
+//require ("DataConversion.php");
 //require ("DataConversion2.php");
 //require ("DataConversion3.php");
 /*print_r ($arrKlonWord);
@@ -24,22 +24,81 @@ $arrWak = (explode("/w", $klon));
 //print ($countOfWak);
 
 /// เตรียม input สำหรับตรวจสัมผัสนอก
-// เก็บพยางค์ที่เป็นตำแหน่งรับ-ส่งสัมผัสกันเอาไว้ใน array ชื่อ rhyme ก่อน
-$pn = [];
-$pn2 = [];
-$rhyme = [];
-for($i=0 ; $i<count($arrWak)-1 ; $i++){
-  $totalPN = count($arrKlonPhonemes[$i]);
-  //echo ($totalPN)." ";
-      // บทที่ 1
-      if($i==0 || $i<4){
+function preareInputRhyme($arrWak,$arrKlonPhonemes){
+  // เก็บพยางค์ที่เป็นตำแหน่งรับ-ส่งสัมผัสกันเอาไว้ใน array ชื่อ rhyme ก่อน
+  $pn = [];
+  $pn2 = [];
+  $rhyme = [];
+  for($i=0 ; $i<count($arrWak)-1 ; $i++){
+    $totalPN = count($arrKlonPhonemes[$i]);
+    //echo ($totalPN)." ";
+        // บทที่ 1
+        if($i==0 || $i<4){
+          // กรณี 8 9 and 7 พยางค์
+            // วรรคที่ 1 บทที่ 1
+            if($i==0){
+              $pn[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
+            }
+            // วรรคที่ 2
+            else if($i==1){
+              if(($totalPN-1)==8){
+                $pn[$i][0] =$arrKlonPhonemes[$i][3];
+                $pn[$i][1] =$arrKlonPhonemes[$i][5];
+                $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+              }
+              else if(($totalPN-1)>=9){
+                $pn[$i][0] =$arrKlonPhonemes[$i][3];
+                $pn[$i][1] =$arrKlonPhonemes[$i][6];
+                $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+              }
+              else if(($totalPN-1)==7){
+                $pn[$i][0] =$arrKlonPhonemes[$i][2];
+                $pn[$i][1] =$arrKlonPhonemes[$i][3];
+                $pn[$i][2] =$arrKlonPhonemes[$i][4];
+                $pn[$i][3] =$arrKlonPhonemes[$i][5];
+                $pn[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
+              }
+              else if(($totalPN-1)<8){
+                $pn[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+              }
+            }
+            // วรรคที่ 3
+            else if($i==2){
+              $pn[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
+            }
+            // วรรคที่ 4
+            else if($i==3){
+              if(($totalPN-1)==8){
+                $pn[$i][0] =$arrKlonPhonemes[$i][3];
+                $pn[$i][1] =$arrKlonPhonemes[$i][5];
+                $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+              }
+              else if(($totalPN-1)>=9){
+                $pn[$i][0] =$arrKlonPhonemes[$i][3];
+                $pn[$i][1] =$arrKlonPhonemes[$i][6];
+                $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
+              }
+              else if(($totalPN-1)==7){
+                $pn[$i][0] =$arrKlonPhonemes[$i][2];
+                $pn[$i][1] =$arrKlonPhonemes[$i][3];
+                $pn[$i][2] =$arrKlonPhonemes[$i][4];
+                $pn[$i][3] =$arrKlonPhonemes[$i][5];
+                $pn[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
+              }
+              else if(($totalPN-1)<8){
+                $pn[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+              }
+            }
+          }
+      // บทที่ 2
+      if($i>=4 || $i<8){
         // กรณี 8 9 and 7 พยางค์
-          // วรรคที่ 1 บทที่ 1
-          if($i==0){
+          // วรรคที่ 1 บทที่ 2
+          if($i==4){
             $pn[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
           }
           // วรรคที่ 2
-          else if($i==1){
+          else if($i==5){
             if(($totalPN-1)==8){
               $pn[$i][0] =$arrKlonPhonemes[$i][3];
               $pn[$i][1] =$arrKlonPhonemes[$i][5];
@@ -50,7 +109,7 @@ for($i=0 ; $i<count($arrWak)-1 ; $i++){
               $pn[$i][1] =$arrKlonPhonemes[$i][6];
               $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
             }
-            else if(($totalPN-1)==7){
+            else if(($totalPY-1)==7){
               $pn[$i][0] =$arrKlonPhonemes[$i][2];
               $pn[$i][1] =$arrKlonPhonemes[$i][3];
               $pn[$i][2] =$arrKlonPhonemes[$i][4];
@@ -62,11 +121,11 @@ for($i=0 ; $i<count($arrWak)-1 ; $i++){
             }
           }
           // วรรคที่ 3
-          else if($i==2){
+          else if($i==6){
             $pn[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
           }
           // วรรคที่ 4
-          else if($i==3){
+          else if($i==7){
             if(($totalPN-1)==8){
               $pn[$i][0] =$arrKlonPhonemes[$i][3];
               $pn[$i][1] =$arrKlonPhonemes[$i][5];
@@ -89,100 +148,46 @@ for($i=0 ; $i<count($arrWak)-1 ; $i++){
             }
           }
         }
-    // บทที่ 2
-    if($i>=4 || $i<8){
-      // กรณี 8 9 and 7 พยางค์
-        // วรรคที่ 1 บทที่ 2
-        if($i==4){
-          $pn[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
-        }
-        // วรรคที่ 2
-        else if($i==5){
-          if(($totalPN-1)==8){
-            $pn[$i][0] =$arrKlonPhonemes[$i][3];
-            $pn[$i][1] =$arrKlonPhonemes[$i][5];
-            $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
-          }
-          else if(($totalPN-1)==9){
-            $pn[$i][0] =$arrKlonPhonemes[$i][3];
-            $pn[$i][1] =$arrKlonPhonemes[$i][6];
-            $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
-          }
-          else if(($totalPY-1)==7){
-            $pn[$i][0] =$arrKlonPhonemes[$i][2];
-            $pn[$i][1] =$arrKlonPhonemes[$i][3];
-            $pn[$i][2] =$arrKlonPhonemes[$i][4];
-            $pn[$i][3] =$arrKlonPhonemes[$i][5];
-            $pn[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
-          }
-          else if(($totalPN-1)<8){
-            $pn[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
-          }
-        }
-        // วรรคที่ 3
-        else if($i==6){
-          $pn[$i][0] =$arrKlonPhonemes[$i][$totalPN-1];
-        }
-        // วรรคที่ 4
-        else if($i==7){
-          if(($totalPN-1)==8){
-            $pn[$i][0] =$arrKlonPhonemes[$i][3];
-            $pn[$i][1] =$arrKlonPhonemes[$i][5];
-            $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
-          }
-          else if(($totalPN-1)==9){
-            $pn[$i][0] =$arrKlonPhonemes[$i][3];
-            $pn[$i][1] =$arrKlonPhonemes[$i][6];
-            $pn[$i][2] =$arrKlonPhonemes[$i][$totalPN-1];
-          }
-          else if(($totalPN-1)==7){
-            $pn[$i][0] =$arrKlonPhonemes[$i][2];
-            $pn[$i][1] =$arrKlonPhonemes[$i][3];
-            $pn[$i][2] =$arrKlonPhonemes[$i][4];
-            $pn[$i][3] =$arrKlonPhonemes[$i][5];
-            $pn[$i][4] =$arrKlonPhonemes[$i][$totalPN-1];
-          }
-          else if(($totalPN-1)<8){
-            $pn[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
-          }
-        }
+      }
+  //print_r ($pn);
+  //echo "<br>";
+  //$str3="";
+  for($i=0 ; $i<count($pn) ; $i++){
+    $strExternalRhyme="";
+    for($j=0 ; $j<count($pn[$i]) ; $j++){
+      if($pn[$i][0] != "จำนวนพยางค์ไม่ถูกต้อง"){
+        $strExternalRhyme = $strExternalRhyme."~".$pn[$i][$j];
+        //echo $str3;
+        $pn2[$i] = explode("~",$strExternalRhyme);
+      }
+      else {
+        $pn2[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
       }
     }
-//print_r ($pn);
-//echo "<br>";
-//$str3="";
-for($i=0 ; $i<count($pn) ; $i++){
-  $strExternalRhyme="";
-  for($j=0 ; $j<count($pn[$i]) ; $j++){
-    if($pn[$i][0] != "จำนวนพยางค์ไม่ถูกต้อง"){
-      $strExternalRhyme = $strExternalRhyme."~".$pn[$i][$j];
-      //echo $str3;
-      $pn2[$i] = explode("~",$strExternalRhyme);
-    }
-    else {
-      $pn2[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+  }
+  //echo "<br>";
+  //print_r ($pn2);
+  for($i=0 ; $i<count($pn2) ; $i++){
+    $index = 0;
+    for($j=0 ; $j<count($pn2[$i]) ; $j+=2){
+      if($pn2[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+        $rhyme[$i][$index] = $pn2[$i][$j];
+        $index = $index+1;
+      }
+      else {
+        $rhyme[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
+      }
     }
   }
+  return ($rhyme);
 }
-//echo "<br>";
-//print_r ($pn2);
-for($i=0 ; $i<count($pn2) ; $i++){
-  $index = 0;
-  for($j=0 ; $j<count($pn2[$i]) ; $j+=2){
-    if($pn2[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
-      $rhyme[$i][$index] = $pn2[$i][$j];
-      $index = $index+1;
-    }
-    else {
-      $rhyme[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
-    }
-  }
-}
+
 
 
 
 /// เตรียม input เพื่อตรวจสัมผัสซ้ำ
-$py = [];
+
+/*$py = [];
 for($i=0 ; $i<count($arrWak)-1 ; $i++){
   $totalPY = count($arrKlonPayang[$i]);
   //echo ($totalPN)." ";
@@ -698,5 +703,5 @@ for($i=0 ; $i<count($pnInRhyme2) ; $i++){
       $InternalRhyme[$i][0] = "จำนวนพยางค์ไม่ถูกต้อง";
     }
   }
-}
+}*/
 ?>

@@ -65,8 +65,8 @@ function process($arrKlonWord,$arrKlonPayang,$arrKlonPhonemes,$arrKlonTone,$arrW
 		$strDupRhyme = ($strDupRhyme).($arrDupRhyme[$i][str])." สถานะ ".($arrDupRhyme[$i][status])."<br>";
 	}
 	echo $strDupRhyme;*/
-	//print_r ($_SESSION['DupRhyme']);
-	//echo "<br><br>";
+	print_r ($_SESSION['DupRhyme']);
+	echo "<br><br>";
 	$_SESSION['ChingRhyme'] = checkChingRhyme($arrWak,$arrKlonPhonemes,$rhyme);
 	//$pan[5] = $arrChingRhyme;
 	/*$strChingRhyme = "ผลการตรวจชิงสัมผัส<br>";
@@ -116,7 +116,7 @@ function process($arrKlonWord,$arrKlonPayang,$arrKlonPhonemes,$arrKlonTone,$arrW
 	}
 	echo $strBadWord;*/
 	//echo count($arrBadWord);
-	//print_r ($_SESSION['BadWord']);
+	print_r ($_SESSION['BadWord']);
 	//echo "<br><br>";
 	/*$arrUseWord = useWord($arrKlonWord, $conn, $connDBWord);
 	$strBadWord = "ผลการตรวจคำหยาบคาย<br>";
@@ -165,7 +165,7 @@ function addValueToArray($arrWak,$jsonWak,$arr,$value){
 			$arrWord = [];
 			//echo "<br>".$jsonWak[$i]."<br>";
 			$deJsonWak = json_decode($jsonWak[$i],true);
-			$deJsonWak = $deJsonWak['message'];
+			//$deJsonWak = $deJsonWak['message'];
 			//print_r ($deJsonWak);
 			if(is_array($deJsonWak)){
 				foreach($deJsonWak as $key=>$val) {
@@ -187,7 +187,7 @@ function addValueToArray($arrWak,$jsonWak,$arr,$value){
 		  $str = "";
 		  $str2 = "";
 		  $deJsonWak = (array)json_decode($jsonWak[$i], true); // ทำทีละวรรค
-			$deJsonWak = $deJsonWak['message'];
+			//$deJsonWak = $deJsonWak['message'];
 			if(is_array($deJsonWak)){
 				foreach ($deJsonWak as $key=>$val) {
 			    	array_push($arrBePayang,$val[$value]);
@@ -285,7 +285,7 @@ function addValueToArray($arrWak,$jsonWak,$arr,$value){
 			$str2 = "";
 			$arrPhonemesAndTone = [];
 			$deJsonWak = json_decode($jsonWak[$i], true); // ทำทีละวรรค
-			$deJsonWak = $deJsonWak['message'];
+			//$deJsonWak = $deJsonWak['message'];
 			//print_r ($deJsonWak);
 			//echo "<br>";
 			//echo "<br>==================================<br>";
@@ -444,16 +444,16 @@ function getData(){
 	$arrWord = [];
 	$arrBePayang = [];
 	$arrBePhonemes = [];
-	$klon = $_GET['klon'];
+	//$klon = $_GET['klon'];
 	//echo $klon;
 	//$klon = "/w/w/w/w";
-	//$klon = "แล้วสอนว่าอย่าไว้ใจมนุษย์/wมันแสนสุดลึกล้ำเหลือกำหนด/wถึงเถาวัลย์พันเกี้ยวที่เลี้ยวลด/wก็ไม่คดเหมือนหนึ่งในน้ำใจคน/wแล้วสอนว่าอย่าไว้ใจมนุษย์/wมันแสนสุดลึกล้ำเหลือกำหนด/wถึงเถาวัลย์พันเกี้ยวที่เลี้ยวลด/wก็ไม่คดเหมือนหนึ่งในน้ำใจคน/w/e";
+	$klon = "แล้วสอนว่าอย่าไว้ใจมนุษย์/wมันแสนสุดลึกล้ำเหลือกำหนด/wถึงเถาวัลย์พันเกี้ยวที่เลี้ยวลด/wก็ไม่คดเหมือนหนึ่งในน้ำใจคน/wแล้วสอนว่าอย่าไว้ใจมนุษย์/wมันแสนสุดลึกล้ำเหลือกำหนด/wถึงเถาวัลย์พันเกี้ยวที่เลี้ยวลด/wก็ไม่คดเหมือนหนึ่งในน้ำใจคน/w/e";
 	//$klon = "แล้วสอนว่าอย่าไว้ใจมนุษย์/wมันแสนสุดลึกล้ำเหลือกำหนด/wถึงเถาวัลย์พันเกี้ยวที่เลี้ยวลด/wก็ไม่คดเหมือนหนึ่งในน้ำใจคน/w/e";
 	$arrWak = splitWak($klon);
 	//print_r($arrWak);
 	//echo (count($arrWak)-1);
-	for ($i=0; $i<count($arrWak)-1 ; ) {
-		$url = "http://172.27.225.156:8080/getData/v1/";
+	for ($i=0; $i<count($arrWak)-1 ; $i++) {
+		/*$url = "http://172.27.225.156:8080/getData/v1/";
 		//$a = "แล้วสอนว่าอย่าไว้ใจมนุษย์";
 		$wak = $arrWak[$i];
 		if($wak != ""){
@@ -465,10 +465,10 @@ function getData(){
 		}
 		else if($wak == "" && $i<(count($arrWak)-1)){
 			$i++;
-		}
+		}*/
 		//print_r($myfile);
 		//$jsonWak[$i] = json_decode($myfile);
-		//$index = (string)$i;
+		$index = (string)$i;
 		//$jsonWak[$i] = readTxt("wak".$index.".txt"); // ถูกทุกอย่างยกเว้น มันพบคำว่า นิ่ง เป็นคำสแลง เป็นเพราะ DB ออกผลใกล้เคียงมาให้
 		//$jsonWak[$i] = readTxt("poem2wak".$index.".txt"); // ถูกหมด
 		//$jsonWak[$i] = readTxt("poem3wak".$index.".txt"); // มีเจสันวรรคที่ i = 5 แต่ไม่มีข้อมูลตอนดีโค้ด ทำให้ผลการตรวจเพี้ยนหมด
@@ -490,7 +490,7 @@ function getData(){
 		//$jsonWak[$i] = readTxt("poem18wak".$index.".txt"); // ถูกหมด
 		//$jsonWak[$i] = readTxt("poem19wak".$index.".txt"); // สัมผัสในโปรแกรมตรวจผิด 1 จุด
 		//$jsonWak[$i] = readTxt("poem20wak".$index.".txt");
-		//$jsonWak[$i] = readTxt("poem21wak".$index.".txt"); // ถูกทุกอย่างยกเว้น มันพบคำว่า ถอย เป็นคำหยาบคาย เป็นเพราะ DB ออกผลใกล้เคียงมาให้ เผลอ กับละเมอ แปลงเป็นโฟนีมผิดอยู่
+		$jsonWak[$i] = readTxt("poem21wak".$index.".txt"); // ถูกทุกอย่างยกเว้น มันพบคำว่า ถอย เป็นคำหยาบคาย เป็นเพราะ DB ออกผลใกล้เคียงมาให้ เผลอ กับละเมอ แปลงเป็นโฟนีมผิดอยู่
 		//$jsonWak[$i] = readTxt("poem22wak".$index.".txt"); // ผิดสัมผัสซ้ำ 1 ที่ มี 1 สัมผัสเลือน ถูก
 		//$jsonWak[$i] = readTxt("poem27wak".$index.".txt"); // กลอนที่ 20 ที่ใช้ทดลองนะ มีตัดพยางค์ผิด แต่อาจารย์ให้มองผ่านไปก่อน
 		//$jsonWak[$i] = readTxt("poemPlak1wak".$index.".txt");

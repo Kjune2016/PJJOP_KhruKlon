@@ -66,13 +66,13 @@ function process($arrKlonWord,$arrKlonPayang,$arrKlonPhonemes,$arrKlonTone,$arrW
 	//echo "<br><br>";
 	$arrChingRhyme = checkChingRhyme($arrWak,$arrKlonPhonemes,$rhyme);
 	$pan[5] = $arrChingRhyme;
-	/*$strChingRhyme = "ผลการตรวจชิงสัมผัส<br>";
+	$strChingRhyme = "ผลการตรวจชิงสัมผัส<br>";
 	for($i=2 ; $i<=count($arrChingRhyme)+1 ; $i++){
 		$strChingRhyme = ($strChingRhyme).($arrChingRhyme[$i][str])." สถานะ ".($arrChingRhyme[$i][status])."<br>";
 	}
-	echo $strChingRhyme;*/
+	echo $strChingRhyme;
 	//print_r ($arrChingRhyme);
-	//echo "<br><br>";
+	echo "<br><br>";
 	$arrInternalRhyme = checkInRhyme($arrWak,$arrKlonPhonemes);
 	$pan[6] = $arrInternalRhyme;
 	/*$strInternalRhyme = "ผลการตรวจสัมผัสใน<br>";
@@ -318,8 +318,8 @@ function getData(){
 	//echo $klon;
 	$klon = "แล้วสอนว่าอย่าไว้ใจมนุษย์/wมันแสนสุดลึกล้ำเหลือกำหนด/wถึงเถาวัลย์พันเกี้ยวที่เลี้ยวลด/wก็ไม่คดเหมือนหนึ่งในน้ำใจคน/wแล้วสอนว่าอย่าไว้ใจมนุษย์/wมันแสนสุดลึกล้ำเหลือกำหนด/wถึงเถาวัลย์พันเกี้ยวที่เลี้ยวลด/wก็ไม่คดเหมือนหนึ่งในน้ำใจคน/w/e";
 	$arrWak = splitWak($klon);
-	//for ($i=0; $i<count($arrWak)-1 ; $i++) {
-		$url = "http://172.27.225.156:8080/getData/v1/";
+	for ($i=0; $i<count($arrWak)-1 ; $i++) {
+		/*$url = "http://172.27.225.156:8080/getData/v1/";
 		$a = "แล้วสอนว่าอย่าไว้ใจมนุษย์";
 		//$word = $_POST["input"];
 		$call_url = $url.$a;
@@ -327,10 +327,10 @@ function getData(){
 		//print_r ($jsonWak);
 		//print_r($myfile);
 		$dejsonWak = json_decode($jsonWak);
-		print_r($dejsonWak);
-		//$index = (string)$i;
+		print_r($dejsonWak);*/
+		$index = (string)$i;
 		//$jsonWak[$i] = readTxt("wak".$index.".txt"); // ถูกทุกอย่างยกเว้น มันพบคำว่า นิ่ง เป็นคำสแลง เป็นเพราะ DB ออกผลใกล้เคียงมาให้
-		//$jsonWak[$i] = readTxt("poem2wak".$index.".txt"); // ถูกหมด
+		$jsonWak[$i] = readTxt("poem2wak".$index.".txt"); // ถูกหมด
 		//$jsonWak[$i] = readTxt("poem3wak".$index.".txt"); // มีเจสันวรรคที่ i = 5 แต่ไม่มีข้อมูลตอนดีโค้ด ทำให้ผลการตรวจเพี้ยนหมด
 		//echo $jsonWak[$i]."<br>==============<br>".($i)."<br>";
 		//$jsonWak[$i] = readTxt("poem4wak".$index.".txt"); // ผิดสัมผัสซ้ำ 2 ที่ แล้วคำว่า กลอน กับ ก้อน สัมผัสกันไหมอะ
@@ -361,7 +361,7 @@ function getData(){
 		//$jsonWak[0] = readTxt("poemPlak6wak0.txt");
 		//echo $jsonWak;
 		#echo $data;
-	//}
+	}
 	//$enCode = json_encode($arrWak);
 	//echo $enCode;
 	//print_r ($arrWak);
