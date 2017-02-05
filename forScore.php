@@ -17,7 +17,7 @@ if($check != 0){
   $pan['prosody']['numWak']['status'] = "false";
 }
 else {
-  $pan['prosody']['numWak']['str'] = "-จำนวนวรรคถูกต้อง";
+  $pan['prosody']['numWak']['str'] = "/-จำนวนวรรคถูกต้อง";
   $pan['prosody']['numWak']['status'] = "true";
 }
 
@@ -36,7 +36,7 @@ if($check != 0){
   $pan['prosody']['numPayang']['status'] = "false";
 }
 else {
-  $pan['prosody']['numPayang']['str'] = "-จำนวนพยางค์ถูกต้อง";
+  $pan['prosody']['numPayang']['str'] = "/-จำนวนพยางค์ถูกต้อง";
   $pan['prosody']['numPayang']['status'] = "true";
 }
 
@@ -64,7 +64,7 @@ else if($check != 0){
   $pan['prosody']['tone']['status'] = "false";
 }
 else if($check2 == 0 && $check == 0){
-  $pan['prosody']['tone']['str'] = "-เสียงพยางค์ท้ายวรรคถูกต้องทุกวรรค";
+  $pan['prosody']['tone']['str'] = "/-เสียงพยางค์ท้ายวรรคถูกต้องทุกวรรค";
   $pan['prosody']['tone']['status'] = "true";
 }
 
@@ -77,7 +77,7 @@ for($i=0 ; $i<=8 ; $i++){
     $strExternal = ($strExternal)."/-".($_SESSION['ExternalRhyme'][$i]['str']);
   }
   else {
-    $strExternal2 = "-มีสัมผัสนอกครบ";
+    $strExternal2 = "/-มีสัมผัสนอกครบ";
   }
 }
 if($strExternal != ""){
@@ -105,7 +105,7 @@ for($i=0 ; $i<$countDup ; $i++){
     $check++;
   }
   else if($_SESSION['DupRhyme'][$i]['status'] == "veryFalse"){
-    $strDup2 = "-จำนวนพยางค์ในวรรคนี้ไม่ถูกต้อง";
+    $strDup2 = "-ไม่พบสัมซ้ำ";
   }
 }
 if($check != 0 && $strDup2 == ""){
@@ -121,7 +121,7 @@ else if($check != 0 && $strDup2 != ""){
   $pan['prosody']['dup']['status'] = "false";
 }
 else {
-  $pan['prosody']['dup']['str'] = "-ไม่พบสัมผัสซ้ำ";
+  $pan['prosody']['dup']['str'] = "/-ไม่พบสัมผัสซ้ำ";
   $pan['prosody']['dup']['status'] = "true";
 }
 
@@ -145,11 +145,11 @@ if(($check != 0)){
   $pan['melody']['toneMelody']['status'] = $check;
 }
 else if(($strTone2 != "ไม่มีความไพเราะในเรื่องเสียงพยางค์ท้ายวรรค") && ($check==0)){
-  $pan['melody']['toneMelody']['str'] = "-เสียงพยางค์ท้ายวรรคถูกต้องทุกวรรค แต่ยังไม่ใช่เสียงที่นิยมที่สุด";
+  $pan['melody']['toneMelody']['str'] = "/-เสียงพยางค์ท้ายวรรคถูกต้องทุกวรรค แต่ยังไม่ใช่เสียงที่นิยมที่สุด";
   $pan['melody']['toneMelody']['status'] = 0;
 }
 else {
-  $pan['melody']['toneMelody']['str'] = "-ไม่มีความไพเราะในเรื่องเสียงพยางค์ท้ายวรรค";
+  $pan['melody']['toneMelody']['str'] = "/-ไม่มีความไพเราะในเรื่องเสียงพยางค์ท้ายวรรค";
   $pan['melody']['toneMelody']['status'] = 0;
 }
 
@@ -168,7 +168,7 @@ if($check != 0){
   $pan['melody']['ching']['status'] = "false";
 }
 else {
-  $pan['melody']['ching']['str'] = "-ไม่พบชิงสัมผัส";
+  $pan['melody']['ching']['str'] = "/-ไม่พบชิงสัมผัส";
   $pan['melody']['ching']['status'] = "true";
 }
 
@@ -188,7 +188,7 @@ if($check != 0){
   $pan['melody']['internal']['status'] = $_SESSION['InternalRhyme']['count'];
 }
 else {
-  $pan['melody']['internal']['str'] = "-ไม่พบตำแหน่งสัมผัสใน";
+  $pan['melody']['internal']['str'] = "/-ไม่พบตำแหน่งสัมผัสใน";
   $pan['melody']['internal']['status'] = 0;
 }
 
@@ -212,27 +212,26 @@ if($check != 0 && ($strVague2 == "")){
   $pan['melody']['vague']['status'] = "false";
 }
 else if(($check == 0) && ($strVague2 != "")){
-  $pan['melody']['vague']['str'] = "-ไม่พบตำแหน่งสัมผัสเลือน";
+  $pan['melody']['vague']['str'] = "/-ไม่พบตำแหน่งสัมผัสเลือน";
   $pan['melody']['vague']['status'] = "false";
 }
 else {
-  $pan['melody']['vague']['str'] = "-ไม่พบสัมผัสเลือน";
+  $pan['melody']['vague']['str'] = "/-ไม่พบสัมผัสเลือน";
   $pan['melody']['vague']['status'] = "true";
 }
 
 
-$strBadWord = "";
+$strBadWord = "/-พบคำหยาบคายคำว่า";
 $check = 0;
 $check2 = 0;
 $countBadWord = count($_SESSION['BadWord']);
 //echo $countBadWord."<br>";
 for($i=0 ; $i<$countBadWord ; $i++){
   if($_SESSION['BadWord'][$i]['status'] == "false"){
-    $strBadWord = ($strBadWord)."/-".($_SESSION['BadWord'][$i]['str']);
+    $strBadWord = ($strBadWord).($_SESSION['BadWord'][$i]['str']);
     $check++;
   }
   else if($_SESSION['BadWord'][$i]['status'] == "veryFalse"){
-    $strBadWord = ($strBadWord)."/-".($_SESSION['BadWord'][$i]['str']);
     $check2++;
   }
 }
@@ -241,26 +240,25 @@ if($check != 0 && $check2 == 0){
   $pan['melody']['badWord']['status'] = $_SESSION['BadWord']['count'];
 }
 else if($check == 0 && $check2 != 0){
-  $pan['melody']['badWord']['str'] = $strBadWord;
+  $pan['melody']['badWord']['str'] = "/-ไม่พบคำหยาบคาย";
   $pan['melody']['badWord']['status'] = -1;
 }
 else {
-  $pan['melody']['badWord']['str'] = "-ไม่พบคำหยาบคาย";
+  $pan['melody']['badWord']['str'] = "/-ไม่พบคำหยาบคาย";
   $pan['melody']['badWord']['status'] = 0;
 }
 
 
-$strSlangWord = "";
+$strSlangWord = "/-พบคำสแลงคำว่า ";
 $check = 0;
 $check2 = 0;
 $countSlangWord = count($_SESSION['SlangWord']);
 for($i=0 ; $i<$countSlangWord ; $i++){
   if($_SESSION['SlangWord'][$i]['status'] == "false"){
-    $strSlangWord = ($strSlangWord)."/-".($_SESSION['SlangWord'][$i]['str']);
+    $strSlangWord = ($strSlangWord).($_SESSION['SlangWord'][$i]['str']);
     $check++;
   }
   else if($_SESSION['SlangWord'][$i]['status'] == "veryFalse"){
-    $strSlangWord = ($strSlangWord)."/-".($_SESSION['SlangWord'][$i]['str']);
     $check2++;
   }
 }
@@ -269,11 +267,11 @@ if($check != 0 && $check2 == 0){
   $pan['melody']['slangWord']['status'] = $_SESSION['SlangWord']['count'];
 }
 else if($check == 0 && $check2 != 0){
-  $pan['melody']['slangWord']['str'] = $strSlangWord;
+  $pan['melody']['slangWord']['str'] = "/-ไม่พบคำสแลง";
   $pan['melody']['slangWord']['status'] = -1;
 }
 else {
-  $pan['melody']['slangWord']['str'] = "-ไม่พบคำสแลง";
+  $pan['melody']['slangWord']['str'] = "/-ไม่พบคำสแลง";
   $pan['melody']['slangWord']['status'] = 0;
 }
 

@@ -99,7 +99,7 @@ function process($arrKlonWord,$arrKlonPayang,$arrKlonPhonemes,$arrKlonTone,$arrW
 	//echo "<br><br>";
 	//$connDBWord = cnDBWord();
 	$conn = cnDB();
-	$_SESSION['SlangWord'] = slangWord($arrKlonWord,$conn);
+	$_SESSION['SlangWord'] = slangWord($arrKlonWord,$conn,$arrWak);
 	//$pan[8] = $arrSlangWord;
 	/*$strSlangWord = "ผลการตรวจคำสแลง<br>";
 	for($i=0 ; $i<count($arrSlangWord) ; $i++){
@@ -108,7 +108,7 @@ function process($arrKlonWord,$arrKlonPayang,$arrKlonPhonemes,$arrKlonTone,$arrW
 	echo $strSlangWord;*/
 	//print_r ($_SESSION['SlangWord']);
 	//echo "<br><br>";
-	$_SESSION['BadWord'] = badWord($arrKlonWord, $conn);
+	$_SESSION['BadWord'] = badWord($arrKlonWord, $conn,$arrWak);
 	//$pan[9] = $arrBadWord;
 	/*$strBadWord = "ผลการตรวจคำหยาบคาย<br>";
 	for($i=0 ; $i<count($arrBadWord) ; $i++){

@@ -8,12 +8,13 @@ require_once ("CNDB.php");
 /// ฉัน จะ ไป จ่าย ตะ หลาด ได้ ที่ ไหน บ้าง
 
 // ตรวจคำสแลง
-function slangWord($arrKlonWord,$conn){
+function slangWord($arrKlonWord,$conn,$arrWak){
   $arrSlang = array();
   $numSlang = 0;
   $count = 0;
-  $check = 0;
-  for($i=0 ; $i<count($arrKlonWord) ; $i++){
+  $check = [];
+  $check2 = [];
+  for($i=0 ; $i<count($arrWak) ; $i++){
     //echo "<br>".(count($arrKlonWord[$i]));
     if(count($arrKlonWord[$i])>0){
       for($j=0 ; $j<count($arrKlonWord[$i]) ; $j++){
@@ -33,45 +34,58 @@ function slangWord($arrKlonWord,$conn){
             $numSlang++;
           }
           $count++;
-          $check = 1;
+          $check[$i] = 1;
+          $check2[$i] = 0;
         }
         else {
-          $check = 1;
+          $check[$i] = 1;
+          $check2[$i] = 0;
         }
       }
     }
     else {
-      $check = 0;
+      $check2[$i] = 1;
+      $check[$i] = 0;
     }
   }
   //print_r ($arrSlang);
-  //echo $count."<br>";
+  //echo "<br>";
+  //echo count($arrSlang)."<br>";
   // แสดงค่าคำสแลง
-  if(count($arrSlang)>0 && $check != 0){
-    for($i=0 ; $i<count($arrSlang) ; $i++){
-      $arrSlangWord[$i][str] = "พบคำสแลงคำว่า ".($arrSlang[$i]);
-      $arrSlangWord[$i][status] = "false";
+  //echo count($arrWak);
+  for($i=0 ; $i<(count($arrWak)-1) ; $i++){
+    if($check[$i] == 1 && $check2[$i] != 1){
+      if(count($arrSlang[$i])>0){
+        $str = "";
+        for($j=0 ; $j<count($arrSlang) ; $j++){
+          $str = ($str)." ".($arrSlang[$j]);
+        }
+        $arrSlangWord[$i]['str'] = $str;
+        $arrSlangWord[$i]['status'] = "false";
+      }
+      else {
+        $arrSlangWord[$i]['str'] = "ไม่พบคำสแลง";
+        $arrSlangWord[$i]['status'] = "true";
+      }
+    }
+    else if($check[$i] == 0 && $check2[$i] == 1){
+        $arrSlangWord[$i]['str'] = "ไม่พบคำสแลง";
+        $arrSlangWord[$i]['status'] = "veryFalse";
     }
   }
-  else if($check != 0){
-    $arrSlangWord[0][str] = "ไม่พบคำสแลง";
-    $arrSlangWord[0][status] = "true";
-  }
-  else if($check == 0){
-    $arrSlangWord[0][str] = "ไม่พบคำสแลง";
-    $arrSlangWord[0][status] = "veryFalse";
-  }
+  
   $arrSlangWord[count] = $count;
   return ($arrSlangWord);
 }
 
 // ตรวจคำหยาบคาย
-function badWord($arrKlonWord, $conn){
+function badWord($arrKlonWord, $conn,$arrWak){
   $arrBad = array();
   $numBad = 0;
   $count = 0;
-  $check = 0;
-  for($i=0 ; $i<count($arrKlonWord) ; $i++){
+  $check = [];
+  $check2 = [];
+  for($i=0 ; $i<count($arrWak) ; $i++){
     if(count($arrKlonWord[$i])>0){
       for($j=0 ; $j<count($arrKlonWord[$i]) ; $j++){
         $word = $arrKlonWord[$i][$j];
@@ -88,36 +102,43 @@ function badWord($arrKlonWord, $conn){
             $arrBad[$numBad] = $word;
             $numBad++;
           }
-          $check = 1;
-          $count++;
+          $check[$i] = 1;
+          $check2[$i] = 0;
         }
         else {
-          $check = 1;
+          $check[$i] = 1;
+          $check2[$i] = 0;
         }
       }
     }
     else {
-      $check = 0;
+      $check2[$i] = 1;
+      $check[$i] = 0;
     }
   }
 //echo $count;
   //print_r ($arrBad);
   //echo "<br>bad<br>";
     // แสดงค่าคำหยาบคาย
-    if(count($arrBad)>0 && $check != 0){
-      for($i=0 ; $i<count($arrBad) ; $i++){
-        $arrBadWord[$i][str] = "พบคำหยาบคายคำว่า ".($arrBad[$i]);
+  for($i=0 ; $i<(count($arrWak)-1) ; $i++){
+    if($check[$i] == 1 && $check2[$i] != 1){
+      if(count($arrBad)>0){
+        for($j=0 ; $j<count($arrBad) ; $j++){
+          $str = ($str)."/-".($arrBad[$j]);
+        }
+        $arrBadWord[$i][str] = $str;
         $arrBadWord[$i][status] = "false";
       }
+      else {
+        $arrBadWord[$i][str] = "ไม่พบคำสแลง";
+        $arrBadWord[$i][status] = "true";
+      }
     }
-    else if($check != 0){
-      $arrBadWord[0][str] = "ไม่พบคำหยาบคาย";
-      $arrBadWord[0][status] = "true";
+    else if($check[$i] == 0 && $check2[$i] == 1){
+        $arrBadWord[$i][str] = "ไม่พบคำสแลง";
+        $arrBadWord[$i][status] = "veryFalse";
     }
-    else if($check == 0){
-      $arrBadWord[0][str] = "ไม่พบคำหยาบคาย";
-      $arrBadWord[0][status] = "veryFalse";
-    }
+  }
     $arrBadWord[count] = $count;
     return ($arrBadWord);
   }
