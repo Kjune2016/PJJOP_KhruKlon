@@ -12,39 +12,54 @@ function slangWord($arrKlonWord,$conn){
   $arrSlang = array();
   $numSlang = 0;
   $count = 0;
+  $check = 0;
   for($i=0 ; $i<count($arrKlonWord) ; $i++){
-    for($j=0 ; $j<count($arrKlonWord[$i]) ; $j++){
-      $word = $arrKlonWord[$i][$j];
-      // ตรวจคำสแลง
-      $querySlang = "SELECT word FROM slang_word WHERE word = '$word'";
-      $resultSlang = mysqli_query($conn, $querySlang);
-      if (mysqli_num_rows($resultSlang) > 0) {
-        if(in_array($word,$arrSlang)){
-          $numSlang = $numSlang;
+    //echo "<br>".(count($arrKlonWord[$i]));
+    if(count($arrKlonWord[$i])>0){
+      for($j=0 ; $j<count($arrKlonWord[$i]) ; $j++){
+        $word = $arrKlonWord[$i][$j];
+        // ตรวจคำสแลง
+        $querySlang = "SELECT word FROM slang_word WHERE word = '$word'";
+        $resultSlang = mysqli_query($conn, $querySlang);
+        if (mysqli_num_rows($resultSlang) > 0) {
+          if(in_array($word,$arrSlang)){
+            $numSlang = $numSlang;
+          }
+          //$arrSlang[$numSlang] = $word;
+          //$numSlang++;
+        //}
+          else {
+            $arrSlang[$numSlang] = $word;
+            $numSlang++;
+          }
+          $count++;
+          $check = 1;
         }
-        //$arrSlang[$numSlang] = $word;
-        //$numSlang++;
-      //}
         else {
-          $arrSlang[$numSlang] = $word;
-          $numSlang++;
+          $check = 1;
         }
-        $count++;
       }
+    }
+    else {
+      $check = 0;
     }
   }
   //print_r ($arrSlang);
   //echo $count."<br>";
   // แสดงค่าคำสแลง
-  if(count($arrSlang)>0){
+  if(count($arrSlang)>0 && $check != 0){
     for($i=0 ; $i<count($arrSlang) ; $i++){
       $arrSlangWord[$i][str] = "พบคำสแลงคำว่า ".($arrSlang[$i]);
       $arrSlangWord[$i][status] = "false";
     }
   }
-  else{
+  else if($check != 0){
     $arrSlangWord[0][str] = "ไม่พบคำสแลง";
     $arrSlangWord[0][status] = "true";
+  }
+  else if($check == 0){
+    $arrSlangWord[0][str] = "ไม่พบคำสแลง";
+    $arrSlangWord[0][status] = "veryFalse";
   }
   $arrSlangWord[count] = $count;
   return ($arrSlangWord);
@@ -55,39 +70,53 @@ function badWord($arrKlonWord, $conn){
   $arrBad = array();
   $numBad = 0;
   $count = 0;
+  $check = 0;
   for($i=0 ; $i<count($arrKlonWord) ; $i++){
-    for($j=0 ; $j<count($arrKlonWord[$i]) ; $j++){
-      $word = $arrKlonWord[$i][$j];
-      $queryBad = "SELECT word FROM bad_word WHERE word = '$word'";
-      $resultBad = mysqli_query($conn, $queryBad);
-      if (mysqli_num_rows($resultBad) > 0) {
-        if(in_array($word,$arrBad)){
-          $numBad = $numBad;
+    if(count($arrKlonWord[$i])>0){
+      for($j=0 ; $j<count($arrKlonWord[$i]) ; $j++){
+        $word = $arrKlonWord[$i][$j];
+        $queryBad = "SELECT word FROM bad_word WHERE word = '$word'";
+        $resultBad = mysqli_query($conn, $queryBad);
+        if (mysqli_num_rows($resultBad) > 0) {
+          if(in_array($word,$arrBad)){
+            $numBad = $numBad;
+          }
+          //$arrBad[$numBad] = $word;
+          //$numBad++;
+        //}
+          else {
+            $arrBad[$numBad] = $word;
+            $numBad++;
+          }
+          $check = 1;
+          $count++;
         }
-        //$arrBad[$numBad] = $word;
-        //$numBad++;
-      //}
         else {
-          $arrBad[$numBad] = $word;
-          $numBad++;
+          $check = 1;
         }
-        $count++;
       }
     }
+    else {
+      $check = 0;
+    }
   }
-
+//echo $count;
   //print_r ($arrBad);
-  //echo "<br>";
+  //echo "<br>bad<br>";
     // แสดงค่าคำหยาบคาย
-    if(count($arrBad)>0){
+    if(count($arrBad)>0 && $check != 0){
       for($i=0 ; $i<count($arrBad) ; $i++){
         $arrBadWord[$i][str] = "พบคำหยาบคายคำว่า ".($arrBad[$i]);
         $arrBadWord[$i][status] = "false";
       }
     }
-    else{
+    else if($check != 0){
       $arrBadWord[0][str] = "ไม่พบคำหยาบคาย";
       $arrBadWord[0][status] = "true";
+    }
+    else if($check == 0){
+      $arrBadWord[0][str] = "ไม่พบคำหยาบคาย";
+      $arrBadWord[0][status] = "veryFalse";
     }
     $arrBadWord[count] = $count;
     return ($arrBadWord);
