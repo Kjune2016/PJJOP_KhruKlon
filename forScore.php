@@ -155,6 +155,7 @@ else {
 
 
 $strChing = "";
+$strChing2 = "";
 $check = 0;
 $countChing = count($_SESSION['ChingRhyme']);
 for($i=0 ; $i<$countChing ; $i++){
@@ -162,16 +163,26 @@ for($i=0 ; $i<$countChing ; $i++){
     $strChing = ($stChing)."/-".($_SESSION['ChingRhyme'][$i]['str']);
     $check++;
   }
+  else if($_SESSION['ChingRhyme'][$i]['status'] == "veryFalse"){
+    $strChing2 = "-ไม่พบชิงสัมผัส";
+  }
 }
-if($check != 0){
-  $pan['melody']['ching']['str'] = $strChing;
-  $pan['melody']['ching']['status'] = "false";
+if($check != 0 && $strChing2 == ""){
+  $pan['prosody']['ching']['str'] = $strChing;
+  $pan['prosody']['ching']['status'] = "false";
+}
+else if($check == 0 && $strChing2 != ""){
+  $pan['prosody']['ching']['str'] = $strChing2;
+  $pan['prosody']['ching']['status'] = "false";
+}
+else if($check != 0 && $strChing2 != ""){
+  $pan['prosody']['ching']['str'] = $strChing."-และมีบางวรรคที่มีจำนวนพยางค์ไม่ถูกต้อง";
+  $pan['prosody']['ching']['status'] = "false";
 }
 else {
-  $pan['melody']['ching']['str'] = "/-ไม่พบชิงสัมผัส";
-  $pan['melody']['ching']['status'] = "true";
+  $pan['prosody']['ching']['str'] = "/-ไม่พบชิงสัมผัส";
+  $pan['prosody']['ching']['status'] = "true";
 }
-
 
 $strInternal = "";
 $check = 0;
@@ -274,7 +285,7 @@ else {
   $pan['melody']['slangWord']['str'] = "/-ไม่พบคำสแลง";
   $pan['melody']['slangWord']['status'] = 0;
 }
-
+//echo "<pre>";
 //print_r ($pan);
 //echo "<br><br>";
 $panjson = json_encode($pan);

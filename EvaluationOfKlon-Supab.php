@@ -534,7 +534,7 @@ function checkExRhyme($arrWak,$arrKlonPhonemes,$rhyme){
     }
     // สัมผัสระหว่างบท   ปล. ยังไม่เคยสมมติตัวอย่าง
   }
-  if((count($arrWak)-1)>4 || (count($arrWak)-1)<8){
+  if((count($arrWak)-1)>=4 || (count($arrWak)-1)<8){
     if($rhyme[3][3]==$rhyme[5][3] && $rhyme[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
       $check = 1;
       $arrExternalRhyme['connect']['str'] = "มีสัมผัสนอกระหว่างบท";
@@ -545,6 +545,10 @@ function checkExRhyme($arrWak,$arrKlonPhonemes,$rhyme){
       $arrExternalRhyme['connect']['str'] = "ไม่มีสัมผัสนอกระหว่างบท";
       $arrExternalRhyme['connect']['status'] = "false";
     }
+  }
+  else {
+    $arrExternalRhyme['connect']['str'] = "ไม่มีสัมผัสนอกระหว่างบท";
+    $arrExternalRhyme['connect']['status'] = "true";
   }
   //print_r ($indexOfRhyme);
   return ($arrExternalRhyme);
@@ -840,7 +844,7 @@ function checkDupRhyme($arrWak,$arrKlonPhonemesAndTone,$arrKlonPayang){
       }
     }
   }
-  //print_r ($PY2);
+  //print_r ($PY);
   //echo "<br>222222<br>";
   //print_r ($PY2);
   //print_r($tone);
@@ -851,9 +855,9 @@ function checkDupRhyme($arrWak,$arrKlonPhonemesAndTone,$arrKlonPayang){
   //for($i=0 ; $i<count($arrWak)-1 ; $i++){
   //$totalPY = count($arrKlonPayang[$i])-1;
   //echo $totalPY;
-  if((count($arrWak)-1)<=4){
-    if(($PY[0][0]!="จำนวนพยางค์ไม่ถูกต้อง") && ($PY[1][0]!="จำนวนพยางค์ไม่ถูกต้อง") && ($PY[2][0]!="จำนวนพยางค์ไม่ถูกต้อง")
-      && ($PY[3][0]!="จำนวนพยางค์ไม่ถูกต้อง")){
+  //echo count($PY)." ";
+  if(count($PY)<=4){
+    if($PY[0][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
       if(($PY[0][0]==$PY[1][0]) || ($PY[0][0]==$PY[1][1])){
         $arrDupRhyme[0]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[0][0]);
         $arrDupRhyme[0]['status'] = "false";
@@ -862,58 +866,13 @@ function checkDupRhyme($arrWak,$arrKlonPhonemesAndTone,$arrKlonPayang){
         $arrDupRhyme[0]['str'] = "ไม่มีสัมผัสซ้ำ";
         $arrDupRhyme[0]['status'] = "true";
       }
-      if(($PY[1][0]==$PY[1][1])){
-        $arrDupRhyme[1]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[1][0]);
-        $arrDupRhyme[1]['status'] = "false";
-      }
-      else if($PY[1][0]!=$PY[1][1]){
-        $arrDupRhyme[1]['str'] = "ไม่มีสัมผัสซ้ำ";
-        $arrDupRhyme[1]['status'] = "true";
-      }
-      if(($PY[1][2]==$PY[2][0]) || ($PY[1][2]==$PY[3][0]) || ($PY[1][2]==$PY[3][1])){
-        $arrDupRhyme[2]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[1][2]);
-        $arrDupRhyme[2]['status'] = "false";
-      }
-      else if(($PY[1][2]!=$PY[2][0]) && ($PY[1][2]!=$PY[3][0]) && ($PY[1][2]!=$PY[3][1])){
-        $arrDupRhyme[2]['str'] = "ไม่มีสัมผัสซ้ำ";
-        $arrDupRhyme[2]['status'] = "true";
-      }
-      if(($PY[2][0]==$PY[3][0]) || ($PY[2][0]==$PY[3][1])){
-        $arrDupRhyme[3]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[2][0]);
-        $arrDupRhyme[3]['status'] = "false";
-      }
-      else if(($PY[2][0]!=$PY[3][0]) && ($PY[2][0]!=$PY[3][1])){
-        $arrDupRhyme[3]['str'] = "ไม่มีสัมผัสซ้ำ";
-        $arrDupRhyme[3]['status'] = "truee";
-      }
-      if(($PY[3][0]==$PY[3][1])){
-        $arrDupRhyme[4]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[3][0]);
-        $arrDupRhyme[4]['status'] = "false";
-      }
-      else if($PY[3][0]!=$PY[3][1]){
-        $arrDupRhyme[4]['str'] = "ไม่มีสัมผัสซ้ำ";
-        $arrDupRhyme[4]['status'] = "true";
-      }
     }
-    else if(($PY[0][0]=="จำนวนพยางค์ไม่ถูกต้อง") || ($PY[1][0]=="จำนวนพยางค์ไม่ถูกต้อง") || ($PY[2][0]=="จำนวนพยางค์ไม่ถูกต้อง")
-          || ($PY[3][0]=="จำนวนพยางค์ไม่ถูกต้อง")){
+    else if($PY[0][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
       $arrDupRhyme[0]['str'] = "ไม่มีสัมผัสซ้ำ";
       $arrDupRhyme[0]['status'] = "veryFalse";
     }
-  }
-  else if((count($arrWak)-1)>4){
-    if(($PY[0][0]!="จำนวนพยางค์ไม่ถูกต้อง") && ($PY[1][0]!="จำนวนพยางค์ไม่ถูกต้อง") && ($PY[2][0]!="จำนวนพยางค์ไม่ถูกต้อง")
-          && ($PY[3][0]!="จำนวนพยางค์ไม่ถูกต้อง")&& ($PY[4][0]!="จำนวนพยางค์ไม่ถูกต้อง") && ($PY[5][0]!="จำนวนพยางค์ไม่ถูกต้อง")
-            && ($PY[6][0]!="จำนวนพยางค์ไม่ถูกต้อง") && ($PY[7][0]!="จำนวนพยางค์ไม่ถูกต้อง")){
-      if(($PY[0][0]==$PY[1][0]) || ($PY[0][0]==$PY[1][1])){
-        $arrDupRhyme[0]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[0][0]);
-        $arrDupRhyme[0]['status'] = "false";
-      }
-      else if(($PY[0][0]!=$PY[1][0]) && ($PY[0][0]!=$PY[1][1])){
-        $arrDupRhyme[0]['str'] = "ไม่มีสัมผัสซ้ำ";
-        $arrDupRhyme[0]['status'] = "true";
-      }
-      if(($PY[1][0]==$PY[1][1])){
+    if($PY[1][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+      if($PY[1][0]==$PY[1][1]){
         $arrDupRhyme[1]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[1][0]);
         $arrDupRhyme[1]['status'] = "false";
       }
@@ -921,6 +880,12 @@ function checkDupRhyme($arrWak,$arrKlonPhonemesAndTone,$arrKlonPayang){
         $arrDupRhyme[1]['str'] = "ไม่มีสัมผัสซ้ำ";
         $arrDupRhyme[1]['status'] = "true";
       }
+    }
+    else if($PY[1][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $arrDupRhyme[1]['str'] = "ไม่มีสัมผัสซ้ำ";
+      $arrDupRhyme[1]['status'] = "veryFalse";
+    }
+    if($PY[1][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
       if(($PY[1][2]==$PY[2][0]) || ($PY[1][2]==$PY[3][0]) || ($PY[1][2]==$PY[3][1])){
         $arrDupRhyme[2]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[1][2]);
         $arrDupRhyme[2]['status'] = "false";
@@ -929,6 +894,12 @@ function checkDupRhyme($arrWak,$arrKlonPhonemesAndTone,$arrKlonPayang){
         $arrDupRhyme[2]['str'] = "ไม่มีสัมผัสซ้ำ";
         $arrDupRhyme[2]['status'] = "true";
       }
+    }
+    else if($PY[1][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $arrDupRhyme[2]['str'] = "ไม่มีสัมผัสซ้ำ";
+      $arrDupRhyme[2]['status'] = "veryFalse";
+    }
+    if($PY[2][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
       if(($PY[2][0]==$PY[3][0]) || ($PY[2][0]==$PY[3][1])){
         $arrDupRhyme[3]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[2][0]);
         $arrDupRhyme[3]['status'] = "false";
@@ -937,6 +908,12 @@ function checkDupRhyme($arrWak,$arrKlonPhonemesAndTone,$arrKlonPayang){
         $arrDupRhyme[3]['str'] = "ไม่มีสัมผัสซ้ำ";
         $arrDupRhyme[3]['status'] = "truee";
       }
+    }
+    else if($PY[2][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $arrDupRhyme[3]['str'] = "ไม่มีสัมผัสซ้ำ";
+      $arrDupRhyme[3]['status'] = "veryFalse";
+    }
+    if($PY[3][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
       if(($PY[3][0]==$PY[3][1])){
         $arrDupRhyme[4]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[3][0]);
         $arrDupRhyme[4]['status'] = "false";
@@ -945,6 +922,84 @@ function checkDupRhyme($arrWak,$arrKlonPhonemesAndTone,$arrKlonPayang){
         $arrDupRhyme[4]['str'] = "ไม่มีสัมผัสซ้ำ";
         $arrDupRhyme[4]['status'] = "true";
       }
+    }
+    else if($PY[3][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $arrDupRhyme[4]['str'] = "ไม่มีสัมผัสซ้ำ";
+      $arrDupRhyme[4]['status'] = "veryFalse";
+    }
+  }
+  else if(count($PY)>4){
+    if($PY[0][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+      if(($PY[0][0]==$PY[1][0]) || ($PY[0][0]==$PY[1][1])){
+        $arrDupRhyme[0]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[0][0]);
+        $arrDupRhyme[0]['status'] = "false";
+      }
+      else if(($PY[0][0]!=$PY[1][0]) && ($PY[0][0]!=$PY[1][1])){
+        $arrDupRhyme[0]['str'] = "ไม่มีสัมผัสซ้ำ";
+        $arrDupRhyme[0]['status'] = "true";
+      }
+    }
+    else if($PY[0][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $arrDupRhyme[0]['str'] = "ไม่มีสัมผัสซ้ำ";
+      $arrDupRhyme[0]['status'] = "veryFalse";
+    }
+    if($PY[1][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+      if($PY[1][0]==$PY[1][1]){
+        $arrDupRhyme[1]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[1][0]);
+        $arrDupRhyme[1]['status'] = "false";
+      }
+      else if($PY[1][0]!=$PY[1][1]){
+        $arrDupRhyme[1]['str'] = "ไม่มีสัมผัสซ้ำ";
+        $arrDupRhyme[1]['status'] = "true";
+      }
+    }
+    else if($PY[1][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $arrDupRhyme[1]['str'] = "ไม่มีสัมผัสซ้ำ";
+      $arrDupRhyme[1]['status'] = "veryFalse";
+    }
+    if($PY[1][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+      if(($PY[1][2]==$PY[2][0]) || ($PY[1][2]==$PY[3][0]) || ($PY[1][2]==$PY[3][1])){
+        $arrDupRhyme[2]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[1][2]);
+        $arrDupRhyme[2]['status'] = "false";
+      }
+      else if(($PY[1][2]!=$PY[2][0]) && ($PY[1][2]!=$PY[3][0]) && ($PY[1][2]!=$PY[3][1])){
+        $arrDupRhyme[2]['str'] = "ไม่มีสัมผัสซ้ำ";
+        $arrDupRhyme[2]['status'] = "true";
+      }
+    }
+    else if($PY[1][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $arrDupRhyme[2]['str'] = "ไม่มีสัมผัสซ้ำ";
+      $arrDupRhyme[2]['status'] = "veryFalse";
+    }
+    if($PY[2][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+      if(($PY[2][0]==$PY[3][0]) || ($PY[2][0]==$PY[3][1])){
+        $arrDupRhyme[3]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[2][0]);
+        $arrDupRhyme[3]['status'] = "false";
+      }
+      else if(($PY[2][0]!=$PY[3][0]) && ($PY[2][0]!=$PY[3][1])){
+        $arrDupRhyme[3]['str'] = "ไม่มีสัมผัสซ้ำ";
+        $arrDupRhyme[3]['status'] = "true";
+      }
+    }
+    else if($PY[2][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $arrDupRhyme[3]['str'] = "ไม่มีสัมผัสซ้ำ";
+      $arrDupRhyme[3]['status'] = "veryFalse";
+    }
+    if($PY[3][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+      if(($PY[3][0]==$PY[3][1])){
+        $arrDupRhyme[4]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[3][0]);
+        $arrDupRhyme[4]['status'] = "false";
+      }
+      else if($PY[3][0]!=$PY[3][1]){
+        $arrDupRhyme[4]['str'] = "ไม่มีสัมผัสซ้ำ";
+        $arrDupRhyme[4]['status'] = "true";
+      }
+    }
+    else if($PY[3][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $arrDupRhyme[4]['str'] = "ไม่มีสัมผัสซ้ำ";
+      $arrDupRhyme[4]['status'] = "veryFalse";
+    }
+    if($PY[3][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
       if(($PY[3][2]==$PY[5][2]) || ($PY[3][2]==$PY[6][0]) || ($PY[3][2]==$PY[7][0]) || ($PY[3][2]==$PY[7][1])){
         $arrDupRhyme[5]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[3][2]);
         $arrDupRhyme[5]['status'] = "false";
@@ -953,6 +1008,12 @@ function checkDupRhyme($arrWak,$arrKlonPhonemesAndTone,$arrKlonPayang){
         $arrDupRhyme[5]['str'] = "ไม่มีสัมผัสซ้ำ";
         $arrDupRhyme[5]['status'] = "true";
       }
+    }
+    else if($PY[3][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $arrDupRhyme[5]['str'] = "ไม่มีสัมผัสซ้ำ";
+      $arrDupRhyme[5]['status'] = "veryFalse";
+    }
+    if($PY[4][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
       if(($PY[4][0]==$PY[5][0]) || ($PY[4][0]==$PY[5][1])){
         $arrDupRhyme[6]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[4][0]);
         $arrDupRhyme[6]['status'] = "false";
@@ -961,14 +1022,26 @@ function checkDupRhyme($arrWak,$arrKlonPhonemesAndTone,$arrKlonPayang){
         $arrDupRhyme[6]['str'] = "ไม่มีสัมผัสซ้ำ";
         $arrDupRhyme[6]['status'] = "true";
       }
-      if(($PY[5][0]==$PY[5][1])){
+    }
+    else if($PY[4][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $arrDupRhyme[6]['str'] = "ไม่มีสัมผัสซ้ำ";
+      $arrDupRhyme[6]['status'] = "veryFalse";
+    }
+    if($PY[5][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+      if($PY[5][0]==$PY[5][1]){
         $arrDupRhyme[7]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[5][0]);
         $arrDupRhyme[7]['status'] = "false";
       }
-      else if(($PY[5][0]!=$PY[5][1])){
+      else if($PY[5][0]!=$PY[5][1]){
         $arrDupRhyme[7]['str'] = "ไม่มีสัมผัสซ้ำ";
         $arrDupRhyme[7]['status'] = "true";
       }
+    }
+    else if($PY[5][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $arrDupRhyme[7]['str'] = "ไม่มีสัมผัสซ้ำ";
+      $arrDupRhyme[7]['status'] = "veryFalse";
+    }
+    if($PY[5][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
       if(($PY[5][2]==$PY[6][0]) || ($PY[5][2]==$PY[7][0]) || ($PY[5][2]==$PY[7][1])){
         $arrDupRhyme[8]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[5][2]);
         $arrDupRhyme[8]['status'] = "false";
@@ -977,6 +1050,12 @@ function checkDupRhyme($arrWak,$arrKlonPhonemesAndTone,$arrKlonPayang){
         $arrDupRhyme[8]['str'] = "ไม่มีสัมผัสซ้ำ";
         $arrDupRhyme[8]['status'] = "true";
       }
+    }
+    else if($PY[5][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $arrDupRhyme[8]['str'] = "ไม่มีสัมผัสซ้ำ";
+      $arrDupRhyme[8]['status'] = "veryFalse";
+    }
+    if($PY[6][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
       if(($PY[6][0]==$PY[7][0]) || ($PY[6][0]==$PY[7][1])){
         $arrDupRhyme[9]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[6][0]);
         $arrDupRhyme[9]['status'] = "false";
@@ -985,6 +1064,12 @@ function checkDupRhyme($arrWak,$arrKlonPhonemesAndTone,$arrKlonPayang){
         $arrDupRhyme[9]['str'] = "ไม่มีสัมผัสซ้ำ";
         $arrDupRhyme[9]['status'] = "true";
       }
+    }
+    else if($PY[6][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $arrDupRhyme[9]['str'] = "ไม่มีสัมผัสซ้ำ";
+      $arrDupRhyme[9]['status'] = "veryFalse";
+    }
+    if($PY[7][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
       if(($PY[7][0]==$PY[7][1])){
         $arrDupRhyme[10]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[7][0]);
         $arrDupRhyme[10]['status'] = "false";
@@ -994,11 +1079,9 @@ function checkDupRhyme($arrWak,$arrKlonPhonemesAndTone,$arrKlonPayang){
         $arrDupRhyme[10]['status'] = "true";
       }
     }
-    else if(($PY[0][0]=="จำนวนพยางค์ไม่ถูกต้อง") || ($PY[1][0]=="จำนวนพยางค์ไม่ถูกต้อง") || ($PY[2][0]=="จำนวนพยางค์ไม่ถูกต้อง")
-          || ($PY[3][0]=="จำนวนพยางค์ไม่ถูกต้อง") || ($PY[4][0]=="จำนวนพยางค์ไม่ถูกต้อง") || ($PY[5][0]=="จำนวนพยางค์ไม่ถูกต้อง")
-          || ($PY[6][0]=="จำนวนพยางค์ไม่ถูกต้อง") || ($PY[7][0]=="จำนวนพยางค์ไม่ถูกต้อง")){
-      $arrDupRhyme[0]['str'] = "ไม่มีสัมผัสซ้ำ";
-      $arrDupRhyme[0]['status'] = "veryFalse";
+    else if($PY[7][0]=="จำนวนพยางค์ไม่ถูกต้อง"){
+      $arrDupRhyme[10]['str'] = "ไม่มีสัมผัสซ้ำ";
+      $arrDupRhyme[10]['status'] = "veryFalse";
     }
   }
   
@@ -1015,7 +1098,7 @@ function checkDupRhyme($arrWak,$arrKlonPhonemesAndTone,$arrKlonPayang){
 
 // 1.6 ชิงสัมผัส  พังค่ะ
 function checkChingRhyme($arrWak,$arrKlonPhonemes,$rhyme){
-  echo "<pre>";
+  //echo "<pre>";
   //print_r($rhyme);
   //echo "<br>ข้างบน rhyme<br>";
   //echo "<br>".(count($arrWak)-1)."<br>";
@@ -1592,8 +1675,8 @@ function checkChingRhyme($arrWak,$arrKlonPhonemes,$rhyme){
   }
   //print_r($indexOfRhyme);
   //echo "<br>1<br>";
-  print_r($checkChing);
-  echo "<br>===========<br>";
+  //print_r($checkChing);
+  //echo "<br>===========<br>";
   //print_r($rhymeChing);
   //echo "<br>======".($rhymeChing[4][0]);
   //echo "<br>3<br>";
