@@ -949,7 +949,7 @@ function checkDupRhyme($arrWak,$arrKlonPhonemesAndTone,$arrKlonPayang){
         $arrDupRhyme[5]['str'] = "มีสัมผัสซ้ำที่คำว่า ".($PY2[3][2]);
         $arrDupRhyme[5]['status'] = "false";
       }
-      else if(($PY[3][2]!=$PY[5][2]) && ($PY[3][2]!=$PY[6][2]) && ($PY[3][2]!=$PY[7][0]) && ($PY[3][2]!=$PY[7][1])){
+      else if(($PY[3][2]!=$PY[5][2]) && ($PY[3][2]!=$PY[6][0]) && ($PY[3][2]!=$PY[7][0]) && ($PY[3][2]!=$PY[7][1])){
         $arrDupRhyme[5]['str'] = "ไม่มีสัมผัสซ้ำ";
         $arrDupRhyme[5]['status'] = "true";
       }
@@ -1015,14 +1015,15 @@ function checkDupRhyme($arrWak,$arrKlonPhonemesAndTone,$arrKlonPayang){
 
 // 1.6 ชิงสัมผัส  พังค่ะ
 function checkChingRhyme($arrWak,$arrKlonPhonemes,$rhyme){
+  echo "<pre>";
   //print_r($rhyme);
-  //echo "<br><br>";
+  //echo "<br>ข้างบน rhyme<br>";
   //echo "<br>".(count($arrWak)-1)."<br>";
   for($i=0 ; $i<count($arrWak)-1 ; $i++){
     $totalPN = count($arrKlonPhonemes[$i])-1;
     //echo $totalPN;
     $check = 0;
-    for($j=1 ; $j<=count($rhyme[$i]) ; $j++){
+    //for($j=1 ; $j<=count($rhyme[$i]) ; $j++){
       // บทที่ 1
       if(($i==0 || $i<4) && ($rhyme[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง")){
         // สัมผัสระหว่างวรรคที่ 1 กับ วรรคที่ 2
@@ -1109,7 +1110,7 @@ function checkChingRhyme($arrWak,$arrKlonPhonemes,$rhyme){
          }
        }
        // สัมผัสระหว่างวรรคที่ 2 กับ วรรคที่ 3
-       else if($i==5){
+       else if($i==6){
          if($totalPN==8 && $rhyme[$i][1]==$rhyme[6][2]){
            $indexOfRhyme[0][3] = "payangAt5";
          }
@@ -1139,205 +1140,249 @@ function checkChingRhyme($arrWak,$arrKlonPhonemes,$rhyme){
      else if(($rhyme[$i][0]=="จำนวนพยางค์ไม่ถูกต้อง")){
        $indexOfRhyme[$i][0] = "ไม่มีสัมผัสระหว่างวรรค";
      }
-    }
+    //}
   }
   //print_r($indexOfRhyme);
+  //echo "<br><br>";
   $indexChing = [];
   //echo count($arrWak)-1;
   for($i=0 ; $i<count($arrWak)-1 ; $i++){
     $totalPN = count($arrKlonPhonemes[$i])-1;
     //echo "///////////".$totalPN;
-    if($totalPN>=8){
-      if($i==1){
-        if($indexOfRhyme[0][0]=="payangAt5"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
+    if($totalPN>=7){
+      if($i==1 || $i==3 || $i==5 || $i==7){
+        if($i==1){
+          if($indexOfRhyme[0][0]=="payangAt5"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][4];
+          }
+          else if($indexOfRhyme[0][0]=="payangAt6"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][4];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][5];
+          }
+          else if($indexOfRhyme[0][0]=="payangAt2"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+          }
+          else if($indexOfRhyme[0][0]=="payangAt3from7"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+          }
+          else if($indexOfRhyme[0][0]=="payangAt4"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+          }
+          else if($indexOfRhyme[0][0]=="payangAt5from7"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][4];
+          }
+          else if($indexOfRhyme[0][0]=="payangAt3"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+          }
+          else if($indexOfRhyme[0][0] == "ไม่มีสัมผัสระหว่างวรรค"){
+            $indexChing[$i][0] = "ไม่มีสัมผัสระหว่างวรรค";
+          }
         }
-        else if($indexOfRhyme[0][0]=="payangAt6"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
-          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][5];
+        else if($i==3){
+          if($indexOfRhyme[0][1]=="payangAt5"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][4];
+          }
+          else if($indexOfRhyme[0][1]=="payangAt6"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][4];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][5];
+          }
+          else if($indexOfRhyme[0][1]=="payangAt2"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+          }
+          else if($indexOfRhyme[0][1]=="payangAt3from7"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+          }
+          else if($indexOfRhyme[0][1]=="payangAt4"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+          } 
+          else if($indexOfRhyme[0][1]=="payangAt5from7"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][4];
+          }
+          else if($indexOfRhyme[0][1]=="payangAt3"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+          }
+          else if($indexOfRhyme[0][1] == "ไม่มีสัมผัสระหว่างวรรค"){
+            $indexChing[$i][0] = "ไม่มีสัมผัสระหว่างวรรค";
+          }
         }
-        else if($indexOfRhyme[0][0]=="payangAt2"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
+        else if($i==5){
+          if($indexOfRhyme[0][2]=="payangAt5"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][4];
+          }
+          else if($indexOfRhyme[0][2]=="payangAt6"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][4];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][5];
+          }
+          else if($indexOfRhyme[0][2]=="payangAt2"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+          }
+          else if($indexOfRhyme[0][2]=="payangAt3from7"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+          }
+          else if($indexOfRhyme[0][2]=="payangAt4"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+          }
+          else if($indexOfRhyme[0][2]=="payangAt5from7"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][4];
+          }
+          else if($indexOfRhyme[0][2]=="payangAt3"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+          }
+          else if($indexOfRhyme[0][2] == "ไม่มีสัมผัสระหว่างวรรค"){
+            $indexChing[$i][0] = "ไม่มีสัมผัสระหว่างวรรค";
+          }
         }
-        else if($indexOfRhyme[0][0]=="payangAt3from7"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-        }
-        else if($indexOfRhyme[0][0]=="payangAt4"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
-        }
-        else if($indexOfRhyme[0][0]=="payangAt5from7"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
-          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][4];
-        }
-        else if($indexOfRhyme[0][0]=="payangAt3"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-        }
-        else if($indexOfRhyme[0][0] == "ไม่มีสัมผัสระหว่างวรรค"){
-          $indexChing[$i-1][0] = "ไม่มีสัมผัสระหว่างวรรค";
-        }
-      }
-      else if($i==3){
-        if($indexOfRhyme[0][1]=="payangAt5"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
-        }
-        else if($indexOfRhyme[0][1]=="payangAt6"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
-          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][5];
-        }
-        else if($indexOfRhyme[0][1]=="payangAt2"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-        }
-        else if($indexOfRhyme[0][1]=="payangAt3from7"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-        }
-        else if($indexOfRhyme[0][1]=="payangAt4"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
-        }
-        else if($indexOfRhyme[0][1]=="payangAt5from7"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
-          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][4];
-        }
-        else if($indexOfRhyme[0][1]=="payangAt3"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-        }
-        else if($indexOfRhyme[0][1] == "ไม่มีสัมผัสระหว่างวรรค"){
-          $indexChing[$i-1][0] = "ไม่มีสัมผัสระหว่างวรรค";
-        }
-      }
-      else if($i==5){
-        if($indexOfRhyme[0][2]=="payangAt5"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
-        }
-        else if($indexOfRhyme[0][2]=="payangAt6"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
-          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][5];
-        }
-        else if($indexOfRhyme[0][2]=="payangAt2"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-        }
-        else if($indexOfRhyme[0][2]=="payangAt3from7"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-        }
-        else if($indexOfRhyme[0][2]=="payangAt4"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
-        }
-        else if($indexOfRhyme[0][2]=="payangAt5from7"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
-          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][4];
-        }
-        else if($indexOfRhyme[0][2]=="payangAt3"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-        }
-        else if($indexOfRhyme[0][2] == "ไม่มีสัมผัสระหว่างวรรค"){
-          $indexChing[$i-1][0] = "ไม่มีสัมผัสระหว่างวรรค";
-        }
-      }
-      else if($i==7){
-        if($indexOfRhyme[0][3]=="payangAt5"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
-        }
-        else if($indexOfRhyme[0][3]=="payangAt6"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][4];
-          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][5];
-        }
-        else if($indexOfRhyme[0][3]=="payangAt2"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-        }
-        else if($indexOfRhyme[0][3]=="payangAt3from7"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-        }
-        else if($indexOfRhyme[0][3]=="payangAt4"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
-        }
-        else if($indexOfRhyme[0][3]=="payangAt5from7"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
-          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][4];
-        }
-        else if($indexOfRhyme[0][3]=="payangAt3"){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-        }
-        else if($indexOfRhyme[0][3] == "ไม่มีสัมผัสระหว่างวรรค"){
-          $indexChing[$i-1][0] = "ไม่มีสัมผัสระหว่างวรรค";
+        else if($i==7){
+          if($indexOfRhyme[0][3]=="payangAt5"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][4];
+          }
+          else if($indexOfRhyme[0][3]=="payangAt6"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][4];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][5];
+          }
+          else if($indexOfRhyme[0][3]=="payangAt2"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+          }
+          else if($indexOfRhyme[0][3]=="payangAt3from7"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+          }
+          else if($indexOfRhyme[0][3]=="payangAt4"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+          }
+          else if($indexOfRhyme[0][3]=="payangAt5from7"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][4];
+          }
+          else if($indexOfRhyme[0][3]=="payangAt3"){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+          }
+          else if($indexOfRhyme[0][3] == "ไม่มีสัมผัสระหว่างวรรค"){
+            $indexChing[$i][0] = "ไม่มีสัมผัสระหว่างวรรค";
+          }
         }
       }
       else if($i==2 || $i==6){
         //echo $totalPN;
-        if($totalPN==8){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
-          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][4];
-          $indexChing[$i-1][4] = $arrKlonPhonemes[$i][5];
-          $indexChing[$i-1][5] = $arrKlonPhonemes[$i][6];
-          $indexChing[$i-1][6] = $arrKlonPhonemes[$i][7];
+        if($i==2){
+          if($totalPN==8){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][4];
+            $indexChing[$i][4] = $arrKlonPhonemes[$i][5];
+            $indexChing[$i][5] = $arrKlonPhonemes[$i][6];
+            $indexChing[$i][6] = $arrKlonPhonemes[$i][7];
+          }
+          else if($totalPN==9){  //ถ้ามากกว่า 9 พยางค์แล้วเป็นคำอะกึ่งเสียงจะรวบแล้วเป็น 9 พยางค์
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][4];
+            $indexChing[$i][4] = $arrKlonPhonemes[$i][5];
+            $indexChing[$i][5] = $arrKlonPhonemes[$i][6];
+            $indexChing[$i][6] = $arrKlonPhonemes[$i][7];
+            $indexChing[$i][7] = $arrKlonPhonemes[$i][8];
+          }
+          else if($totalPN==7){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][4];
+            $indexChing[$i][4] = $arrKlonPhonemes[$i][5];
+            $indexChing[$i][5] = $arrKlonPhonemes[$i][6];
+          }
+          else if($totalPN>9){  //ถ้ามากกว่า 9 พยางค์แล้วเป็นคำอะกึ่งเสียงจะรวบแล้วเป็น 9 พยางค์
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][4];
+            $indexChing[$i][4] = $arrKlonPhonemes[$i][5];
+            $indexChing[$i][5] = $arrKlonPhonemes[$i][6];
+            $indexChing[$i][6] = $arrKlonPhonemes[$i][7];
+            $indexChing[$i][7] = $arrKlonPhonemes[$i][$totalPN];
+          }
         }
-        else if($totalPN==9){  //ถ้ามากกว่า 9 พยางค์แล้วเป็นคำอะกึ่งเสียงจะรวบแล้วเป็น 9 พยางค์
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
-          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][4];
-          $indexChing[$i-1][4] = $arrKlonPhonemes[$i][5];
-          $indexChing[$i-1][5] = $arrKlonPhonemes[$i][6];
-          $indexChing[$i-1][6] = $arrKlonPhonemes[$i][7];
-          $indexChing[$i-1][7] = $arrKlonPhonemes[$i][8];
-        }
-        else if($totalPN==7){
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
-          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][4];
-          $indexChing[$i-1][4] = $arrKlonPhonemes[$i][5];
-          $indexChing[$i-1][5] = $arrKlonPhonemes[$i][6];
-        }
-        else if($totalPN>9){  //ถ้ามากกว่า 9 พยางค์แล้วเป็นคำอะกึ่งเสียงจะรวบแล้วเป็น 9 พยางค์
-          $indexChing[$i-1][0] = $arrKlonPhonemes[$i][1];
-          $indexChing[$i-1][1] = $arrKlonPhonemes[$i][2];
-          $indexChing[$i-1][2] = $arrKlonPhonemes[$i][3];
-          $indexChing[$i-1][3] = $arrKlonPhonemes[$i][4];
-          $indexChing[$i-1][4] = $arrKlonPhonemes[$i][5];
-          $indexChing[$i-1][5] = $arrKlonPhonemes[$i][6];
-          $indexChing[$i-1][6] = $arrKlonPhonemes[$i][7];
-          $indexChing[$i-1][7] = $arrKlonPhonemes[$i][$totalPN];
+        else if($i==6){
+          if($totalPN==8){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][4];
+            $indexChing[$i][4] = $arrKlonPhonemes[$i][5];
+            $indexChing[$i][5] = $arrKlonPhonemes[$i][6];
+            $indexChing[$i][6] = $arrKlonPhonemes[$i][7];
+          }
+          else if($totalPN==9){  //ถ้ามากกว่า 9 พยางค์แล้วเป็นคำอะกึ่งเสียงจะรวบแล้วเป็น 9 พยางค์
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][4];
+            $indexChing[$i][4] = $arrKlonPhonemes[$i][5];
+            $indexChing[$i][5] = $arrKlonPhonemes[$i][6];
+            $indexChing[$i][6] = $arrKlonPhonemes[$i][7];
+            $indexChing[$i][7] = $arrKlonPhonemes[$i][8];
+          }
+          else if($totalPN==7){
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][4];
+            $indexChing[$i][4] = $arrKlonPhonemes[$i][5];
+            $indexChing[$i][5] = $arrKlonPhonemes[$i][6];
+          }
+          else if($totalPN>9){  //ถ้ามากกว่า 9 พยางค์แล้วเป็นคำอะกึ่งเสียงจะรวบแล้วเป็น 9 พยางค์
+            $indexChing[$i][0] = $arrKlonPhonemes[$i][1];
+            $indexChing[$i][1] = $arrKlonPhonemes[$i][2];
+            $indexChing[$i][2] = $arrKlonPhonemes[$i][3];
+            $indexChing[$i][3] = $arrKlonPhonemes[$i][4];
+            $indexChing[$i][4] = $arrKlonPhonemes[$i][5];
+            $indexChing[$i][5] = $arrKlonPhonemes[$i][6];
+            $indexChing[$i][6] = $arrKlonPhonemes[$i][7];
+            $indexChing[$i][7] = $arrKlonPhonemes[$i][$totalPN];
+          }
         }
       }
     }
@@ -1346,14 +1391,16 @@ function checkChingRhyme($arrWak,$arrKlonPhonemes,$rhyme){
     }
   }
   //print_r($indexChing);
-  //echo "<br>";
-  for($i=0 ; $i<count($indexChing) ; $i++){
+  //echo "<br>===================<br>";
+  for($i=1 ; $i<=count($indexChing)+1 ; $i++){
     $strChingRhyme = "";
     if($indexChing[$i][0] != "จำนวนพยางค์ไม่ถูกต้อง"){
       for($j=0 ; $j<count($indexChing[$i]) ; $j++){
-        $strChingRhyme = ($strChingRhyme)."~".($indexChing[$i][$j]);
-        //echo $strChingRhyme."<br>";
-        $indexChing2[$i] = explode("~",$strChingRhyme);
+        if($i!=4){
+          $strChingRhyme = ($strChingRhyme)."~".($indexChing[$i][$j]);
+          //echo $strChingRhyme."<br>";
+          $indexChing2[$i] = explode("~",$strChingRhyme);
+        }
       }
     }
     else {
@@ -1362,10 +1409,10 @@ function checkChingRhyme($arrWak,$arrKlonPhonemes,$rhyme){
   }
   //print_r ($indexChing2);
   //echo "<br>11111111111111<br>";
-  for($i=0 ; $i<count($indexChing2) ; $i++){
+  for($i=1 ; $i<=count($indexChing2)+1 ; $i++){
     $index = 0;
     for($j=0 ; $j<count($indexChing2[$i]) ; $j+=2){
-      if($indexChing2[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง"){
+      if($indexChing2[$i][0]!="จำนวนพยางค์ไม่ถูกต้อง" && $i!=4){
         $rhymeChing[$i][$index] = $indexChing2[$i][$j];
         $index = $index+1;
       }
@@ -1375,405 +1422,214 @@ function checkChingRhyme($arrWak,$arrKlonPhonemes,$rhyme){
     }
   }
   //print_r($rhymeChing);
-  //echo "<br><br>";
+  //echo "<br>ข้างบน rhymeChing<br>";
   $strCheckChing = "";
-  $checkChing = 1;
+  $checkChing = [];
   $arrStatusChing = [];
   $arrChingRhyme = [];
-  for($i=1 ; $i<=count($arrWak)-1 ; $i++){
-    for($j=1 ; $j<count($rhymeChing[$i-1]) ; $j++){
-      // บทที่ 1
-        if($i==1){
-          // ตรวจชิงสัมผัสวรรค 2
-          if($indexOfRhyme[0][0]=="payangAt3"){ // 8 9 พยางค์ สัมผัสที่พยางค์ที่ 3
-            $strCheckChing = $rhyme[$i][1];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
+  for($i=1 ; $i<=(count($arrWak)-1) ; $i++){
+    for($j=0 ;$j<=count($rhymeChing[$i]) ; $j++){
+      //echo (count($rhymeChing[$i]))."<br>";
+      //if($rhymeChing[$i][0] != "จำนวนพยางคไม่ถูกต้อง"){
+        if($i==1 || $i==3 || $i==5 || $i==7){
+          if($i==1){
+            if($rhymeChing[1][0] != "จำนวนพยางค์ไม่ถูกต้อง"){
+              if(count($rhymeChing[$i])<=3){
+                if($rhymeChing[$i][$j]==$rhyme[$i][1]){
+                  $checkChing[$i+1] = "false";
+                  //echo "errrrrr";
+                }
+                else if($checkChing[$i+1] != "false"){
+                  $checkChing[$i+1] = "true";
+                }
+                else {
+                  $checkChing[$i+1] = "false";
+                }
+              }
+              else {
+                if($rhymeChing[$i][$j]==$rhyme[$i][2]){
+                  $checkChing[$i+1] = "false";
+                }
+                else if($checkChing[$i+1] != "false"){
+                  $checkChing[$i+1] = "true";
+                }
+                else {
+                  $checkChing[$i+1] = "false";
+                }
+              }
             }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 8 พยางค์สัมผัสที่พยางค์ที่ 5 หรือ 9 พยางค์สัมผัสที่พยางค์ที่ 6
-          else if($indexOfRhyme[0][0]=="payangAt5" || $indexOfRhyme[0][0]=="payangAt6"){
-            $strCheckChing = $rhyme[$i][2];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 7 พยางค์สัมผัสที่พยางค์ที่ 2
-          else if($indexOfRhyme[0][0]=="payangAt2"){
-            $strCheckChing = $rhyme[$i][1];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
+            else if($rhymeChing[1][0] == "จำนวนพยางค์ไม่ถูกต้อง"){
+              $checkChing[$i+1] = "veryFalse";
             }
           }
-          // 7 พยางค์สัมผัสที่พยางค์ที่ 3
-          else if($indexOfRhyme[0][0]=="payangAt3from7"){
-            $strCheckChing = $rhyme[$i][2];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
+          else if($i==3){
+            if($rhymeChing[3][0] != "จำนวนพยางค์ไม่ถูกต้อง"){
+              if(count($rhymeChing[$i])<=3){
+                if($rhymeChing[$i][$j]==$rhyme[$i][1]){
+                  $checkChing[$i+1] = "false";
+                }
+                else if($checkChing[$i+1] != "false"){
+                  $checkChing[$i+1] = "true";
+                }
+                else {
+                  $checkChing[$i+1] = "false";
+                }
+              }
+              else {
+                if($rhymeChing[$i][$j]==$rhyme[$i][2]){
+                  $checkChing[$i+1] = "false";
+                }
+                else if($checkChing[$i+1] != "false"){
+                  $checkChing[$i+1] = "true";
+                }
+                else {
+                  $checkChing[$i+1] = "false";
+                }
+              }
             }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 7 พยางค์สัมผัสที่พยางค์ที่ 4
-          else if($indexOfRhyme[0][0]=="payangAt4"){
-            $strCheckChing = $rhyme[$i][3];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 7 พยางค์สัมผัสที่พยางค์ที่ 5
-          else if($indexOfRhyme[0][0]=="payangAt5from7"){
-            $strCheckChing = $rhyme[$i][4];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
+            else if($rhymeChing[3][0] == "จำนวนพยางค์ไม่ถูกต้อง"){
+              $checkChing[$i+1] = "veryFalse";
             }
           }
-        }
-        else if($i==2){
-  		    // ตรวจชิงสัมผัสวรรค 3
-          $strCheckChing = $rhyme[$i][1];
-          if($strCheckChing!=$rhymeChing[$i-1][$j]){
-            $checkChing = 0;
-          }
-          else if($checkChing==1){
-            $checkChing = 1;
-          }
-          else {
-            $checkChing = 0;
-          }
-        }
-        else if($i==3){
-          // ตรวจชิงสัมผัสวรรค 4
-          if($indexOfRhyme[0][1]=="payangAt3"){ // 8 9 พยางค์ สัมผัสที่พยางค์ที่ 3
-            $strCheckChing = $rhyme[$i][1];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
+          else if($i==5){
+            if($rhymeChing[5][0] != "จำนวนพยางค์ไม่ถูกต้อง"){
+              if(count($rhymeChing[$i])<=3){
+                if($rhymeChing[$i][$j]==$rhyme[$i][1]){
+                  $checkChing[$i+1] = "false";
+                }
+                else if($checkChing[$i+1] != "false"){
+                  $checkChing[$i+1] = "true";
+                }
+                else {
+                  $checkChing[$i+1] = "false";
+                }
+              }
+              else {
+                if($rhymeChing[$i][$j]==$rhyme[$i][2]){
+                  $checkChing[$i+1] = "false";
+                }
+                else if($checkChing[$i+1] != "false"){
+                  $checkChing[$i+1] = "true";
+                }
+                else {
+                  $checkChing[$i+1] = "false";
+                }
+              }
             }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 8 พยางค์สัมผัสที่พยางค์ที่ 5 หรือ 9 พยางค์สัมผัสที่พยางค์ที่ 6
-          else if($indexOfRhyme[0][1]=="payangAt5" || $indexOfRhyme[0][1]=="payangAt6"){
-            $strCheckChing = $rhyme[$i][2];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
+            else if($rhymeChing[5][0] == "จำนวนพยางค์ไม่ถูกต้อง"){
+              $checkChing[$i+1] = "veryFalse";
             }
           }
-          // 7 พยางค์สัมผัสที่พยางค์ที่ 2
-          else if($indexOfRhyme[0][1]=="payangAt2"){
-            $strCheckChing = $rhyme[$i][1];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
+          else if($i==7){
+            if($rhymeChing[7][0] != "จำนวนพยางค์ไม่ถูกต้อง"){
+              if(count($rhymeChing[$i])<=3){
+                if($rhymeChing[$i][$j]==$rhyme[$i][1]){
+                  $checkChing[$i+1] = "false";
+                }
+                else if($checkChing[$i+1] != "false"){
+                  $checkChing[$i+1] = "true";
+                }
+                else {
+                  $checkChing[$i+1] = "false";
+                }
+              }
+              else {
+                if($rhymeChing[$i][$j]==$rhyme[$i][2]){
+                  $checkChing[$i+1] = "false";
+                }
+                else if($checkChing[$i+1] != "false"){
+                  $checkChing[$i+1] = "true";
+                }
+                else {
+                  $checkChing[$i+1] = "false";
+                }
+              }
             }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 7 พยางค์สัมผัสที่พยางค์ที่ 3
-          else if($indexOfRhyme[0][1]=="payangAt3from7"){
-            $strCheckChing = $rhyme[$i][2];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 7 พยางค์สัมผัสที่พยางค์ที่ 4
-          else if($indexOfRhyme[0][1]=="payangAt4"){
-            $strCheckChing = $rhyme[$i][3];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 7 พยางค์สัมผัสที่พยางค์ที่ 5
-          else if($indexOfRhyme[0][1]=="payangAt5from7"){
-            $strCheckChing = $rhyme[$i][4];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
+            else if($rhymeChing[7][0] == "จำนวนพยางค์ไม่ถูกต้อง"){
+              $checkChing[$i+1] = "veryFalse";
             }
           }
         }
-        // บทที่ 2
-        else if($i==5){
-          // ตรวจชิงสัมผัสวรรค 2
-          if($indexOfRhyme[0][2]=="payangAt3"){ // 8 9 พยางค์ สัมผัสที่พยางค์ที่ 3
-            $strCheckChing = $rhyme[$i][1];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
+        else if($i==2 || $i==6){
+          if($i==2){
+            if($rhymeChing[2][0] != "จำนวนพยางค์ไม่ถูกต้อง"){
+              if($rhymeChing[$i][$j]==$rhyme[$i][1]){
+                $checkChing[$i+1] = "false";
+              }
+              else if($checkChing[$i+1] != "false"){
+                $checkChing[$i+1] = "true";
+              } 
+              else {
+                $checkChing[$i+1] = "false";
+              }
             }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 8 พยางค์สัมผัสที่พยางค์ที่ 5 หรือ 9 พยางค์สัมผัสที่พยางค์ที่ 6
-          else if($indexOfRhyme[0][2]=="payangAt5" || $indexOfRhyme[0][2]=="payangAt6"){
-            $strCheckChing = $rhyme[$i][2];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
+            else if($rhymeChing[2][0] == "จำนวนพยางค์ไม่ถูกต้อง"){
+              $checkChing[$i+1] = "veryFalse";
             }
           }
-          // 7 พยางค์สัมผัสที่พยางค์ที่ 2
-          else if($indexOfRhyme[0][2]=="payangAt2"){
-            $strCheckChing = $rhyme[$i][1];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
+          else if($i==6){
+            if($rhymeChing[6][0] != "จำนวนพยางค์ไม่ถูกต้อง"){
+              if($rhymeChing[$i][$j]==$rhyme[$i][1]){
+                $checkChing[$i+1] = "false";
+              }
+              else if($checkChing[$i+1] != "false"){
+                $checkChing[$i+1] = "true";
+              }
+              else {
+                $checkChing[$i+1] = "false";
+              }
             }
-            else if($checkChing==1){
-              $checkChing = 1;
+            else if($rhymeChing[6][0] == "จำนวนพยางค์ไม่ถูกต้อง"){
+              $checkChing[$i+1] = "veryFalse";
             }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 7 พยางค์สัมผัสที่พยางค์ที่ 3
-          else if($indexOfRhyme[0][2]=="payangAt3from7"){
-            $strCheckChing = $rhyme[$i][2];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 7 พยางค์สัมผัสที่พยางค์ที่ 4
-          else if($indexOfRhyme[0][2]=="payangAt4"){
-            $strCheckChing = $rhyme[$i][3];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 7 พยางค์สัมผัสที่พยางค์ที่ 5
-          else if($indexOfRhyme[0][2]=="payangAt5from7"){
-            $strCheckChing = $rhyme[$i][4];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
+          } 
         }
-        else if($i==6){
-          // ตรวจชิงสัมผัสวรรค 3
-          $strCheckChing = $rhyme[$i][1];
-          if($strCheckChing!=$rhymeChing[$i-1][$j]){
-            $checkChing = 0;
-          }
-          else if($checkChing==1){
-            $checkChing = 1;
-          }
-          else {
-            $checkChing = 0;
-          }
-        }
-        else if($i==7){
-          // ตรวจชิงสัมผัสวรรค 4
-          if($indexOfRhyme[0][3]=="payangAt3"){ // 8 9 พยางค์ สัมผัสที่พยางค์ที่ 3
-            $strCheckChing = $rhyme[$i][1];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 8 พยางค์สัมผัสที่พยางค์ที่ 5 หรือ 9 พยางค์สัมผัสที่พยางค์ที่ 6
-          else if($indexOfRhyme[0][3]=="payangAt5" || $indexOfRhyme[0][3]=="payangAt6"){
-            $strCheckChing = $rhyme[$i][2];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-            // 7 พยางค์สัมผัสที่พยางค์ที่ 2
-          else if($indexOfRhyme[0][3]=="payangAt2"){
-            $strCheckChing = $rhyme[$i][1];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 7 พยางค์สัมผัสที่พยางค์ที่ 3
-          else if($indexOfRhyme[0][3]=="payangAt3from7"){
-            $strCheckChing = $rhyme[$i][2];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 7 พยางค์สัมผัสที่พยางค์ที่ 4
-          else if($indexOfRhyme[0][3]=="payangAt4"){
-            $strCheckChing = $rhyme[$i][3];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-          // 7 พยางค์สัมผัสที่พยางค์ที่ 5
-          else if($indexOfRhyme[0][3]=="payangAt5from7"){
-            $strCheckChing = $rhyme[$i][4];
-            if($strCheckChing!=$rhymeChing[$i-1][$j]){
-              $checkChing = 0;
-            }
-            else if($checkChing==1){
-              $checkChing = 1;
-            }
-            else {
-              $checkChing = 0;
-            }
-          }
-        }
-    }
-    if($checkChing==0){
-      $arrStatusChing[$i] = "true";
-    }
-    else {
-      $arrStatusChing[$i] = "false";
+      //}
+      //else {
+        //$checkChing[0] = "veryFalse";
+      //}
     }
   }
   //print_r($indexOfRhyme);
   //echo "<br>1<br>";
-  //print_r($arrStatusChing);
-  //echo "<br>===========<br>";
+  print_r($checkChing);
+  echo "<br>===========<br>";
   //print_r($rhymeChing);
   //echo "<br>======".($rhymeChing[4][0]);
   //echo "<br>3<br>";
-  for($i=1 ; $i<=count($arrStatusChing) ; $i++){
-    if($rhymeChing[$i-1][0] != "จำนวนพยางค์ไม่ถูกต้อง"){
+  for($i=2 ; $i<=count($arrWak)-1 ; $i++){
+    if($checkChing[$i] != "veryFalse"){
       if($i==2 || $i==3 || $i==4){
-        if($arrStatusChing[$i]=="true"){
+        if($checkChing[$i]=="true"){
           $arrChingRhyme[$i]['str'] = "ไม่มีตำแหน่งชิงสัมผัสในวรรคที่ ".($i)." ของบทที่ 1";
           $arrChingRhyme[$i]['status'] = "true";
         }
-        else if($arrStatusChing[$i]=="false"){
+        else if($checkChing[$i]=="false"){
           $arrChingRhyme[$i]['str'] = "มีตำแหน่งชิงสัมผัสในวรรคที่ ".($i)." ของบทที่ 1";
           $arrChingRhyme[$i]['status'] = "false";
         }
       }
       else if($i==6 || $i==7 || $i==8){
-        if($arrStatusChing[$i]=="true"){
-          $arrChingRhyme[$i]['str'] = "ไม่มีตำแหน่งชิงสัมผัสในวรรคที่ ".(round($i%5)+1)." ของบทที่ 2";
+        if($checkChing[$i]=="true"){
+          $arrChingRhyme[$i]['str'] = "ไม่มีตำแหน่งชิงสัมผัสในวรรคที่ ".(round($i%6)+2)." ของบทที่ 2";
           //echo "<br>".($i)." ".(round($i%5)+2)."<br>";
           $arrChingRhyme[$i]['status'] = "true";
         }
-        else if($arrStatusChing[$i]=="false"){
-          $arrChingRhyme[$i]['str'] = "มีตำแหน่งชิงสัมผัสในวรรคที่ ".(round($i%5)+1)." ของบทที่ 2";
+        else if($checkChing[$i]=="false"){
+          $arrChingRhyme[$i]['str'] = "มีตำแหน่งชิงสัมผัสในวรรคที่ ".(round($i%6)+2)." ของบทที่ 2";
           //echo "<br>".($i)." ".(round($i%5)+2)."<br>";
           $arrChingRhyme[$i]['status'] = "false";
         }
       }
     }
     else {
-      if($arrStatusChing[$i]=="false"){
-        $arrChingRhyme[$i]['str'] = "ไม่มีตำแหน่งชิงสัมผัส";
-        $arrChingRhyme[$i]['status'] = "false";
+      if($i==2 || $i==3 || $i==4){
+        $arrChingRhyme[$i]['str'] = "ไม่มีตำแหน่งชิงสัมผัสในวรรคที่ ".($i)." ของบทที่ 1";
+        $arrChingRhyme[$i]['status'] = "veryFalse";
+      }
+      else if($i==6 || $i==7 || $i==8){
+        $arrChingRhyme[$i]['str'] = "ไม่มีตำแหน่งชิงสัมผัสในวรรคที่ ".(round($i%6)+2)." ของบทที่ 2";
+        $arrChingRhyme[$i]['status'] = "veryFalse";
       }
     }
   }
